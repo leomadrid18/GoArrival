@@ -1,0 +1,184 @@
+<div class="row m-0 p-0 mt-5">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12 m-0 p-0">
+        <span class="add">Agregue los pasajeros del vuelo</span>
+    </div>
+</div>
+<div class="row m-0 p-0 mt-2">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-12 m-0 p-0">
+        <div class="row m-0 p-0">
+            <div class="col-lg-5 col-md-6 col-sm-6 col-12 m-0 p-0">
+              
+                <span class="text-bienv">Nombre/Apellido</span>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-12 m-0 p-0">
+                <input (keyup)="onSearch($event)" [(ngModel)]="name" class="form-control box-shadow" type="text">
+            </div>
+        </div>
+
+
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-12 m-0 p-0">
+        <div class="row m-0 p-0">
+            <div class="col-lg-4 col-md-5 col-sm-5 col-12 m-0 p-0">
+              
+                <span class="text-bienv">DNI/Matrícula</span>
+            </div>
+            <div class="col-lg-5 col-md-5 col-sm-5 col-12 m-0 p-0">
+                <input (keyup)="onSearchDoc($event)" [(ngModel)]="document" class="form-control box-shadow" type="text">
+            </div>
+            <div class="col-lg-3 col-md-2 col-sm-2 col-12">
+                <button class="p-0 form-control btn apc-btn-buscar" (click)="search()">
+                    <img src="assets/Images/header/buscador-musical.svg" alt="" style="width: 12px">
+                    Buscar
+                </button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<div class="row m-0 p-0 mt-5">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12 m-0 p-0">
+        <div class="row m-0 p-2 box-shadow">
+            <div class="col-lg-1 m-0 p-0">
+
+            </div>
+            <div class="col-lg-2 m-0 p-0 text-center">
+                <span class="title">Nombre</span>
+            </div>
+            <div class="col-lg-2 m-0 p-0 text-center">
+                <span class="title">Apellidos</span>
+            </div>
+            <div class="col-lg-2 m-0 p-0 text-center">
+                <span class="title">Tipo Doc</span>
+            </div>
+            <div class="col-lg-2 m-0 p-0 text-center">
+                <span class="title">Documento</span>
+            </div>
+            <div class="col-lg-2 m-0 p-0 text-center">
+                <span class="title">Perfil</span>
+            </div>
+            <div class="col-lg-1">
+
+            </div>
+        </div>
+        <div *ngFor="let person of filteredList | paginate: { itemsPerPage: 10, currentPage: p}" class="row m-0 p-2 box-shadow">
+            <div class="col-lg-1 m-0 p-0 text-center">
+                <img *ngIf="person.isVIP === true"
+                width="30" src="assets/Images/seeker/vip.png">
+            </div>
+            <div class="col-lg-2 m-0 p-0 text-center">
+                <span class="title">{{person.firstName}}</span>
+            </div>
+            <div class="col-lg-2 m-0 p-0 text-center">
+                <span class="title">{{person.lastName}}</span>
+            </div>
+            <div class="col-lg-2 m-0 p-0 text-center">
+                <span class="title">{{person.lpersonDocuments[0].docName}}</span>
+            </div>
+            <div class="col-lg-2 m-0 p-0 text-center">
+                <span class="title">{{person.lpersonDocuments[0].docNumber}}</span>
+            </div>
+            <div class="col-lg-2 m-0 p-0 text-center">
+                <span class="title">{{person.orole.name}}</span>
+            </div>
+            <div class="col-lg-1 m-0 p-0 text-center">
+                <img class="point"  (click)="agregarPasajero(person)" width="30"
+                src="assets/Images/seeker/mas.png">
+            </div>
+        </div>
+        <div class="row m-0 p-0 mt-4">
+            <div class="col-lg-12 text-center">
+               
+                <pagination-controls class="my-pagination" (pageChange)="p = $event"></pagination-controls>
+              
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row m-0 p-0 mt-5">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12 m-0 p-0">
+        <span class="add">Pasajeros agregados</span>
+    </div>
+</div>
+<div class="row m-0 p-0 mt-3 mb-5">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12 m-0 p-0">
+        <div class="row m-0 p-2 box-shadow">
+            <div class="col-lg-1 m-0 p-0">
+
+            </div>
+            <div class="col-lg-2 m-0 p-0 text-center">
+                <span class="title">Nombre</span>
+            </div>
+            <div class="col-lg-2 m-0 p-0 text-center">
+                <span class="title">Apellidos</span>
+            </div>
+            <div class="col-lg-2 m-0 p-0 text-center">
+                <span class="title">Tipo Doc</span>
+            </div>
+            <div class="col-lg-2 m-0 p-0 text-center">
+                <span class="title">Documento</span>
+            </div>
+            <div class="col-lg-2 m-0 p-0 text-center">
+                <span class="title">Perfil</span>
+            </div>
+            <div class="col-lg-1">
+
+            </div>
+        </div>
+        <div *ngFor="let pass of lstPasajeros | paginate: { itemsPerPage: 10, currentPage: p}" class="row m-0 p-2 box-shadow">
+            <div class="col-lg-1 m-0 p-0 text-center">
+                <img *ngIf="pass.isVIP === true"
+                width="30" src="assets/Images/seeker/vip.png">
+            </div>
+            <div class="col-lg-2 m-0 p-0 text-center">
+                <span class="title">{{pass.firstName}}</span>
+            </div>
+            <div class="col-lg-2 m-0 p-0 text-center">
+                <span class="title">{{pass.lastName}}</span>
+            </div>
+            <div class="col-lg-2 m-0 p-0 text-center">
+                <span class="title">{{pass.lpersonDocuments[0].docName}}</span>
+            </div>
+            <div class="col-lg-2 m-0 p-0 text-center">
+                <span class="title">{{pass.lpersonDocuments[0].docNumber}}</span>
+            </div>
+            <div class="col-lg-2 m-0 p-0 text-center">
+                <span class="title">{{pass.orole.name}}</span>
+            </div>
+            <div class="col-lg-1 m-0 p-0 text-center">
+                <img class="point" (click)="eliminarPasajero(pass)" width="15"
+                src="assets/Images/seeker/papelera_reciclaje.svg">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row m-0 p-0">
+    <div class="col-lg-12 m-0 p-0 text-center">
+        <span (click)="continuar(modalvalidacion)" class="next">Continuar</span>
+    </div>
+</div>
+
+<div #modalvalidacion  class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>

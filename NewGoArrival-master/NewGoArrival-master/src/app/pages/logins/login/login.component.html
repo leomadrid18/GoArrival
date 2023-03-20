@@ -1,0 +1,63 @@
+<section class="todo">
+    <div class="log">
+        <div class="row m-0 p-0" id="alinear">
+            <div class="col-lg-3 col-md-6 col-sm-8 m-0 p-0" id="imgPhone">
+                <img class="img" src="assets/Images/login/logoblanco.png">
+            </div>
+        </div>
+        <div class="row m-0 p-0 mt-5" id="centrar">
+            <div class="col-lg-4 col-md-7 col-sm-10 col-11 m-0 p-0 padre">
+                <div class="row m-0 p-0"  id="login">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 m-0 p-0">
+                        <div class="row m-2 p-2">
+                            <div class="col m-0 p-0 text-center">
+                                <span class="text-bienv">Bienvenido a Go Arrival</span>
+                            </div>
+                        </div>
+                        <div class="row m-2 p-2">
+                            <div class="col-lg-4 col-md-5 col-sm-12 col-12">
+                                <span class="subtext">Usuario</span>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-12 col-12">
+                                <input id="txtemail" [(ngModel)]="usuario" class="text-5" type="text" />
+                                <div class="raya"></div>
+                            </div>
+                        </div>
+                        <div class="row m-2 p-2">
+                            <div class="col-lg-4 col-md-5 col-sm-12 col-12">
+                                <span class="subtext">Contraseña</span>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-12 col-12">
+                                <input id="txtemail" [(ngModel)]="password" class="text-5" type="password" />
+                                <div class="raya"></div>
+                            </div>
+                        </div>
+                        <div class="row m-2 p-2">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="text-align: end;">
+                                <span class="subtextClick">Olvide mi contraseña</span>
+                            </div>
+                        </div>
+                        <div class="row m-2 p-2">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-3 mt-2 text-center">
+                                <span (click)="loginUser()" class="btnIngresar">Ingresar</span>
+                            </div>
+                        </div>
+                        <div class="row m-0 p-0 mt-2 mb-4">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="text-align: center;">
+                                <span class="text-error" *ngIf="validError">{{messageError}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-0 p-0">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 m-0 p-0 pt-3 pb-3 text-center">
+                        <span class="subtextDere">2020 - {{numberyear}} © Todos los derechos reservados. Domiruth Bussines Travel</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

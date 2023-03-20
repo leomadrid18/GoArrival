@@ -1,0 +1,185 @@
+.barra {
+    border-radius: 0px 0px 50px 50px;
+    height: 180px;
+    background: -webkit-linear-gradient(left, rgba(237, 28, 35, .9) 10%, #b01738 40%, rgba(60, 71, 73, .9) 100%);
+}
+
+.subBarra {
+    height: 180px;
+    border-radius: 0px 0px 50px 50px;
+    background: url('src/assets/Images/login/login_body_2.png');
+}
+
+.datos {
+    line-height: 6;
+}
+
+.point {
+    cursor: pointer;
+}
+
+.text-bienv {
+    text-align: center;
+    color: white;
+    font-size: 15px;
+    font-family: Omnes-med;
+}
+
+.text-panel {
+    color: #767676;
+    font-size: 19px;
+    margin-left: 10px;
+    font-family: Omnes-med;
+}
+
+.carrito {
+    background: #e2231a;
+    position: relative;
+    padding: 2px 5px 3px 2px;
+    top: 10px;
+    color: white;
+    border-radius: 10px;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.navbar {
+    /* otros estilos */
+    display: none;
+    /* ocultar navbar por defecto */
+}
+
+.hide-navbar {
+    display: none;
+    /* ocultar navbar */
+}
+
+.linear {
+    text-align: center;
+    line-height: 4;
+    cursor: pointer;
+}
+
+.blanco {
+    background-color: #FDFDFD;
+    border-radius: 20px 0px 0px 0px;
+}
+
+.ocultar{
+    visibility: hidden;
+}
+
+#textVuelos{
+    color: #ED1C24;
+}
+
+.none{
+    display: none;
+}
+
+
+.rayasRojas {
+    width: 70px;
+    border-radius: 15px 0px 0px 0px;
+    position: relative;
+    top: 29px;
+}
+
+.imgLine {
+    right: 0px;
+    position: relative;
+    height: 6px;
+    bottom: 30px;
+    width: 135px;
+}
+
+.navbar a {
+    color: #212529;
+    text-decoration: none;
+    padding: 10px;
+    margin: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.navbar a:hover {
+    background-color: #e9ecef;
+}
+
+.phone {
+    display: none !important;
+}
+
+.logoblan{
+    width: 135px;
+}
+
+.optionRayas{
+    width: 135px
+}
+
+.optionsPhone{
+    width: 80%;
+    padding-top: 20px;
+}
+
+
+@media screen and (max-width:900px) {
+    .text-panel {
+        color: #767676;
+        font-size: 19px;
+        display: none !important;
+        margin-left: 10px;
+        font-family: Omnes-med;
+    }
+}
+
+@media screen and (max-width:760px) {
+    .imgLine {
+        right: 0px;
+        position: relative;
+        height: 6px;
+        bottom: 30px;
+        width: 90px;
+    }
+
+    .optionRayas{
+        width: 100px;
+        top: 21px;
+        position: relative;
+    }
+}
+
+@media screen and (max-width:576px) {
+    .web {
+        display: none;
+    }
+
+    .logoblan{
+        width: 155px;
+    }
+
+    .subBarra {
+        height: 90px;
+        border-radius: 0px;
+        background: none;
+    }
+
+    .barra {
+        border-radius: 0px;
+        height: 90px;
+    }
+
+    .phone {
+        display: flex !important;
+        line-height: 5;
+    }
+}

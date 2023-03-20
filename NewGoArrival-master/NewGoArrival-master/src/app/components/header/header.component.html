@@ -1,0 +1,108 @@
+<div class="row m-0 p-0 barra">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12 m-0 p-0 subBarra">
+        <div class="row m-0 p-0 web">
+            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                <img width="240" src="assets/Images/login/logoblanco.png">
+            </div>
+            <div class="col-lg-7 col-md-5 col-sm-4 borrar">
+
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-4 col-6 datos text-center">
+                <img class="point" width="40" src="assets/Images/header/userHeader.png">
+                <span class="text-bienv ml-2">ALEXIS</span>
+                <img class="ml-2" src="assets/Images/header/zicHeader.png">
+                <img class="ml-3" src="assets/Images/header/rayita.png">
+                <img class="point ml-2 mr-1" src="assets/Images/header/carrito.png">
+                <span class="carrito">0</span>
+            </div>
+        </div>
+        <div class="row m-0 p-0 phone">
+            <div class="col-3 m-0 p-0 pl-4">
+                <img width="20" src="assets/Images/header/tres.png">
+            </div>
+            <div class="col-5 m-0 p-0 text-center">
+                <img class="logoblan"  src="assets/Images/login/logoblanco.png">
+            </div>
+            <div class="col-4 m-0 p-0 pl-3 text-center">
+                <img width="60" src="assets/Images/header/help.png">
+            </div>
+        </div>
+        <div class="row m-0 p-0 web">
+            <div class="col-lg-2 col-md-2 col-sm-2  m-0 p-0 text-center">
+                <img class="optionRayas" src="assets/Images/header/menu.png">
+                <div class="navbar">
+                    <a href="#">Opción 1</a>
+                    <a href="#">Opción 2</a>
+                    <a href="#">Opción 3</a>
+                    <a href="#">Opción 4</a>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-9 col-sm-9 m-0 p-0 blanco">
+                <div class="row m-0 p-0">
+                    <div class="col-lg-2 col-md-2 col-sm-2  m-0 p-0 pr-2 pl-2 linear"
+                        (click)="changeOption(1,'vuelo','textVuelos','imgVuelo','vuelorojo')">
+                        <img class="none" id="imgVuelo" src="assets/Images/header/airplane.svg">
+                        <img id="vuelorojo" src="assets/Images/header/airplane_rojo.svg">
+                        <span class="text-panel" id="textVuelos">Vuelos</span><br />
+                        <img class="imgLine" id="vuelo" src="assets/Images/header/directo.png">
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2  m-0 p-0 linear"
+                        (click)="changeOption(2,'hoteles','textHotel','imgHotel','hotelrojo')">
+                        <img id="imgHotel" src="assets/Images/header/hotel.svg">
+                        <img class="none" id="hotelrojo" src="assets/Images/header/hotel_rojo.svg">
+                        <span class="text-panel" id="textHotel">Hoteles</span><br />
+                        <img class="imgLine ocultar" id="hoteles" src="assets/Images/header/directo.png">
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2  m-0 p-0 linear"
+                        (click)="changeOption(3,'autos','textAutos','imgAuto','autorojo')">
+                        <img id="imgAuto" src="assets/Images/header/menu_auto_gris.svg">
+                        <img class="none" id="autorojo" src="assets/Images/header/menu_auto_rojo.svg">
+                        <span class="text-panel" id="textAutos">Autos</span><br />
+                        <img class="imgLine ocultar" id="autos" src="assets/Images/header/directo.png">
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2  m-0 p-0 linear"
+                        (click)="changeOption(4,'seguros','textSeguros','imgSeguros','segurojo')">
+                        <img id="imgSeguros" src="assets/Images/header/cora.svg">
+                        <img class="none" id="segurojo" src="assets/Images/header/cora-rojo.svg">
+                        <span class="text-panel" id="textSeguros">Seguros</span><br />
+                        <img class="imgLine ocultar" id="seguros" src="assets/Images/header/directo.png">
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2  m-0 p-0 linear"
+                        (click)="changeOption(5,'buses','textBuses','imgBuses','busesrojo')">
+                        <img id="imgBuses" src="assets/Images/header/camion.svg">
+                        <img class="none" id="busesrojo" src="assets/Images/header/camion-rojo.svg">
+                        <span class="text-panel" id="textBuses">Buses</span><br />
+                        <img class="imgLine ocultar" id="buses" src="assets/Images/header/directo.png">
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2  m-0 p-0 linear"
+                        (click)="changeOption(6,'paquete','textPaquetes','imgpaquete','paquerojo')">
+                        <img id="imgpaquete" src="assets/Images/header/island.svg">
+                        <img class="none" id="paquerojo" src="assets/Images/header/island-rojo.svg">
+                        <span class="text-panel" id="textPaquetes">Paquetes</span><br />
+                        <img class="imgLine ocultar" id="paquete" src="assets/Images/header/directo.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row m-0 p-0 phone">
+            <div class="col-2 m-0 p-0 text-center">
+                <img class="optionsPhone" src="assets/Images/header/vuelo_desactivado.svg">
+            </div>
+            <div class="col-2 m-0 p-0 text-center">
+                <img class="optionsPhone" src="assets/Images/header/hoteles_desactivado.svg">
+            </div>
+            <div class="col-2 m-0 p-0 text-center">
+                <img class="optionsPhone" src="assets/Images/header/vuelo_desactivado.svg">
+            </div>
+            <div class="col-2 m-0 p-0 text-center">
+                <img class="optionsPhone" src="assets/Images/header/seguros_desactivado.svg">
+            </div>
+            <div class="col-2 m-0 p-0 text-center">
+                <img class="optionsPhone" src="assets/Images/header/buses_desactivado.svg">
+            </div>
+            <div class="col-2 m-0 p-0 text-center">
+                <img class="optionsPhone" src="assets/Images/header/paquetes_desactivado.svg">
+            </div>
+        </div>
+    </div>
+</div>

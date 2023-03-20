@@ -1,0 +1,46 @@
+.add{
+    color: #6B2542;
+    font-size: 25px;
+    font-family: Omnes-med;
+}
+
+.text-bienv {
+    text-align: center;
+    color: #767676;
+    font-size: 18px;
+    font-family: Omnes-med;
+    margin-left: 10px;
+}
+
+.title {
+    text-align: center;
+    color: #767676;
+    font-size: 16px;
+    font-family: Omnes-med;
+}
+
+.next{
+    color: white;
+    background-color: #ED1C24;
+    padding: 10px 10px 10px 10px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-family: Omnes-med;
+    cursor: pointer;
+}
+
+.point {
+    cursor: pointer;
+}
+
+.apc-btn-buscar{
+  color: white;
+  background-color: #ED1C24;
+  font-family: Omnes-med;
+  font-size: 15px;
+}
+
+button{
+    border: none !important;
+    background: none;
+}
