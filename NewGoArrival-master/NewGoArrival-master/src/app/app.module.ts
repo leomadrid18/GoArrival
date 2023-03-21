@@ -8,6 +8,7 @@ import { LoginComponent } from './pages/logins/login/login.component';
 import { LoginConsolidatorComponent } from './pages/logins/login-consolidator/login-consolidator.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -27,7 +28,9 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
+ 
     HttpClientModule,
+    BrowserAnimationsModule,
     FormsModule,
     AppRoutingModule
   ],

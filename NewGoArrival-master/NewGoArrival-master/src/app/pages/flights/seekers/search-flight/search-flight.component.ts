@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DatepickerDateCustomClasses } from 'ngx-bootstrap/datepicker';
 
 declare var jquery: any;
 declare var $: any;
@@ -25,26 +26,94 @@ export class SearchFlightComponent implements OnInit {
   destinoAuto: string;
   destinoTexto: string;
   valdestino = false;
+  bsValue: Date;
+  isOpendate = false;
+  valfechasalida = false;
+  valfechadestino = false;
+  minDateSalida: Date;
+  minDateRetorno: Date;
+  dateCustomClasses: DatepickerDateCustomClasses[];
+  calendarSalidaValue: any;
+  fechaSalida: string;
+  fechaRetorno: string;
+  fechaSalidaShow: string;
+  fechaRetornoShow: string;
+  textoCabina: string;
+  cabina: string;
+  textoEscala: string;
+  escala: string;
+  pasajeros: number;
+  maleta: boolean = true;
+  validarPasajeros = false;
+  passengerList: any;
   constructor() {
     this.tipoVuelo = "";
     this.indexTramo = 2;
+    this.pasajeros = 1;
     this.origenAuto = "";
     this.origentTexto = "";
+    this.cabina = "";
     this.destinoAuto = "";
     this.destinoTexto = "";
-    
-   }
+    this.fechaSalida = "";
+    this.textoCabina = "Todas";
+    this.textoEscala = "Todas";
+    this.escala = "";
+    this.fechaRetorno = "";
+    this.fechaSalidaShow = "";
+    this.fechaRetornoShow = "";
+    this.minDateSalida = new Date();
+    this.minDateSalida.setDate(this.minDateSalida.getDate());
+    this.minDateRetorno = new Date();
+    this.minDateRetorno.setDate(this.minDateRetorno.getDate() + 1);
+    const now = new Date();
+    this.bsValue = new Date();
+    this.dateCustomClasses = [
+      { date: now, classes: ["bg-danger", "text-warning"] },
+    ];
+  }
 
   ngOnInit(): void {
+
+  }
+
+  searchFlight(){
+    
+  }
+
+  selection(passengers: any[]) {
+    this.passengerList = passengers;
+  }
+
+  seleccionarCabina(valor:any, texto:string) {
+    this.cabina = valor;
+    this.textoCabina = texto;
+  }
+
+  seleccionarEscala(valor:any, texto: any) {
+    this.escala = valor;
+    this.textoEscala = texto;
+  }
+
+
+
+  ValidarCiudad() {
+    if (this.model.origentTexto.length < 10) {
+      this.model.origentTexto = "";
+    }
+
+    if (this.model.destinoTexto.length < 10) {
+      this.model.destinoTexto = "";
+    }
   }
 
   onChangeSearch(val: string) {
 
 
-/*     this.airportlist = this.session.getItem("ls_airportlist");
-    this.airportlist = this.session.decryptData(this.airportlist);
-    this.citylist = this.session.getItem("ls_citylist");
-    this.citylist = this.session.decryptData(this.citylist); */
+    /*     this.airportlist = this.session.getItem("ls_airportlist");
+        this.airportlist = this.session.decryptData(this.airportlist);
+        this.citylist = this.session.getItem("ls_citylist");
+        this.citylist = this.session.decryptData(this.citylist); */
     this.lstAutocomplete = [];
     const lstAutocomplete = this.lstAutocomplete;
     this.airportlist.forEach(function (aeropuerto) {
@@ -78,13 +147,13 @@ export class SearchFlightComponent implements OnInit {
       );
       this.data = resultFilter;
 
-    
+
 
       $(".x").hide();
     }
   }
 
-  onFocused(e: any) {}
+  onFocused(e: any) { }
 
   selectEventDestino(item: any) {
     this.destinoAuto = item.iataCode;
@@ -97,15 +166,19 @@ export class SearchFlightComponent implements OnInit {
     }
   }
 
-  onFocused2(e: any) {}
+  onFocused2(e: any) { }
+
+  handlerSalida() {
+    this.isOpendate = true;
+  }
 
   onChangeSearchDestino(val: string) {
- 
-/* 
-    this.airportlist = this.session.getItem("ls_airportlist");
-    this.airportlist = this.session.decryptData(this.airportlist);
-    this.citylist = this.session.getItem("ls_citylist");
-    this.citylist = this.session.decryptData(this.citylist); */
+
+    /* 
+        this.airportlist = this.session.getItem("ls_airportlist");
+        this.airportlist = this.session.decryptData(this.airportlist);
+        this.citylist = this.session.getItem("ls_citylist");
+        this.citylist = this.session.decryptData(this.citylist); */
 
     this.lstAutocomplete = [];
     const lstAutocomplete = this.lstAutocomplete;
@@ -144,6 +217,71 @@ export class SearchFlightComponent implements OnInit {
       $(".x").hide();
     }
   }
+
+  onValueChangeSalida(value: Date): void {
+    this.valfechasalida = false;
+    $("#txtFechaSalida").removeClass("campo-invalido");
+    this.minDateRetorno = value;
+    this.dateCustomClasses = [
+      { date: this.minDateRetorno, classes: ["bg-danger", "text-warning"] },
+    ];
+
+    if (value != null) {
+      let mes = "";
+      let getMonth = value.getMonth() + 1;
+      if (getMonth < 10) {
+        getMonth = value.getMonth() + 1;
+        mes = "0" + getMonth;
+      } else {
+        mes = "" + getMonth;
+      }
+
+      let dia = "";
+      if (value.getDate() < 10) {
+        dia = "0" + value.getDate();
+      } else {
+        dia = "" + value.getDate();
+      }
+
+      if (value >= this.calendarSalidaValue) {
+        $("#fechadestino").val("");
+        this.fechaRetorno = "";
+      }
+      this.fechaSalida = value.getFullYear() + "/" + mes + "/" + dia;
+      this.fechaSalidaShow = dia + "/" + mes + "/" + value.getFullYear();
+    }
+  }
+
+  onValueChangeRetorno(value: Date): void {
+    if (value != null) {
+      this.valfechadestino = false;
+      this.calendarSalidaValue = value;
+      
+   /*    this.dateCustomClasses = [
+        { date: null, classes: ["bg-danger", "text-warning"] },
+      ]; */
+      $("#txtFechaDestino").removeClass("campo-invalido");
+      let mes = "";
+      let getMonth = value.getMonth() + 1;
+      if (getMonth < 10) {
+        getMonth = value.getMonth() + 1;
+        mes = "0" + getMonth;
+      } else {
+        mes = "" + getMonth;
+      }
+
+      let dia = "";
+      if (value.getDate() < 10) {
+        dia = "0" + value.getDate();
+      } else {
+        dia = "" + value.getDate();
+      }
+
+      this.fechaRetorno = value.getFullYear() + "/" + mes + "/" + dia;
+      this.fechaRetornoShow = dia + "/" + mes + "/" + value.getFullYear();
+    }
+  }
+
 
   selectEvent(item: any) {
     // do something with selected item

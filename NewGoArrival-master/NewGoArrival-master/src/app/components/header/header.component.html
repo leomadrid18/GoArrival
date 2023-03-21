@@ -4,10 +4,10 @@
             <div class="col-lg-2 col-md-3 col-sm-4 col-6">
                 <img width="240" src="assets/Images/login/logoblanco.png">
             </div>
-            <div class="col-lg-7 col-md-5 col-sm-4 borrar">
+            <div class="col-lg-7 col-md-5 col-sm-2 borrar">
 
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-4 col-6 datos text-center">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-6 datos text-center">
                 <img class="point" width="40" src="assets/Images/header/userHeader.png">
                 <span class="text-bienv ml-2">ALEXIS</span>
                 <img class="ml-2" src="assets/Images/header/zicHeader.png">
@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="row m-0 p-0 phone">
-            <div class="col-3 m-0 p-0 pl-4">
+            <div class="col-3 m-0 p-0 pl-4 text-center">
                 <img width="20" src="assets/Images/header/tres.png">
             </div>
             <div class="col-5 m-0 p-0 text-center">
@@ -37,8 +37,8 @@
                     <a href="#">Opción 4</a>
                 </div>
             </div>
-            <div class="col-lg-8 col-md-9 col-sm-9 m-0 p-0 blanco">
-                <div class="row m-0 p-0">
+            <div class="col-lg-9 col-md-9 col-sm-9 m-0 p-0 blanco">
+                <div class="row m-0 p-0" style="height: 100px;">
                     <div class="col-lg-2 col-md-2 col-sm-2  m-0 p-0 pr-2 pl-2 linear"
                         (click)="changeOption(1,'vuelo','textVuelos','imgVuelo','vuelorojo')">
                         <img class="none" id="imgVuelo" src="assets/Images/header/airplane.svg">
@@ -85,23 +85,29 @@
             </div>
         </div>
         <div class="row m-0 p-0 phone">
-            <div class="col-2 m-0 p-0 text-center">
-                <img class="optionsPhone" src="assets/Images/header/vuelo_desactivado.svg">
+            <div class="col-2 m-0 p-0 text-center" (click)="change('vuelosOn','vuelosOff',1)">
+                <img id="vuelosOn" class="optionsPhone" src="assets/Images/header/Vuelo-On.svg">
+                <img id="vuelosOff" class="optionsPhone none" src="assets/Images/header/Vuelo-Off.svg">
             </div>
-            <div class="col-2 m-0 p-0 text-center">
-                <img class="optionsPhone" src="assets/Images/header/hoteles_desactivado.svg">
+            <div class="col-2 m-0 p-0 text-center" (click)="change('hotelOn','hotelOff',2)">
+                <img id="hotelOn" class="optionsPhone none" src="assets/Images/header/Hotel-On.svg">
+                <img id="hotelOff" class="optionsPhone" src="assets/Images/header/Hotel-Off.svg">
             </div>
-            <div class="col-2 m-0 p-0 text-center">
-                <img class="optionsPhone" src="assets/Images/header/vuelo_desactivado.svg">
+            <div class="col-2 m-0 p-0 text-center" (click)="change('autosOn','autosOff',3)">
+                <img id="autosOn" class="optionsPhone none" src="assets/Images/header/Autos-On.svg">
+                <img id="autosOff" class="optionsPhone" src="assets/Images/header/Autos-Off.svg">
             </div>
-            <div class="col-2 m-0 p-0 text-center">
-                <img class="optionsPhone" src="assets/Images/header/seguros_desactivado.svg">
+            <div class="col-2 m-0 p-0 text-center" (click)="change('segurosOn','segurosOff',4)">
+                <img id="segurosOn" class="optionsPhone none" src="assets/Images/header/Seguros-On.svg">
+                <img id="segurosOff" class="optionsPhone" src="assets/Images/header/Seguros-Off.svg">
             </div>
-            <div class="col-2 m-0 p-0 text-center">
-                <img class="optionsPhone" src="assets/Images/header/buses_desactivado.svg">
+            <div class="col-2 m-0 p-0 text-center" (click)="change('busesOn','busesOff',5)">
+                <img id="busesOn" class="optionsPhone none" src="assets/Images/header/Buses-On.svg">
+                <img id="busesOff" class="optionsPhone" src="assets/Images/header/Buses-Off.svg">
             </div>
-            <div class="col-2 m-0 p-0 text-center">
-                <img class="optionsPhone" src="assets/Images/header/paquetes_desactivado.svg">
+            <div class="col-2 m-0 p-0 text-center" (click)="change('paquetesOn','paquetesOff',6)">
+                <img id="paquetesOn" class="optionsPhone none" src="assets/Images/header/Paquetes-On.svg">
+                <img id="paquetesOff" class="optionsPhone" src="assets/Images/header/Paquetes.svg">
             </div>
         </div>
     </div>

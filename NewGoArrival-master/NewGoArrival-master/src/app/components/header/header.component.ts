@@ -14,6 +14,8 @@ export class HeaderComponent implements OnInit {
   qwe: any;
   visible: any;
   numero: number;
+  prendido = "vuelosOn";
+  apagado = "vuelosOff";
   constructor(private router: Router) {
     this.numero = 1;
   }
@@ -22,6 +24,39 @@ export class HeaderComponent implements OnInit {
     /*  const miVariable: string | null = null;
      const valor = miVariable ?? "valor por defecto";
      console.log(valor); // Imprime "valor por defecto" */
+  }
+
+  change(on: string,off: string,number: any){
+    this.qwe = document.getElementById(this.prendido);
+    this.qwe.style.display = "none";
+    this.qwe = document.getElementById(this.apagado);
+    this.qwe.style.display = "initial";
+    this.qwe = document.getElementById(off);
+    this.qwe.style.display = "none";
+    this.qwe = document.getElementById(on);
+    this.qwe.style.display = "initial";
+    this.prendido = on;
+    this.apagado = off;
+    switch (number) {
+      case 1:
+        this.router.navigate(["flights"]);
+        break;
+      case 2:
+        this.router.navigate(["hotel"]);
+        break;
+      case 3:
+         this.router.navigate(["cars"]);
+        break;
+      case 4:
+         this.router.navigate(["insurance"]);
+        break;
+      case 5:
+        /*this.router.navigate(["flights"]); */
+        break;
+      case 6:
+        /*   this.router.navigate(["flights"]); */
+        break;
+    }
   }
 
   ocultar(id: string, text: string, img: string, rojo: string) {

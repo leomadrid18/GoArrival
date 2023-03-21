@@ -31,6 +31,14 @@
 
 
 
+.box-shadow-input {
+  background: white;
+  padding: 1em;
+  box-shadow: 0px 5px 12px rgba(217, 226, 233, 0.5);
+  border-bottom: 5px solid rgba(219, 223, 227, 0.303017);
+}
+
+
 .box-shadow {
     background: white;
     padding: 1em;
@@ -84,4 +92,21 @@
   color: #3D3D3D !important;
   font-family: Omnes-med !important;
   font-size: 15px !important;
+}
+
+@media screen and (max-width:576px) {
+  .autocomplete-container .input-container input{
+    color: #3D3D3D !important;
+    font-family: Omnes-med !important;
+    font-size: 15px !important;
+    background: white !important;
+    padding: 1em !important;
+    border: 1px solid rgb(84 90 96 / 30%) !important;
+    box-shadow: 1px 5px 12px rgba(206, 219, 257, 0.5) !important;
+    border-radius: 4px;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    height: 50px !important;
+  }
+
 }

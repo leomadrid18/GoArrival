@@ -4,9 +4,14 @@ import { FlightsComponent } from './flights.component';
 import { RouterModule, Routes } from '@angular/router';
 import { RoleCentralizerComponent } from './seekers/role-centralizer/role-centralizer.component';
 import { SearchFlightComponent } from './seekers/search-flight/search-flight.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from "ngx-pagination";
 import { AutocompleteLibModule } from "angular-ng-autocomplete";
+import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { PassengerCounterComponent } from './seekers/search-flight/passenger-counter/passenger-counter.component';
+
+
 
 const routes: Routes = [
   {
@@ -20,10 +25,14 @@ const routes: Routes = [
     FlightsComponent,
     RoleCentralizerComponent,
     SearchFlightComponent,
+    PassengerCounterComponent,
    
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
+    BsDropdownModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     NgxPaginationModule,
     AutocompleteLibModule,
     FormsModule,
