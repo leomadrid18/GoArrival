@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { HeaderService } from 'src/app/services/head.service';
+import { LoginService } from 'src/app/services/login/login.service';
+
 
 @Component({
   selector: 'app-flights',
@@ -7,19 +9,24 @@ import { HeaderService } from 'src/app/services/head.service';
   styleUrls: ['./flights.component.css']
 })
 export class FlightsComponent implements OnInit {
+
+
   showHeader = true;
   flagCentralizador = true;
   objetoDesencriptado: any = {};
   objetoEncriptado: any;
-  constructor(private headerService: HeaderService) { 
+
+  constructor(private headerService: HeaderService,private login: LoginService) { 
     this.showHeader = true;
     this.headerService.mostrarEncabezado();
   }
 
   ngOnInit(): void {
-    this.objetoEncriptado = localStorage.getItem('%$#2x5sd4e');
-    this.objetoDesencriptado = this.headerService.desencriptar(this.objetoEncriptado);
+    this.objetoDesencriptado = localStorage.getItem('%$#2x5sd4e');
+    /* this.objetoDesencriptado = this.headerService.desencriptar(this.objetoEncriptado); */
   }
+
+
 
   updateCentralizador($event: boolean) {
     this.flagCentralizador = $event;

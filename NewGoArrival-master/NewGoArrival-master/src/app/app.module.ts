@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
+
 const routes: Routes = [
   { path: 'login', component: LoginConsolidatorComponent, runGuardsAndResolvers: 'always' },
   { path: '', component: LoginComponent, runGuardsAndResolvers: 'always' }
@@ -23,12 +24,10 @@ const routes: Routes = [
     AppComponent,
     LoginComponent,
     HeaderComponent,
-    LoginConsolidatorComponent,
-
+    LoginConsolidatorComponent
   ],
   imports: [
     BrowserModule,
- 
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,

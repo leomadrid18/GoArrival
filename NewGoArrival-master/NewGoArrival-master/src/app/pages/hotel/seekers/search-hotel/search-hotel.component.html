@@ -1,0 +1,141 @@
+<div class="row m-0 p-0 mt-5">
+    <div class="{{general}} box-shadow-search animated fadeIn" style="background-color: #FDFDFD;">
+        <div class="row m-0 p-0 mt-3">
+            <div class="col-lg-4 col-md-4 col-sm-4 top">
+                <span class="titles">Destino</span>
+                <ng-autocomplete [(ngModel)]="model.origentTexto" style="color: #898989 !important;" [data]="data"
+                    [searchKeyword]="keyword" (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)'
+                    (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate"
+                    [notFoundTemplate]="notFoundTemplate">
+                </ng-autocomplete>
+
+                <ng-template #itemTemplate let-item>
+
+                    <div class="" style="width: 100%">
+                        <div class="row">
+                            <div class="col-1">
+
+                                <img *ngIf="item.categoryId===2;" style="width: 25px; padding-right: 5px;"
+                                    src="src/assets/Images/seeker/ciudad1.png" alt="">
+                                <img *ngIf="item.categoryId===1" style="width: 25px; padding-right: 5px;"
+                                    src="src/assets/Images/seeker/aeropuerto2.jpeg" alt="">
+                            </div>
+                            <div class="col-11">
+                                <a class="m-0 p-0" [innerHTML]="item.name"></a>
+                            </div>
+                        </div>
+                    </div>
+
+                </ng-template>
+                <ng-template #notFoundTemplate let-notFound>
+
+                </ng-template>
+            </div>
+            <div class="col-lg-4 col-md col-sm col-12 top">
+                <span class="titles" style="margin-left: 10px;">Fechas</span>
+                <label id="ingreso" class="d-inline-flex box-shadow label-fecha">
+                    <input type="image" src="src/assets/Images/seeker/calendario.svg" (click)="datepickerRange.toggle()"
+                        class="input-img">
+                    <input type="text" #datepickerRange="bsDaterangepicker" class="p-0 pl-2 input-date" id="dateingreso"
+                        [minDate]="minDateIngreso" (bsValueChange)="onValueChangeIngreso($event)" bsDaterangepicker
+                        [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-red',  selectFromOtherMonth: true }">
+                </label>
+            </div>
+            <div class="col-lg-4 col-md col-sm col-12 top">
+                <span class="titles" style="margin-left: 10px;">Habitaciones</span>
+                <div *ngIf="objetoDesencriptado.orole.roleDescription == 'Centralizador'; else elseTemplate">
+                    <div class="row m-0 p-0" onclick="MostrarModal()" id="habitacion">
+                        <label for="" class="d-inline-flex box-shadow col-6 label-habitaciones">
+                            <input type="image" src="src/assets/Images/seeker/cama.svg" class="input-img">
+                            <input readonly (keypress)="validarNumeros($event)" type="text" id="txthabitacion"
+                                class="input-text2" value="1">
+                        </label>
+                        <label for="" class="d-inline-flex box-shadow col-6 label-habitaciones">
+                            <input type="image" src="src/assets/Images/seeker/pasajero.svg" class="input-img">
+                            <input readonly (keypress)="validarNumeros($event)" type="text" id="txtpersonas"
+                                class="input-text2" value="1">
+                        </label>
+                    </div>
+                </div>
+                <ng-template #elseTemplate class="row m-0 p-0">
+                    <div class="row m-0 p-0" id="habitacion">
+                        <label for="" class="d-inline-flex box-shadow col-6 label-habitaciones">
+                            <input readonly type="image" src="src/assets/Images/seeker/cama.svg" class="input-img">
+                            <input readonly (keypress)="validarNumerosN($event)" type="text" id="txthabitacion"
+                                class="input-text2" value="1">
+                        </label>
+                        <label for="" class="d-inline-flex box-shadow col-6 label-habitaciones">
+                            <input readonly type="image" src="src/assets/Images/seeker/pasajero.svg" class="input-img">
+                            <input readonly (keypress)="validarNumerosN($event)" type="text" id="txtpersonas"
+                                class="input-text2" value="1">
+                        </label>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+        <div class="row m-0 p-0 mt-3 mb-4">
+            <div class="col-lg-4 top" dropdown>
+                <span class="titles">Cabina</span>
+                <button id="button-basic" dropdownToggle type="button" class="btn v-texto-3 dropdown-toggle box-shadow"
+                    style="padding-bottom: 10px; padding-top: 10px;" aria-controls="dropdown-basic">
+                    <span class="star-filtro" *ngIf="textoestrellas === 'Todas'"> {{textoestrellas}}</span>
+                    <span class="star-filtro" *ngIf="textoestrellas === '5'"><img src="src/assets/Images/seeker/star.svg"><img
+                            src="src/assets/Images/seeker/star.svg"><img src="src/assets/Images/seeker/star.svg"><img
+                            src="src/assets/Images/seeker/star.svg"><img src="src/assets/Images/seeker/star.svg">
+                        {{textoestrellas}}</span>
+                    <span class="star-filtro" *ngIf="textoestrellas === '4'"><img src="src/assets/Images/seeker/star.svg"><img
+                            src="src/assets/Images/seeker/star.svg"><img src="src/assets/Images/seeker/star.svg"><img
+                            src="src/assets/Images/seeker/star.svg"> {{textoestrellas}}</span>
+                    <span class="star-filtro" *ngIf="textoestrellas === '3'"><img src="src/assets/Images/seeker/star.svg"><img
+                            src="src/assets/Images/seeker/star.svg"><img src="src/assets/Images/seeker/star.svg">
+                        {{textoestrellas}}</span>
+                    <span class="star-filtro" *ngIf="textoestrellas === '2'"><img src="src/assets/Images/seeker/star.svg"><img
+                            src="src/assets/Images/seeker/star.svg"> {{textoestrellas}}</span>
+                    <span class="star-filtro" *ngIf="textoestrellas === '1'"><img src="src/assets/Images/seeker/star.svg">
+                        {{textoestrellas}}</span>
+                </button>
+                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu v-texto-3 list-star pl-3 pr-3"
+                    style="cursor: pointer" role="menu" aria-labelledby="button-basic">
+                    <li role="menuitem"><a class="dropdown-item" (click)="SeleccionarEstrella('', 'Todas')">Todas</a>
+                    </li>
+                    <li role="menuitem" class="row m-0 p-0">
+                        <div class="star dropdown-item col-11" (click)="SeleccionarEstrella('5', '5')"><img
+                                src="src/assets/Images/seeker/estrellas.svg"><img src="src/assets/Images/seeker/estrellas.svg"><img
+                                src="src/assets/Images/seeker/estrellas.svg"><img src="src/assets/Images/seeker/estrellas.svg"><img
+                                src="src/assets/Images/seeker/estrellas.svg"></div>
+                        <div class="col-1 m-0 p-0 number-star">5</div>
+                    </li>
+                    <li role="menuitem" class="row m-0 p-0">
+                        <div class="star dropdown-item col-11" (click)="SeleccionarEstrella('4', '4')"><img
+                                src="src/assets/Images/seeker/estrellas.svg"><img src="src/assets/Images/seeker/estrellas.svg"><img
+                                src="src/assets/Images/seeker/estrellas.svg"><img src="src/assets/Images/seeker/estrellas.svg"></div>
+                        <div class="col-1 m-0 p-0 number-star">4</div>
+                    </li>
+                    <li role="menuitem" class="row m-0 p-0">
+                        <div class="star dropdown-item col-11" (click)="SeleccionarEstrella('3', '3')"><img
+                                src="src/assets/Images/seeker/estrellas.svg"><img src="src/assets/Images/seeker/estrellas.svg"><img
+                                src="src/assets/Images/seeker/estrellas.svg"></div>
+                        <div class="col-1 m-0 p-0 number-star">3</div>
+                    </li>
+                    <li role="menuitem" class="row m-0 p-0">
+                        <div class="star dropdown-item col-11" (click)="SeleccionarEstrella('2', '2')"><img
+                                src="src/assets/Images/seeker/estrellas.svg"><img src="src/assets/Images/seeker/estrellas.svg"></div>
+                        <div class="col-1 m-0 p-0 number-star">2</div>
+                    </li>
+                    <li role="menuitem" class="row m-0 p-0">
+                        <div class="star dropdown-item col-11" (click)="SeleccionarEstrella('1', '1')"><img
+                                src="src/assets/Images/seeker/estrellas.svg"></div>
+                        <div class="col-1 m-0 p-0 number-star">1</div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-lg-3 top">
+                <button (click)="searchHotel()" class="btn v-btn-buscar">
+                    <img src="assets/Images/seeker/buscador-musical.svg" alt="" style="width: 15px">
+                    Buscar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

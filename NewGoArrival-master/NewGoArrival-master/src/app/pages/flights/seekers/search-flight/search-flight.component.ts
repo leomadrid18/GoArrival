@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DatepickerDateCustomClasses } from 'ngx-bootstrap/datepicker';
+import { selectOcompany, selectOrole, selectPersonId } from 'src/app/app-state/selectors/login.selector';
+import { FlightService } from 'src/app/services/flight/flight.service';
+import { Store, select } from '@ngrx/store';
+import { AppState } from 'src/app/app.state';
 
 declare var jquery: any;
 declare var $: any;
@@ -10,12 +14,15 @@ declare var $: any;
   styleUrls: ['./search-flight.component.css']
 })
 export class SearchFlightComponent implements OnInit {
+  company$ = this.store.pipe(select(selectOcompany));
+  role$ = this.store.pipe(select(selectOrole));
+  personId$ = this.store.pipe(select(selectPersonId));
   general = "col-lg-12 col-md-12 col-sm-12 col-12 m-0 p-0"
   tipoVuelo: string;
   indexTramo: number;
   lstAutocomplete: any[] = [];
-  airportlist: any[] = [];
-  citylist: any[] = [];
+  airportlist: any;
+  citylist: any;
   model: any = {};
   keyword = "name";
   data: any[] = [];
@@ -46,7 +53,7 @@ export class SearchFlightComponent implements OnInit {
   maleta: boolean = true;
   validarPasajeros = false;
   passengerList: any;
-  constructor() {
+  constructor(private service: FlightService,private store: Store<AppState>) {
     this.tipoVuelo = "";
     this.indexTramo = 2;
     this.pasajeros = 1;
@@ -77,8 +84,29 @@ export class SearchFlightComponent implements OnInit {
 
   }
 
+
+
   searchFlight(){
-    
+    let data = {
+      Lusers: null,
+      Lpassengers: null,
+      CabinType: null,
+      Scales: null,
+      TypeSearch: null,
+      IncludesBaggage: null,
+      Origin: null,
+      Destination: null,
+      DepartureArrivalDate: null,
+      DepartureArrivalTimeFrom: null,
+      DepartureArrivalTimeTo: null,
+      Ocompany: null,
+      Oagency: null
+    };
+    this.service.searchFlight(data).subscribe(
+      x=>{ 
+        console.log(x);
+      }
+    )
   }
 
   selection(passengers: any[]) {
@@ -108,15 +136,13 @@ export class SearchFlightComponent implements OnInit {
   }
 
   onChangeSearch(val: string) {
-
-
-    /*     this.airportlist = this.session.getItem("ls_airportlist");
-        this.airportlist = this.session.decryptData(this.airportlist);
-        this.citylist = this.session.getItem("ls_citylist");
-        this.citylist = this.session.decryptData(this.citylist); */
+    this.airportlist = sessionStorage.getItem("ls_airportlist");
+    this.airportlist = JSON.parse(this.airportlist);
+    this.citylist = sessionStorage.getItem("ls_citylist");
+    this.citylist = JSON.parse(this.citylist);
     this.lstAutocomplete = [];
     const lstAutocomplete = this.lstAutocomplete;
-    this.airportlist.forEach(function (aeropuerto) {
+    this.airportlist.forEach(function (aeropuerto: any) {
       const obj1 = {
         iataCode: aeropuerto.iataCode,
         name: aeropuerto.name,
@@ -127,7 +153,7 @@ export class SearchFlightComponent implements OnInit {
       };
       lstAutocomplete.push(obj1);
     });
-    this.citylist.forEach(function (ciudad) {
+    this.citylist.forEach(function (ciudad: any) {
       const obj1 = {
         iataCode: ciudad.iataCode,
         name: ciudad.name,
@@ -146,8 +172,6 @@ export class SearchFlightComponent implements OnInit {
         (word) => word.searchName.toLowerCase().search(val.toLowerCase()) >= 0
       );
       this.data = resultFilter;
-
-
 
       $(".x").hide();
     }
@@ -174,15 +198,14 @@ export class SearchFlightComponent implements OnInit {
 
   onChangeSearchDestino(val: string) {
 
-    /* 
-        this.airportlist = this.session.getItem("ls_airportlist");
-        this.airportlist = this.session.decryptData(this.airportlist);
-        this.citylist = this.session.getItem("ls_citylist");
-        this.citylist = this.session.decryptData(this.citylist); */
+    this.airportlist = sessionStorage.getItem("ls_airportlist");
+    this.airportlist = JSON.parse(this.airportlist);
+    this.citylist = sessionStorage.getItem("ls_citylist");
+    this.citylist = JSON.parse(this.citylist);
 
     this.lstAutocomplete = [];
     const lstAutocomplete = this.lstAutocomplete;
-    this.airportlist.forEach(function (aeropuerto) {
+    this.airportlist.forEach(function (aeropuerto: any) {
       const obj1 = {
         iataCode: aeropuerto.iataCode,
         name: aeropuerto.name,
@@ -193,7 +216,7 @@ export class SearchFlightComponent implements OnInit {
       };
       lstAutocomplete.push(obj1);
     });
-    this.citylist.forEach(function (ciudad) {
+    this.citylist.forEach(function (ciudad: any) {
       const obj1 = {
         iataCode: ciudad.iataCode,
         name: ciudad.name,
@@ -257,9 +280,9 @@ export class SearchFlightComponent implements OnInit {
       this.valfechadestino = false;
       this.calendarSalidaValue = value;
       
-   /*    this.dateCustomClasses = [
+      this.dateCustomClasses = [
         { date: null, classes: ["bg-danger", "text-warning"] },
-      ]; */
+      ];
       $("#txtFechaDestino").removeClass("campo-invalido");
       let mes = "";
       let getMonth = value.getMonth() + 1;
@@ -315,7 +338,7 @@ export class SearchFlightComponent implements OnInit {
         };
         lstAutocomplete.push(obj1);
       });
-      this.citylist.forEach(function (ciudad) {
+      this.citylist.forEach(function (ciudad: any) {
         const obj1 = {
           iataCode: ciudad.iataCode,
           name: ciudad.name,

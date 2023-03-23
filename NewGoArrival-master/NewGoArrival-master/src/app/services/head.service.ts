@@ -11,13 +11,6 @@ export class HeaderService {
 
   constructor() {}
 
-  setData(data: string) {
-    this.data = data;
-  }
-
-  getData(): string {
-    return this.data;
-  }
 
   mostrarEncabezado(): void {
     this.showHeader = true;

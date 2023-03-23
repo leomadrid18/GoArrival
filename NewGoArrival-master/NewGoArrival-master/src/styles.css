@@ -88,6 +88,10 @@
   z-index: 999 !important;
 }
 
+.suggestions-container.is-visible{
+  width: 200% !important
+}
+
 .autocomplete-container .suggestions-container ul li a{
   color: #3D3D3D !important;
   font-family: Omnes-med !important;

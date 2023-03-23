@@ -1,1 +1,12 @@
-<p>flights-list works!</p>
+<div class="row m-0 p-0">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12 m-0 p-0">
+        <div class="row m-0 p-0">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-12 m-0">
+                <app-search-flight-lower (result)="validShowFlights($event)"></app-search-flight-lower>
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-8 col-12 m-0">
+                <app-calendar-flights *ngIf="validCalendar" (fechas)="onSelectDate($event)" [buscador]="request" [calendar]="lstCalendar" [salida]="llowCostAirlines"></app-calendar-flights>
+            </div>
+        </div>
+    </div>
+</div>

@@ -36,15 +36,16 @@
                 <ng-template #itemTemplate let-item>
 
                     <div class="" style="width: 100%">
-                        <div class="row">
-                            <div class="col-1">
+                        <div class="row m-0 p-0 mt-1">
+                            <div class="col-lg-1 col-md-2 col-sm-2 col-3 ">
                                 <img *ngIf="item.categoryId===2;" style="width: 25px; padding-right: 5px;"
                                     src="assets/Images/seeker/ciudad1.png" alt="">
-                                <img *ngIf="item.categoryId===1" style="width: 25px; padding-right: 5px;"
+                                <img *ngIf="item.categoryId===1" style="width: 25px; padding-right: 5px;"suggestions-container
                                     src="assets/Images/seeker/aeropuerto2.jpeg" alt="">
                             </div>
-                            <div class="col-11">
-                                <a class="m-0 p-0" [innerHTML]="item.name"></a>
+                            <div class="col-lg-11 col-md-10 col-sm-10 col-9">
+                                <span [innerHTML]="item.name"></span>
+                                <!-- <a class="m-0 p-0" ></a> -->
                             </div>
                         </div>
                     </div>
@@ -178,11 +179,9 @@
                 <span class="titles mr-2">Incluye maleta en bodega</span>
                 <input id="chkmaleta" type="checkbox" [(ngModel)]="maleta">
             </div>
-            <div class="col-lg-3 top">
-                <button (click)="searchFlight()" class="btn v-btn-buscar">
-                    <img src="assets/Images/seeker/buscador-musical.svg" alt="" style="width: 15px">
-                    Buscar
-                  </button>
+            <div class="col-lg-3 eew">
+                <div class="buscar" (click)="searchFlight()"><img src="assets/Images/seeker/buscador-musical.svg" alt="" style="width: 15px">Buscar</div>
+              
             </div>
         </div>
     </div>
