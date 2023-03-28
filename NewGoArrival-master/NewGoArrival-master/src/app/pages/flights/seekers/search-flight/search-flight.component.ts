@@ -104,7 +104,7 @@ export class SearchFlightComponent implements OnInit {
     };
     this.service.searchFlight(data).subscribe(
       x=>{ 
-        console.log(x);
+       
       }
     )
   }

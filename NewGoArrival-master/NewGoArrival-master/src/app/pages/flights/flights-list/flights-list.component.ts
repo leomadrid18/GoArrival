@@ -10,6 +10,9 @@ export class FlightsListComponent implements OnInit {
   lstCalendar: any;
   request: any;
   validCalendar = false;
+  validFlights = false;
+  lstFlights: any;
+  tipoVuelo = "RT";
   constructor() { }
 
   ngOnInit(): void {
@@ -28,11 +31,15 @@ export class FlightsListComponent implements OnInit {
         this.lstCalendar = valor.result.lcalendars;
         this.validCalendar = true;
       }
+      if(valor.result.lrecommendations.length > 0){
+        this.lstFlights = valor.result.lrecommendations;
+        this.validFlights = true;
+      }
     }
   }
 
   onSelectDate(fechas: any) {
-    console.log(fechas);
+   
   }
 
 }

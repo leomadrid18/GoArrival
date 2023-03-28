@@ -1,11 +1,36 @@
 <div class="row m-0 p-0">
     <div class="col-lg-12 col-md-12 col-sm-12 col-12 m-0 p-0">
         <div class="row m-0 p-0">
-            <div class="col-lg-3 col-md-4 col-sm-4 col-12 m-0">
+            <div class="col-lg-3 col-md-12 col-sm-12 col-12 m-0">
                 <app-search-flight-lower (result)="validShowFlights($event)"></app-search-flight-lower>
             </div>
-            <div class="col-lg-9 col-md-9 col-sm-8 col-12 m-0">
-                <app-calendar-flights *ngIf="validCalendar" (fechas)="onSelectDate($event)" [buscador]="request" [calendar]="lstCalendar" [salida]="llowCostAirlines"></app-calendar-flights>
+            <div class="col-lg-9 col-md-12 col-sm-12 col-12 m-0">
+                <div id="calendar" class="row m-0 p-0">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                        <app-calendar-flights *ngIf="validCalendar" (fechas)="onSelectDate($event)" [buscador]="request"
+                            [calendar]="lstCalendar" [salida]="llowCostAirlines"></app-calendar-flights>
+                    </div>
+                </div>
+                <div *ngIf="validFlights" class="row m-0 p-0">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 m-0 p-0">
+                        <app-recommendation *ngFor="let recomendacion of lstFlights; let i = index"
+                            [isVisible]="recomendacion.isVisible" [currency]="recomendacion.oprice.currency"
+                            [totalFareAmount]="recomendacion.oprice.totalAmount"
+                            [totalTaxAmount]="recomendacion.oprice.totalTaxAmount"
+                            [fareAmountByPassenger]="recomendacion.oprice.baseAmount" [recomen]="recomendacion"
+                            [fareTaxAmountByPassenger]="recomendacion.lpassengerPrices[0].baseAmount"
+                            [carrierId]="recomendacion.ocarrier.carrierId"
+                            [numberPassengers]="recomendacion.lpassengerPrices[0].quantity"
+                            [pseudo]="recomendacion.pseudo" [gds]="recomendacion.gds"
+                            [flightNational]="recomendacion.flightNational" [lsections]="recomendacion.lsections"
+                            [lsectionLength]="recomendacion.lsections.length" [lpolicies]="recomendacion.lpolicies"
+                            [internationalPrice]="recomendacion.oprice.ointernationalPrice"
+                            [recommendationId]="recomendacion.recommendationId" [tipoVuelo]="tipoVuelo"
+                            [pseudoRepeat]="recomendacion.lpseudoRepeats" [index]='i + 1'>
+                        </app-recommendation>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

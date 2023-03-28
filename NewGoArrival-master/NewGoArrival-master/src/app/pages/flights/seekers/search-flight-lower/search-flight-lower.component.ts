@@ -17,7 +17,7 @@ export class SearchFlightLowerComponent implements OnInit {
   company$ = this.store.pipe(select(selectOcompany));
   role$ = this.store.pipe(select(selectOrole));
   personId$ = this.store.pipe(select(selectPersonId));
-  general = "col-lg-12 col-md-12 col-sm-12 col-12 m-2 p-2"
+  general = "col-lg-12 col-md-12 col-sm-12 col-12 "
   tipoVuelo: string;
   indexTramo: number;
   lstAutocomplete: any[] = [];
@@ -151,7 +151,7 @@ export class SearchFlightLowerComponent implements OnInit {
         }
         this.result.emit(obj);
         localStorage.setItem('flights-result', JSON.stringify(x));
-        console.log(x);
+      
       }
     )
   }

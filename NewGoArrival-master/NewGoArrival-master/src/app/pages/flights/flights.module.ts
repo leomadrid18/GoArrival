@@ -14,6 +14,14 @@ import { StoreModule } from '@ngrx/store';
 import { FlightsListComponent } from './flights-list/flights-list.component';
 import { SearchFlightLowerComponent } from './seekers/search-flight-lower/search-flight-lower.component';
 import { CalendarFlightsComponent } from './flights-list/calendar-flights/calendar-flights.component';
+import { RecommendationComponent } from './flights-list/recommendation/recommendation.component';
+import { SectionComponent } from './flights-list/recommendation/section/section.component';
+import { SegmentComponent } from './flights-list/recommendation/segment/segment.component';
+import { SegmentGroupComponent } from './flights-list/recommendation/segment-group/segment-group.component';
+import { FinalPriceComponent } from './flights-list/recommendation/final-price/final-price.component';
+import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { FormattimeairportPipe } from 'src/app/pipes/formattimeairport.pipe';
 
 
 const routes: Routes = [
@@ -32,12 +40,20 @@ const routes: Routes = [
     SearchFlightComponent,
     SearchFlightLowerComponent,
     PassengerCounterComponent,
+    FormattimeairportPipe,
     FlightsListComponent,
-    CalendarFlightsComponent
+    CalendarFlightsComponent,
+    RecommendationComponent,
+    SectionComponent,
+    SegmentComponent,
+    SegmentGroupComponent,
+    FinalPriceComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    ModalModule.forRoot(),
+    TooltipModule.forRoot(),
     StoreModule.forRoot({  }),
     BsDropdownModule.forRoot(),
     BsDatepickerModule.forRoot(),
@@ -45,6 +61,7 @@ const routes: Routes = [
     AutocompleteLibModule,
     FormsModule,
     RouterModule.forChild(routes)
-  ]
+  ],
+  providers: [BsModalService],
 })
 export class FlightsModule { }

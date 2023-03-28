@@ -1,24 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
 
 @font-face {
-    font-family: 'Omnes-bold';
-    src: url('/assets/fonts/Omnes/OmnesBold.ttf');
+  font-family: 'Omnes-bold';
+  src: url('/assets/fonts/Omnes/OmnesBold.ttf');
 }
 
 
 @font-face {
-    font-family: 'Omnes-reg';
-    src: url('/assets/fonts/Omnes/OmnesReg.ttf');
+  font-family: 'Omnes-reg';
+  src: url('/assets/fonts/Omnes/OmnesReg.ttf');
 }
 
 @font-face {
-    font-family: 'Omnes-sem';
-    src: url('/assets/fonts/Omnes/OmnesSem.ttf');
+  font-family: 'Omnes-sem';
+  src: url('/assets/fonts/Omnes/OmnesSem.ttf');
 }
 
 @font-face {
-    font-family: 'Omnes-med';
-    src: url('/assets/fonts/Omnes/OmnesMed_1.ttf');
+  font-family: 'Omnes-med';
+  src: url('/assets/fonts/Omnes/OmnesMed_1.ttf');
 }
 
 
@@ -29,7 +29,11 @@
   z-index: 999 !important;
 }
 
-
+.box-shadow-important {
+  background: white;
+  border: 1px solid rgba(219, 223, 227, 0.303017) !important;
+  box-shadow: 0px 5px 12px rgba(217, 226, 233, 0.5) !important;
+}
 
 .box-shadow-input {
   background: white;
@@ -38,25 +42,76 @@
   border-bottom: 5px solid rgba(219, 223, 227, 0.303017);
 }
 
-
-.box-shadow {
-    background: white;
-    padding: 1em;
-    border: 1px solid rgba(219, 223, 227, 0.303017);
-    box-shadow: 0px 5px 12px rgba(217, 226, 233, 0.5);
+.tooltipEscalas {
+  position: relative;
+  display: inline-block;
 }
 
-.autocomplete-container{
+.tooltipEscalas .tooltipBagDivEsc {
+  visibility: hidden;
+  width: 350px;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: -85%;
+  margin-left: -170px;
+  box-shadow: 1px 1px 5px 5px #949494;
+}
+
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+
+.fast{
+  -webkit-animation-duration: 0.4s;
+  animation-duration: 0.4s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.tooltipEscalas .tooltipBagDivEsc::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+.tooltipEscalas:hover .tooltipBagDivEsc {
+  visibility: visible;
+}
+
+
+.box-shadow {
+  background: white;
+  padding: 1em;
+  border: 1px solid rgba(219, 223, 227, 0.303017);
+  box-shadow: 0px 5px 12px rgba(217, 226, 233, 0.5);
+}
+
+.autocomplete-container {
   box-shadow: none !important;
 }
 
-.autocomplete-container1{
+.autocomplete-container1 {
   border: 1px solid rgba(219, 223, 227, 0.303017) !important;
   box-shadow: 0px 5px 12px rgba(217, 226, 233, 0.5) !important;
   z-index: 999 !important;
 }
 
-.autocomplete-container1 .input-container input{
+.autocomplete-container1 .input-container input {
   color: #3D3D3D !important;
   font-family: Omnes-med !important;
   font-size: 15px !important;
@@ -66,7 +121,7 @@
   box-shadow: 0px 5px 12px rgba(217, 226, 233, 0.5) !important;
 }
 
-.autocomplete-container .input-container input{
+.autocomplete-container .input-container input {
   color: #3D3D3D !important;
   font-family: Omnes-med !important;
   font-size: 15px !important;
@@ -79,27 +134,27 @@
   transition: 0.5s;
 }
 
-.autocomplete-container .input-container input:focus{
+.autocomplete-container .input-container input:focus {
   border: 3px solid #6B253C !important;
   border-radius: 4px;
 }
 
-.autocomplete-container .suggestions-container{
+.autocomplete-container .suggestions-container {
   z-index: 999 !important;
 }
 
-.suggestions-container.is-visible{
+.suggestions-container.is-visible {
   width: 200% !important
 }
 
-.autocomplete-container .suggestions-container ul li a{
+.autocomplete-container .suggestions-container ul li a {
   color: #3D3D3D !important;
   font-family: Omnes-med !important;
   font-size: 15px !important;
 }
 
 @media screen and (max-width:576px) {
-  .autocomplete-container .input-container input{
+  .autocomplete-container .input-container input {
     color: #3D3D3D !important;
     font-family: Omnes-med !important;
     font-size: 15px !important;
@@ -111,6 +166,12 @@
     -webkit-transition: 0.5s;
     transition: 0.5s;
     height: 50px !important;
+  }
+
+  .box-shadow-important {
+    background: #FDFDFD;
+    border: none;
+    box-shadow: none;
   }
 
 }

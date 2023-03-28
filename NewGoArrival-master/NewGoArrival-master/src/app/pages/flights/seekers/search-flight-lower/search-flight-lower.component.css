@@ -76,6 +76,10 @@
     margin-top: 10px;
     font-size: 20px;
   }
+
+  .todoLower{
+    margin-top: 1.5rem!important;
+  }
   
   
   .btn-combo:focus {
@@ -147,6 +151,10 @@
     .section {
         margin-right: 0px;
         margin-left: 0px;
+    }
+
+    .todoLower{
+      margin-top: 7.5rem!important;
     }
   
     .dates{

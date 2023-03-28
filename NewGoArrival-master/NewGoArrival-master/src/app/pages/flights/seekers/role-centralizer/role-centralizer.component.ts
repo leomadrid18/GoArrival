@@ -35,8 +35,7 @@ export class RoleCentralizerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    /* this.data = this.head.getData();
-    console.log(this.data); */
+
     this.objetoEncriptado = localStorage.getItem('%$#2x5sd4e');
     this.objetoDesencriptado = this.head.desencriptar(this.objetoEncriptado);
   }
@@ -140,7 +139,7 @@ export class RoleCentralizerComponent implements OnInit {
         
       }
     );
-    console.log(this.objetoDesencriptado);
+
   }
 
   typeSearch(valor: any) {

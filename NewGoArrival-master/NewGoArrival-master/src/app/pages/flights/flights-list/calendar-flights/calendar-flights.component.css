@@ -13,6 +13,14 @@
     background-color: #ddd;
 }
 
+.idaa{
+    color: white;
+    font-weight: 700;
+    top: 85px;
+    position: absolute;
+    left: 40px;
+}
+
 .separate {
     text-transform: capitalize;
     font-weight: 700;
