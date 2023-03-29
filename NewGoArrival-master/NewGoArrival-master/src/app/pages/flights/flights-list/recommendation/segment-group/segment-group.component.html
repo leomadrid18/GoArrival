@@ -21,23 +21,23 @@
             <div class="col-lg-1 col-md-1 col-sm-1 m-0 p-0"></div>
         </div>
         <div class="row m-0 p-0 pb-2">
-            <div class="col-lg-4 col-md-4 col-sm-4 col-4 m-0 text-center">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-4 m-0 text-center textosairports">
                 <span class="g-text-date"> {{segmentGroup.departureDateShow}}</span><br/>
                 <span class="g-text-3"> {{segmentGroup.departureTimeShow}}</span><br/>
                 <span class="g-text-4"> {{segmentGroup.oorigin.iataCode}}</span><br/>
                 <span class="g-text-6"> {{segmentGroup.oorigin.cityName}}</span><br/>
                 <span class="g-text-6"> {{segmentGroup.oorigin.airportName}}</span>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-4 m-0 text-center">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-4 m-0 text-center textosairports">
 
               <!--   <hr class="rayahr"> -->
                 <span class="g-text-6"> Duración: {{segmentGroup.totalFlightTimeShow}}</span>
               <!--   <hr class="rayahr"> --> <br/>
                 <span class="g-text-6">Cabina: {{segmentGroup.cabinDescription}} - {{segmentGroup.classId}}</span><br/>
-                <span class="g-text-6">  Disponibilidad: {{segmentGroup.avlStatus}}</span>
+                <span id="avlStatus" class="g-text-6">  Disponibilidad: {{segmentGroup.avlStatus}}</span>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-4 m-0 text-center">
-                <span *ngIf="segmentGroup.dateVariation===0" class="g-text-date"> {{segmentGroup.arrivalDateShow}}</span><br/>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-4 m-0 text-center textosairports">
+                <span *ngIf="segmentGroup.dateVariation===0" class="g-text-date"> {{segmentGroup.arrivalDateShow}}</span>
                 <span *ngIf="segmentGroup.dateVariation>0" style="color: #ED1C24 !important;" class="g-text-2"><label class="g-text-2" style="color: #ED1C24 !important;">(+{{segmentGroup.dateVariation}})</label> {{segmentGroup.arrivalDateShow}}</span><br/>
                 <span class="g-text-3"> {{segmentGroup.arrivalTimeShow}}</span><br/>
                 <span class="g-text-4"> {{segmentGroup.odestination.iataCode}}</span><br/>
@@ -53,13 +53,13 @@
     <div class="col-lg-12 col-md-12 col-sm-12 m-0 p-0 pt-3 text-center g-text-5">
         <div class="row m-0 p-0">
 
-            <div class="col-lg-2 col-md-2 col-sm m-0 p-0">
+            <div class="col-lg-2 col-md-2 col-sm col-1 m-0 p-0">
                 <hr style="height: 5px; border-radius: 20px 0 0 20px;" color="#FF0000">
             </div>
-            <div class="col-lg-8 col-md-8 col-sm-7 m-0 p-0 g-text-5 d-flex justify-content-center align-items-center" style="border-radius: 20px 20px 20px 20px; background-color: #ED1C24; height: 35px">
+            <div class="col-lg-8 col-md-8 col-sm-7 col-10 m-0 p-0 g-text-5 d-flex justify-content-center align-items-center gruesa">
                 {{textFlightTimeShow}}
             </div>
-            <div class="col-lg-2 col-md-2 col-sm m-0 p-0">
+            <div class="col-lg-2 col-md-2 col-sm col-1 m-0 p-0">
                 <hr style="height: 5px; border-radius: 0 20px 20px 0;" color="#FF0000">
             </div>
         </div>

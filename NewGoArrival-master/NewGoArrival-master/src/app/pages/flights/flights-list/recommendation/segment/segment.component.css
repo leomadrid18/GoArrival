@@ -1,127 +1,149 @@
-.div-familia{
-  font-size: 12px;
-  border-radius: 14px;
-  text-align: center;
-  background: #5CB5AB 0% 0% no-repeat padding-box;
-  color: #FFFFFF;
+.div-familia {
+    font-size: 12px;
+    border-radius: 14px;
+    text-align: center;
+    background: #5CB5AB 0% 0% no-repeat padding-box;
+    color: #FFFFFF;
 }
 
-.checkI{
+.checkI {
     text-align: center;
     line-height: 4;
 }
 
-.datevar{
+.datevar {
     color: #ED1C24 !important;
-     padding-left: 5px !important; 
-     font-size: 14px
+    padding-left: 5px !important;
+    font-size: 14px
 }
 
-.imgBaggage{
+.imgBaggage {
     width: 33px;
     margin-left: 10px;
     margin-right: 10px;
 }
 
-.bord{
+.bord {
     border-left: 1px solid #898989;
 }
 
-.sacles{
+.sacles {
     cursor: pointer;
     line-height: 23px;
 }
 
-.sm-text-1{
-  font-size: 17px;
-  font-family: Omnes-med;
-  color: #898989;
+.sm-text-1 {
+    font-size: 17px;
+    font-family: Omnes-med;
+    color: #898989;
 }
 
-.directo{
+.directo {
     width: 100%;
 }
 
-.sm-text-2{
-  font-size: 13px;
-  font-family: Omnes-med;
-  color: #898989;
+.sm-text-2 {
+    font-size: 13px;
+    font-family: Omnes-med;
+    color: #898989;
+}
+
+.text-baggages-phone {
+    font-size: 16px;
+    font-family: Omnes-med;
+    color: #6B253C;
 }
 
 
-#imgPhone,#text-durac{
+#imgPhone,
+#text-durac {
     display: none;
 }
 
-.divhe{
+.divhe {
     line-height: normal;
 }
 
-.arrows{
-    width: 40px; 
+.arrows {
+    width: 40px;
     cursor: pointer
+}
+
+#baggagePhone{
+    display: none;
 }
 
 @media screen and (max-width:500px) {
-    .directo{
+    .directo {
         width: 10%;
     }
-  #imgWeb{
-    display: none;
-  }
 
-  #imgPhone,#text-durac{
-    display: initial;
-}
+    #baggagePhone{
+        display: initial;
+    }
 
-.checkI{
-    text-align: center;
-    line-height: normal;
-}
+    .bordear{
+        border-bottom: 1px solid #BABABA;
+    }
 
-.scaleImg{
-    width: 45px;
-}
+    #imgWeb {
+        display: none;
+    }
 
-.directo{
-    width: 45px;
-    height: 4px;
-}
+    #imgPhone,
+    #text-durac {
+        display: initial;
+        margin-bottom: 15px;
+    }
 
-.divhe{
-    line-height: normal;
-}
+    .checkI {
+        text-align: center;
+        line-height: normal;
+    }
 
-.sacles{
-    cursor: pointer;
-    line-height: 15px;
-}
+    .scaleImg {
+        width: 45px;
+    }
 
-.bord{
-    border: none;
-    padding: 0px 0px 0px 15px;
-}
+    .directo {
+        width: 45px;
+        height: 4px;
+    }
 
-#timeShow{
-    text-align: initial !important;
-}
+    .divhe {
+        line-height: normal;
+    }
 
-.imgBaggage{
-    width: 25px;
-    margin-left: 5px;
-    margin-right: 5px;
-}
+    .sacles {
+        cursor: pointer;
+        line-height: 15px;
+    }
 
-.sm-text-1{
-    font-size: 14px;
-    font-family: Omnes-med;
-    color: #0a0808;
-  }
+    .bord {
+        border: none;
+        padding: 0px 0px 0px 15px;
+    }
 
-.arrows{
-    width: 20px; 
-    cursor: pointer
-}
+    #timeShow {
+        text-align: initial !important;
+    }
 
-    
+    .imgBaggage {
+        width: 25px;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    .sm-text-1 {
+        font-size: 14px;
+        font-family: Omnes-med;
+        color: #0a0808;
+    }
+
+    .arrows {
+        width: 20px;
+        cursor: pointer
+    }
+
+
 }

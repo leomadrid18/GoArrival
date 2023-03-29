@@ -1,11 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { HeaderService } from 'src/app/services/head.service';
 import { LoginService } from 'src/app/services/login/login.service';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 import * as crypto from 'crypto-js';
-import { Login } from 'src/models/login/login.model';
-import { Observable } from 'rxjs';
 
 
 @Component({
@@ -14,17 +12,21 @@ import { Observable } from 'rxjs';
   styleUrls: ['./login.component.css'],
   providers: [LoginService]
 })
+
+
 export class LoginComponent implements OnInit {
+  @ViewChild('spinner') spinnerse: any;
   year: Date = new Date();
   numberyear: any;
   usuario: any;
+  showOverlay = false;
   password: any;
   messageError: any;
   validError: boolean;
   showHeader = false;
   passwordCrypto = 'serviceLogin#$';
   objetoEncriptado: string;
-  constructor( private router: Router, private headerService: HeaderService,
+  constructor( private router: Router, private headerService: HeaderService,  private spinner: NgxSpinnerService,
     private service: LoginService) {
     this.validError = false;
     this.showHeader = false;
@@ -41,33 +43,7 @@ export class LoginComponent implements OnInit {
 
 
 
- /*  guardarLogin(rpta: Login) {
-    const rptaLogin: Login = {
-      allowedAccess: rpta.allowedAccess,
-      email: rpta.email,
-      gender: rpta.gender,
-      isActive: rpta.isActive,
-      lcostCenter: rpta.lcostCenter,
-      lmenu: rpta.lmenu,
-      loginUser: rpta.loginUser,
-      oagency: rpta.oagency,
-      ocompany: rpta.ocompany,
-      odocument: rpta.odocument,
-      oerror: rpta.oerror,
-      orole: rpta.orole,
-      partnerClub: rpta.partnerClub,
-      personId: rpta.personId,
-      phoneNumber: rpta.phoneNumber,
-      requiredChangePassword: rpta.requiredChangePassword,
-      travelerCode: rpta.travelerCode,
-      userId: rpta.userId,
-      userLastName: rpta.userLastName,
-      userName: rpta.userName,
-      vip: rpta.vip
-    };
 
-    return rptaLogin;
-  } */
 
 
   airportListPriority() {
@@ -116,6 +92,7 @@ export class LoginComponent implements OnInit {
 
 
   loginUser() {
+    this.headerService.mostrarSpinner();
     let obj = {
       User: this.usuario,
       Password: crypto.SHA256(this.password).toString(),
@@ -123,16 +100,17 @@ export class LoginComponent implements OnInit {
     }
     this.service.login(obj).subscribe(
       rpta => {
+        this.headerService.setData("my-data",rpta);
         if (rpta.oerror != null) {
           this.messageError = rpta.oerror.message;
           this.validError = true;
           return;
         } else {
-        /*   this.objetoEncriptado = this.headerService.encriptar(rpta); */
+        
           localStorage.setItem('%$#2x5sd4e', JSON.stringify(rpta));
           this.router.navigate(["flights"]);
         }
-
+        this.headerService.ocultarSpinner();
       }
     );
   }

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,7 +9,7 @@ import { LoginConsolidatorComponent } from './pages/logins/login-consolidator/lo
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 
@@ -20,15 +20,18 @@ const routes: Routes = [
 ];
 
 @NgModule({
+  schemas: [NO_ERRORS_SCHEMA],
   declarations: [
     AppComponent,
     LoginComponent,
     HeaderComponent,
+    
     LoginConsolidatorComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    NgxSpinnerModule,
     BrowserAnimationsModule,
     FormsModule,
     AppRoutingModule

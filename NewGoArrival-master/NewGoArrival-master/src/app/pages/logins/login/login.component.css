@@ -1,4 +1,3 @@
-
 .log {
     height: 100vh;
     background: -webkit-linear-gradient(left, rgba(237, 28, 35, 0.3) 0%, rgba(176, 23, 56, 0.3) 36%, rgba(60, 71, 73, 0.3) 65%, rgba(60, 71, 73, 0.3) 100%);
@@ -17,6 +16,9 @@
     background-repeat: no-repeat;
 }
 
+
+
+
 .img {
     max-width: 100%;
     height: auto;
@@ -31,22 +33,22 @@
 }
 
 #login {
-    background: -webkit-linear-gradient(left,rgba(255,255,255,.9) 0,rgba(255,255,255,.9) 100%);
+    background: -webkit-linear-gradient(left, rgba(255, 255, 255, .9) 0, rgba(255, 255, 255, .9) 100%);
     border-radius: 30px 0px 30px 0px;
 }
 
-input{
+input {
     border: none !important;
     width: 100%;
 
 }
 
-.raya{
-    background: -webkit-linear-gradient(left,#ed1c23 0,#b01738 36%,#3c4749 100%);
-    padding-left: 0!important;
-    padding-block: 0!important;
-    padding-right: 0!important;
-    padding-bottom: 3px!important;
+.raya {
+    background: -webkit-linear-gradient(left, #ed1c23 0, #b01738 36%, #3c4749 100%);
+    padding-left: 0 !important;
+    padding-block: 0 !important;
+    padding-right: 0 !important;
+    padding-bottom: 3px !important;
     position: relative;
     height: 3px;
 }
@@ -58,37 +60,37 @@ input{
     font-family: Omnes-med;
 }
 
-.btnIngresar{
+.btnIngresar {
     color: white;
     font-size: 18px;
     cursor: pointer;
     padding: 10px 50px 10px 50px;
     border-radius: 5px;
     font-family: Omnes-med;
-    background: -webkit-linear-gradient(left,#ed1c23 0,#b01738 36%,#3c4749 100%);
+    background: -webkit-linear-gradient(left, #ed1c23 0, #b01738 36%, #3c4749 100%);
 }
 
-.padre{
+.padre {
     border-radius: 30px 0;
-    background: -webkit-linear-gradient(left,rgba(237,28,35,.7) 0,rgba(176,23,56,.7) 36%,rgba(60,71,73,.6) 65%,rgba(60,71,73,.5) 100%);
+    background: -webkit-linear-gradient(left, rgba(237, 28, 35, .7) 0, rgba(176, 23, 56, .7) 36%, rgba(60, 71, 73, .6) 65%, rgba(60, 71, 73, .5) 100%);
     color: #fff;
 }
 
-.subtext{
+.subtext {
     text-align: center;
     color: #767676;
     font-size: 16px;
     font-family: Omnes-med;
 }
 
-.subtextDere{
+.subtextDere {
     text-align: center;
     color: white;
     font-size: 14px;
     font-family: Omnes-med;
 }
 
-.text-error{
+.text-error {
     text-align: center;
     color: red;
     font-size: 15px;
@@ -97,7 +99,7 @@ input{
 
 
 
-.subtextClick{
+.subtextClick {
     text-align: center;
     color: #767676;
     font-size: 16px;

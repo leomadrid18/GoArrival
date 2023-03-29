@@ -10,7 +10,7 @@ import { LoginService } from 'src/app/services/login/login.service';
 })
 export class FlightsComponent implements OnInit {
 
-
+  myData: any;
   showHeader = true;
   flagCentralizador = true;
   objetoDesencriptado: any = {};
@@ -22,6 +22,10 @@ export class FlightsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.headerService.getData('my-data')?.subscribe(data => {
+      this.myData = data;
+    });
+    console.log(this.myData);
     this.objetoDesencriptado = localStorage.getItem('%$#2x5sd4e');
     /* this.objetoDesencriptado = this.headerService.desencriptar(this.objetoEncriptado); */
   }

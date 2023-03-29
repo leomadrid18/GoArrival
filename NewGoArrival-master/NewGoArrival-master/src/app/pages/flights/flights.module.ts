@@ -7,7 +7,6 @@ import { SearchFlightComponent } from './seekers/search-flight/search-flight.com
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from "ngx-pagination";
 import { AutocompleteLibModule } from "angular-ng-autocomplete";
-import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { PassengerCounterComponent } from './seekers/search-flight/passenger-counter/passenger-counter.component';
 import { StoreModule } from '@ngrx/store';
@@ -20,9 +19,12 @@ import { SegmentComponent } from './flights-list/recommendation/segment/segment.
 import { SegmentGroupComponent } from './flights-list/recommendation/segment-group/segment-group.component';
 import { FinalPriceComponent } from './flights-list/recommendation/final-price/final-price.component';
 import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
+
 import { FormattimeairportPipe } from 'src/app/pipes/formattimeairport.pipe';
 
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 const routes: Routes = [
   {
@@ -51,6 +53,7 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
+    NgxSpinnerModule,
     ReactiveFormsModule,
     ModalModule.forRoot(),
     TooltipModule.forRoot(),

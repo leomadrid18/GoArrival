@@ -4,6 +4,8 @@ import { selectOcompany, selectOrole, selectPersonId } from 'src/app/app-state/s
 import { FlightService } from 'src/app/services/flight/flight.service';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
+import { HeaderService } from 'src/app/services/head.service';
+
 
 declare var $: any;
 
@@ -58,7 +60,7 @@ export class SearchFlightLowerComponent implements OnInit {
 
   @Output() result = new EventEmitter<any>();
 
-  constructor(private service: FlightService, private store: Store<AppState>) {
+  constructor(private service: FlightService, private store: Store<AppState>,private head: HeaderService) {
     this.tipoVuelo = "";
     this.indexTramo = 2;
     this.pasajeros = 1;
@@ -93,6 +95,7 @@ export class SearchFlightLowerComponent implements OnInit {
 
 
   searchFlight() {
+    this.head.mostrarSpinner();
     let origen: any[] = [];
     let destino: any[] = [];
     let fechas: any[] = [];
@@ -151,7 +154,7 @@ export class SearchFlightLowerComponent implements OnInit {
         }
         this.result.emit(obj);
         localStorage.setItem('flights-result', JSON.stringify(x));
-      
+        this.head.ocultarSpinner();
       }
     )
   }

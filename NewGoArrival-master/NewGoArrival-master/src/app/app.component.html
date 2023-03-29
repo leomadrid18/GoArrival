@@ -2,3 +2,7 @@
 <app-header *ngIf="headerService.showHeader"></app-header>
 <router-outlet>
 </router-outlet>
+
+<div *ngIf="headerService.showOverlay" class="overlay">
+    <img #spinner src='https://domiruthgeneral.blob.core.windows.net/domiruth/domiruth/carga.gif' alt="Loading..." />
+</div>

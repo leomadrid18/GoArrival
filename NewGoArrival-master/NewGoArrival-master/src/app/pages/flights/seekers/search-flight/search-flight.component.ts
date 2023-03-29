@@ -4,6 +4,8 @@ import { selectOcompany, selectOrole, selectPersonId } from 'src/app/app-state/s
 import { FlightService } from 'src/app/services/flight/flight.service';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
+import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 declare var jquery: any;
 declare var $: any;
@@ -51,9 +53,10 @@ export class SearchFlightComponent implements OnInit {
   escala: string;
   pasajeros: number;
   maleta: boolean = true;
+  objetoDesencriptado: any;
   validarPasajeros = false;
   passengerList: any;
-  constructor(private service: FlightService,private store: Store<AppState>) {
+  constructor(private service: FlightService,private store: Store<AppState>,private router: Router,private spinner: NgxSpinnerService) {
     this.tipoVuelo = "";
     this.indexTramo = 2;
     this.pasajeros = 1;
@@ -81,30 +84,68 @@ export class SearchFlightComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.objetoDesencriptado = localStorage.getItem('%$#2x5sd4e')
+    this.objetoDesencriptado = JSON.parse(this.objetoDesencriptado);
   }
 
 
 
   searchFlight(){
+    this.spinner.show();
+    let origen: any[] = [];
+    let destino: any[] = [];
+    let fechas: any[] = [];
+    let horasFrom: any[] = [];
+    let horasTo: any[] = [];
+    let lUsers_: any[] = [];
+    let lPassengers: any[] = [];
+
+    origen.push(this.origenAuto);
+    origen.push(this.destinoAuto);
+
+    destino.push(this.destinoAuto);
+    destino.push(this.origenAuto);
+
+    fechas.push(this.fechaSalida);
+    fechas.push(this.fechaRetorno);
+
+    fechas.forEach(function (fe) {
+      horasFrom.push("");
+      horasTo.push("");
+    });
+    lUsers_.push(
+      {
+        "RoleId": this.objetoDesencriptado.orole.roleId,
+        "CostCenterId": null,
+        "UserId": this.objetoDesencriptado.userId
+      }
+    );
+    const passenger = {
+      Quantity: this.pasajeros,
+      TypePassenger: 'ADT'
+    }
+
+    lPassengers.push(passenger);
     let data = {
-      Lusers: null,
-      Lpassengers: null,
-      CabinType: null,
-      Scales: null,
-      TypeSearch: null,
-      IncludesBaggage: null,
-      Origin: null,
-      Destination: null,
-      DepartureArrivalDate: null,
-      DepartureArrivalTimeFrom: null,
-      DepartureArrivalTimeTo: null,
-      Ocompany: null,
-      Oagency: null
+      Lusers: lUsers_,
+      Lpassengers: lPassengers,
+      CabinType: this.cabina,
+      Scales: this.escala,
+      TypeSearch: "C",
+      IncludesBaggage: this.maleta,
+      Origin: origen,
+      Destination: destino,
+      DepartureArrivalDate: fechas,
+      DepartureArrivalTimeFrom: horasFrom,
+      DepartureArrivalTimeTo: horasTo,
+      Ocompany: this.objetoDesencriptado.ocompany,
+      Oagency: this.objetoDesencriptado.oagency
     };
     this.service.searchFlight(data).subscribe(
       x=>{ 
-       
+        this.spinner.hide();
+        localStorage.setItem('flights-result', JSON.stringify(x));
+        this.router.navigate(["flights/flight-list"])
       }
     )
   }

@@ -11,6 +11,7 @@ export class AppComponent implements OnInit {
   constructor(public headerService: HeaderService) {}
   title = 'GoArrival';
   showHeader = true;
+  showOverlay = false;
   ngOnInit(){
     setTimeout(function() {
       $("#divLoaderLogin").hide();
