@@ -1,4 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+
+
 import { HeaderService } from 'src/app/services/head.service';
 import { LoginService } from 'src/app/services/login/login.service';
 
@@ -10,25 +13,35 @@ import { LoginService } from 'src/app/services/login/login.service';
 })
 export class FlightsComponent implements OnInit {
 
+
   myData: any;
   showHeader = true;
   flagCentralizador = true;
   objetoDesencriptado: any = {};
   objetoEncriptado: any;
-
-  constructor(private headerService: HeaderService,private login: LoginService) { 
+  cookieValue: any;
+  constructor(private headerService: HeaderService, private login: LoginService, private cookieServices: CookieService) {
     this.showHeader = true;
     this.headerService.mostrarEncabezado();
+
   }
 
   ngOnInit(): void {
-    this.headerService.getData('my-data')?.subscribe(data => {
-      this.myData = data;
-    });
-    console.log(this.myData);
-    this.objetoDesencriptado = localStorage.getItem('%$#2x5sd4e');
-    /* this.objetoDesencriptado = this.headerService.desencriptar(this.objetoEncriptado); */
+    this.cookieValue = this.cookieServices.get('dwerrgfqw24423');
+    this.objetoDesencriptado = this.headerService.desencriptar(this.cookieValue);
+    this.validCentralizer();
   }
+
+  validCentralizer() {
+    if (this.objetoDesencriptado.orole.roleId === 3) {
+      this.flagCentralizador = true;
+    } else {
+      this.flagCentralizador = false;
+    }
+  }
+
+
+
 
 
 
@@ -39,3 +52,4 @@ export class FlightsComponent implements OnInit {
   }
 
 }
+

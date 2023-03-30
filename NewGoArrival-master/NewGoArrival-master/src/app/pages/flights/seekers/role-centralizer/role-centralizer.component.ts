@@ -2,6 +2,8 @@ import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 import { FlightService } from 'src/app/services/flight/flight.service';
 import * as crypto from 'crypto-js';
 import { HeaderService } from 'src/app/services/head.service';
+import { CookieService } from 'ngx-cookie-service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-role-centralizer',
@@ -13,8 +15,6 @@ export class RoleCentralizerComponent implements OnInit {
   tipoBusqueda: string;
   name: string;
   document: string;
-  itemsPerPage = 5;
-  currentPage = 1;
   Math: Math = Math;
   passwordCrypto = 'serviceLogin#$';
   objetoDesencriptado: any = {};
@@ -23,12 +23,13 @@ export class RoleCentralizerComponent implements OnInit {
   lstPerson: any[] = [];
   lstPersonShow: any[] = [];
   p: any;
+  modalRef!: BsModalRef;
   maxPax = 8;
   lstPasajeros: any[] = [];
   filteredList: any[] = []; // Lista filtrada
   @Output() flagCentralizado = new EventEmitter<boolean>();
   searchTerm = '';
-  constructor(private service: FlightService,private head: HeaderService) { 
+  constructor(private service: FlightService,private head: HeaderService,private cookie: CookieService,private modalService: BsModalService) { 
     this.tipoBusqueda = 'N';
     this.name = "";
     this.document = "";
@@ -36,15 +37,12 @@ export class RoleCentralizerComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.objetoEncriptado = localStorage.getItem('%$#2x5sd4e');
-    this.objetoDesencriptado = this.head.desencriptar(this.objetoEncriptado);
+   
+    this.objetoDesencriptado = this.cookie.get('dwerrgfqw24423');
+    this.objetoDesencriptado = this.head.desencriptar(this.objetoDesencriptado);
   }
 
-  paginate() {
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    const endIndex = startIndex + this.itemsPerPage;
-    return this.lstPerson.slice(startIndex, endIndex);
-  }
+  
 
   
 
@@ -74,12 +72,12 @@ export class RoleCentralizerComponent implements OnInit {
 
   continuar(template: any) {
     if (this.lstPasajeros.length === 0) {
-   /*    this.modalRef = this.modalService.show(
+      this.modalRef = this.modalService.show(
         template,
         Object.assign({}, { class: 'gray modal-lg m-infraccion' })
-      ); */
-     
+      );
     } else {
+      /* this.sessionStorageService.store('ss_lstPasajeros', this.lstPasajeros); */
       this.flagCentralizado.emit(false);
     }
   }
@@ -118,6 +116,7 @@ export class RoleCentralizerComponent implements OnInit {
     if(this.filteredList.length != 0){
       return;
     }
+    this.head.mostrarSpinner();
     let freeText = '';
     const datos = {
       Ocompany: {
@@ -131,6 +130,7 @@ export class RoleCentralizerComponent implements OnInit {
       result => {
         this.lstPerson = result;
         this.filteredList = result;
+        this.head.ocultarSpinner();
       },
       err => {
         

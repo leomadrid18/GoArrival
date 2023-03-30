@@ -1,6 +1,4 @@
-import { Login } from "src/models/login/login.model";
-
-export interface AppState {
-    login: Login
-}
-
+export interface MyObject {
+    id: number;
+    name: string;
+  }

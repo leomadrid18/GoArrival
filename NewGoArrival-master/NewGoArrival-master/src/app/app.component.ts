@@ -8,7 +8,9 @@ declare var $: any;
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(public headerService: HeaderService) {}
+  constructor(public headerService: HeaderService) {
+    
+  }
   title = 'GoArrival';
   showHeader = true;
   showOverlay = false;

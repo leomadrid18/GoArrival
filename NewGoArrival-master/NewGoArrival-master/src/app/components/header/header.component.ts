@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild,ElementRef  } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { HeaderService } from 'src/app/services/head.service';
 
 @Component({
   selector: 'app-header',
@@ -16,15 +18,35 @@ export class HeaderComponent implements OnInit {
   numero: number;
   prendido = "vuelosOn";
   apagado = "vuelosOff";
-  constructor(private router: Router) {
+  cookieValue: any
+  empresa: any;
+  @ViewChild('userBox') userBox!: ElementRef;
+  constructor(private router: Router,private cookieServices: CookieService,private headService: HeaderService) {
     this.numero = 1;
   }
 
   ngOnInit(): void {
-    /*  const miVariable: string | null = null;
-     const valor = miVariable ?? "valor por defecto";
-     console.log(valor); // Imprime "valor por defecto" */
+
+    this.cookieValue = this.cookieServices.get('dwerrgfqw24423');
+    this.cookieValue = this.headService.desencriptar(this.cookieValue);
+    if (this.cookieValue.ocompany != null) {
+      this.empresa = this.cookieValue.ocompany.companyName;
+    } else {
+      if (this.cookieValue.oagency) {
+        this.empresa = this.cookieValue.oagency.agencyName;
+      }
+    }
   }
+
+  changeProfile() {
+    var z = document.getElementById("profile");
+    z!.style.display = "block";
+  }
+
+  cerrarSesion() {
+    this.router.navigate([""]);
+  }
+ 
 
   change(on: string,off: string,number: any){
     this.qwe = document.getElementById(this.prendido);

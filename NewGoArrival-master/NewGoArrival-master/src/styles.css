@@ -166,6 +166,10 @@
   font-size: 15px !important;
 }
 
+.gray.modal-lg.m-infraccion{
+  max-width: 45% !important;
+}
+
 @media screen and (max-width:576px) {
   .autocomplete-container .input-container input {
     color: #3D3D3D !important;

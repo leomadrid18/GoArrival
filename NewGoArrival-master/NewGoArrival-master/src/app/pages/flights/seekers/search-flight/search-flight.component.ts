@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { DatepickerDateCustomClasses } from 'ngx-bootstrap/datepicker';
-import { selectOcompany, selectOrole, selectPersonId } from 'src/app/app-state/selectors/login.selector';
+
 import { FlightService } from 'src/app/services/flight/flight.service';
 import { Store, select } from '@ngrx/store';
-import { AppState } from 'src/app/app.state';
 import { Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { CookieService } from 'ngx-cookie-service';
+import { HeaderService } from 'src/app/services/head.service';
+
 
 declare var jquery: any;
 declare var $: any;
@@ -16,9 +17,7 @@ declare var $: any;
   styleUrls: ['./search-flight.component.css']
 })
 export class SearchFlightComponent implements OnInit {
-  company$ = this.store.pipe(select(selectOcompany));
-  role$ = this.store.pipe(select(selectOrole));
-  personId$ = this.store.pipe(select(selectPersonId));
+  public datae: any[];
   general = "col-lg-12 col-md-12 col-sm-12 col-12 m-0 p-0"
   tipoVuelo: string;
   indexTramo: number;
@@ -56,7 +55,10 @@ export class SearchFlightComponent implements OnInit {
   objetoDesencriptado: any;
   validarPasajeros = false;
   passengerList: any;
-  constructor(private service: FlightService,private store: Store<AppState>,private router: Router,private spinner: NgxSpinnerService) {
+  constructor(private service: FlightService,private router: Router,private cookie: CookieService,private headerService: HeaderService) {
+
+    this.datae = [];
+   
     this.tipoVuelo = "";
     this.indexTramo = 2;
     this.pasajeros = 1;
@@ -84,14 +86,26 @@ export class SearchFlightComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.objetoDesencriptado = localStorage.getItem('%$#2x5sd4e')
-    this.objetoDesencriptado = JSON.parse(this.objetoDesencriptado);
+    this.objetoDesencriptado = this.cookie.get('dwerrgfqw24423');
+    this.objetoDesencriptado = this.headerService.desencriptar(this.objetoDesencriptado);
+    this.cookie.delete("rtsdt3298dwlou3208");
+  }
+
+
+
+
+  public saveObject(valor: any): void {
+    this.headerService.addObject(1, valor).then(() => {
+      console.log('Objeto guardado en la base de datos');
+    }).catch(error => {
+      console.error('Error al guardar objeto en la base de datos', error);
+    });
   }
 
 
 
   searchFlight(){
-    this.spinner.show();
+    this.headerService.mostrarSpinner();
     let origen: any[] = [];
     let destino: any[] = [];
     let fechas: any[] = [];
@@ -142,9 +156,14 @@ export class SearchFlightComponent implements OnInit {
       Oagency: this.objetoDesencriptado.oagency
     };
     this.service.searchFlight(data).subscribe(
-      x=>{ 
-        this.spinner.hide();
-        localStorage.setItem('flights-result', JSON.stringify(x));
+      x =>{
+        this.headerService.ocultarSpinner();
+        const obj = {
+          result: x,
+          request: data
+        }
+        let valor = this.headerService.encriptar(obj);
+        this.saveObject(valor)
         this.router.navigate(["flights/flight-list"])
       }
     )

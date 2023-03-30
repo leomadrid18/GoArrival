@@ -1,4 +1,4 @@
-.add{
+.add {
     color: #6B2542;
     font-size: 25px;
     font-family: Omnes-med;
@@ -19,7 +19,19 @@
     font-family: Omnes-med;
 }
 
-.next{
+.buscar {
+    color: white;
+    background-color: #ED1C24;
+    font-family: Omnes-med;
+    font-size: 16px;
+    height: 35px;
+    text-align: center;
+    cursor: pointer;
+    line-height: 30px;
+    border-radius: 10px;
+}
+
+.next {
     color: white;
     background-color: #ED1C24;
     padding: 10px 10px 10px 10px;
@@ -33,14 +45,44 @@
     cursor: pointer;
 }
 
-.apc-btn-buscar{
-  color: white;
-  background-color: #ED1C24;
-  font-family: Omnes-med;
-  font-size: 15px;
+.apc-btn-buscar {
+    color: white;
+    background-color: #ED1C24;
+    font-family: Omnes-med;
+    font-size: 15px;
 }
 
-button{
+button {
     border: none !important;
     background: none;
+}
+
+.btn-ok {
+    background-color: #ED1C24;
+    color: white;
+    font-family: Omnes-med;
+    font-size: 20px;
+}
+
+.text-1 {
+    font-family: Omnes-med;
+    font-size: 23px;
+}
+
+@media screen and (max-width:576px) {
+    .rolescr {
+        padding-top: 85px !important;
+    }
+
+    .namelast {
+        line-height: 35px;
+    }
+
+    .buscar {
+        margin-top: 15px !important;
+    }
+
+    .ocultarTitle {
+        display: none;
+    }
 }

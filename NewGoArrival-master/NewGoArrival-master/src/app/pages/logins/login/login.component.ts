@@ -2,8 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { HeaderService } from 'src/app/services/head.service';
 import { LoginService } from 'src/app/services/login/login.service';
-import { NgxSpinnerService } from 'ngx-spinner';
 import * as crypto from 'crypto-js';
+import { Observable } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
+
 
 
 @Component({
@@ -26,8 +28,10 @@ export class LoginComponent implements OnInit {
   showHeader = false;
   passwordCrypto = 'serviceLogin#$';
   objetoEncriptado: string;
-  constructor( private router: Router, private headerService: HeaderService,  private spinner: NgxSpinnerService,
-    private service: LoginService) {
+  widgets$!: Observable<any[]>;
+  lstAirports: any;
+  constructor( private router: Router, private headerService: HeaderService, 
+    private service: LoginService,private cookieServices: CookieService) {
     this.validError = false;
     this.showHeader = false;
     this.usuario = "";
@@ -37,7 +41,11 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.airportList();
+    this.cookieServices.deleteAll();
+    this.lstAirports = sessionStorage.getItem("ls_airportlist")
+    if(this.lstAirports === null){
+      this.airportListPriority();
+    }
     this.numberyear = this.year.getFullYear();
   }
 
@@ -49,10 +57,8 @@ export class LoginComponent implements OnInit {
   airportListPriority() {
     this.service.getAirportList(true).subscribe(
       (result: any) => {
-        this.objetoEncriptado = this.headerService.encriptar(result.lairports);
-        sessionStorage.setItem('ls_airportlist', this.objetoEncriptado);
-        this.objetoEncriptado = this.headerService.encriptar(result.lcities);
-        sessionStorage.setItem('ls_citylist', this.objetoEncriptado);
+        sessionStorage.setItem('ls_airportlist', JSON.stringify(result.lairports));
+        sessionStorage.setItem('ls_citylist', JSON.stringify(result.lcities));
         this.airportList();
       },
 
@@ -71,9 +77,7 @@ export class LoginComponent implements OnInit {
   airportList() {
     this.service.getAirportList(false).subscribe(
       (result: any) => {
-        /* this.objetoEncriptado = this.headerService.encriptar(result.lairports); */
         sessionStorage.setItem('ls_airportlist', JSON.stringify(result.lairports));
-        /* this.objetoEncriptado = this.headerService.encriptar(result.lcities); */
         sessionStorage.setItem('ls_citylist', JSON.stringify(result.lcities));
       },
 
@@ -91,7 +95,8 @@ export class LoginComponent implements OnInit {
 
 
 
-  loginUser() {
+
+   loginUser() {
     this.headerService.mostrarSpinner();
     let obj = {
       User: this.usuario,
@@ -100,14 +105,13 @@ export class LoginComponent implements OnInit {
     }
     this.service.login(obj).subscribe(
       rpta => {
-        this.headerService.setData("my-data",rpta);
         if (rpta.oerror != null) {
           this.messageError = rpta.oerror.message;
           this.validError = true;
           return;
         } else {
-        
-          localStorage.setItem('%$#2x5sd4e', JSON.stringify(rpta));
+          let valor = this.headerService.encriptar(rpta);
+          this.cookieServices.set('dwerrgfqw24423', valor);
           this.router.navigate(["flights"]);
         }
         this.headerService.ocultarSpinner();

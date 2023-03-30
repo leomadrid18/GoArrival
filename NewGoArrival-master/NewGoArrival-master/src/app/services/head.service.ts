@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AES, enc } from 'crypto-js';
-import { BehaviorSubject } from 'rxjs';
+import Dexie from 'dexie';
+import { CookieService } from 'ngx-cookie-service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,29 +11,49 @@ export class HeaderService {
   showHeader = true;
   showOverlay = false;
   passwordCrypto = 'serviceLogin#$';
-  private dataCache = new Map<string, BehaviorSubject<any>>();
+  private db!: Dexie;
 
-  constructor() {}
-
-  getData(key: string) {
-    if (this.dataCache.has(key)) {
-      return this.dataCache.get(key);
-    }
-    const dataSubject = new BehaviorSubject<any>(null);
-    this.dataCache.set(key, dataSubject);
-    return dataSubject;
+  constructor(private cookieService: CookieService) {
+    this.createDatabase();
   }
 
-  setData(key: string, data: any) {
-    if (this.dataCache.has(key)) {
-      this.dataCache.get(key)?.next(data);
-    }
-    const dataSubject = new BehaviorSubject<any>(data);
-    this.dataCache.set(key, dataSubject);
+  private createDatabase(): void {
+    this.db = new Dexie('myDB');
+
+    this.db.version(1).stores({
+      myTable: 'id, myObject.myString'
+    });
+
+    this.db.open().catch(error => {
+      console.error('Error al abrir la base de datos', error);
+    });
   }
 
-  clearCache() {
-    this.dataCache.clear();
+  public deleteDatabase(): Promise<void> {
+    return this.db.delete();
+  }
+
+  public addObject(id: number, myString: string): Promise<any> {
+    return this.db.table('myTable').put({id, myObject: {myString}});
+  }
+
+  public getObject(id: number): Promise<{id: number, myObject: {myString: string}}> {
+    return this.db.table('myTable').get(id);
+  }
+
+  setData(key: string, value: any): void {
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 7);
+    this.cookieService.set(key, JSON.stringify(value), expirationDate, "null", "null", true, 'Strict');
+  }
+
+  getData(key: string): any {
+    const value = this.cookieService.get(key);
+    return value !== '' ? JSON.parse(value) : null;
+  }
+
+  removeData(key: string): void {
+    this.cookieService.delete(key);
   }
 
   mostrarSpinner(): void {
@@ -62,3 +84,5 @@ export class HeaderService {
     return objetoDesencriptado;
   }
 }
+
+

@@ -24,7 +24,7 @@ import { FormattimeairportPipe } from 'src/app/pipes/formattimeairport.pipe';
 
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { NgxSpinnerModule } from "ngx-spinner";
+
 
 const routes: Routes = [
   {
@@ -53,11 +53,9 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    NgxSpinnerModule,
     ReactiveFormsModule,
     ModalModule.forRoot(),
     TooltipModule.forRoot(),
-    StoreModule.forRoot({  }),
     BsDropdownModule.forRoot(),
     BsDatepickerModule.forRoot(),
     NgxPaginationModule,

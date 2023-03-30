@@ -1,11 +1,6 @@
 import { createAction, props } from '@ngrx/store';
+import { MyObject } from 'src/app/app.state';
 
-export const createLogin = createAction(
-  '[Login] Create Login',
-  props<{ ocompany: any; orole: any; personId: any }>()
-);
 
-export const updateLogin = createAction(
-  '[Login] Update Login',
-  props<{ ocompany: any; orole: any; personId: any }>()
-);
+export const addMyObject = createAction('[My Object] Add', props<{ myObject: MyObject }>());
+export const removeMyObject = createAction('[My Object] Remove', props<{ id: number }>());

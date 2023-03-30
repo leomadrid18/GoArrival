@@ -133,6 +133,55 @@
     padding-top: 20px;
 }
 
+.user-box {
+    display: none;
+    position: absolute;
+    top: 85%;
+    left: 0;
+    width: 225px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    text-align: center;
+    line-height: 25px;
+    border: 2px solid rgb(237, 28, 36);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.name {
+    font-size: 16px;
+    font-weight: 600;
+    font-family: Omnes-med;
+    color: #212529;
+}
+
+.job {
+    font-size: 13px;
+    font-family: Omnes-med;
+    color: #212529;
+}
+
+.user-box h2 {
+    font-size: 1.5rem;
+    margin-top: 0;
+}
+
+.btn {
+    display: block;
+    margin: 0 auto 10px auto;
+    background: none;
+    border: 1px solid brown;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 600;
+    box-sizing: border-box;
+    transition: all .3s ease-in-out;
+    color: brown;
+}
+
+
 
 @media screen and (max-width:1046px) {
     .text-panel {
@@ -159,6 +208,17 @@
         height: 6px;
         bottom: 30px;
         width: 90px;
+    }
+
+    .user-box {
+        width: 240px;
+        left: auto;
+        right: 0;
+        text-align: left;
+    }
+
+    .user-box p {
+        margin: 0.5rem 0;
     }
 
     .optionRayas {

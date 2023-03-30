@@ -1,9 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { DatepickerDateCustomClasses } from 'ngx-bootstrap/datepicker';
-import { selectOcompany, selectOrole, selectPersonId } from 'src/app/app-state/selectors/login.selector';
+import { CookieService } from 'ngx-cookie-service';
 import { FlightService } from 'src/app/services/flight/flight.service';
-import { Store, select } from '@ngrx/store';
-import { AppState } from 'src/app/app.state';
+
 import { HeaderService } from 'src/app/services/head.service';
 
 
@@ -16,9 +15,7 @@ declare var $: any;
 })
 
 export class SearchFlightLowerComponent implements OnInit {
-  company$ = this.store.pipe(select(selectOcompany));
-  role$ = this.store.pipe(select(selectOrole));
-  personId$ = this.store.pipe(select(selectPersonId));
+
   general = "col-lg-12 col-md-12 col-sm-12 col-12 "
   tipoVuelo: string;
   indexTramo: number;
@@ -60,7 +57,7 @@ export class SearchFlightLowerComponent implements OnInit {
 
   @Output() result = new EventEmitter<any>();
 
-  constructor(private service: FlightService, private store: Store<AppState>,private head: HeaderService) {
+  constructor(private service: FlightService,private head: HeaderService,private cookie : CookieService) {
     this.tipoVuelo = "";
     this.indexTramo = 2;
     this.pasajeros = 1;
@@ -88,8 +85,8 @@ export class SearchFlightLowerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.objetoDesencriptado = localStorage.getItem('%$#2x5sd4e')
-    this.objetoDesencriptado = JSON.parse(this.objetoDesencriptado);
+    this.objetoDesencriptado = this.cookie.get('dwerrgfqw24423');
+    this.objetoDesencriptado = this.head.desencriptar(this.objetoDesencriptado);
   }
 
 
@@ -153,11 +150,14 @@ export class SearchFlightLowerComponent implements OnInit {
           request: data
         }
         this.result.emit(obj);
-        localStorage.setItem('flights-result', JSON.stringify(x));
+        let valor = this.head.encriptar(obj);
+        this.head.addObject(1,valor);
         this.head.ocultarSpinner();
       }
     )
   }
+
+ 
 
   selection(passengers: any[]) {
     this.passengerList = passengers;
