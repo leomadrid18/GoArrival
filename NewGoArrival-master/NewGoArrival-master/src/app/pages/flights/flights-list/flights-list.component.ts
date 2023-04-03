@@ -26,16 +26,16 @@ export class FlightsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cargar();
+    /* this.cargar(); */
     this.getObject();
-    this.cookieValue = this.cookieServices.get('rtsdt3298dwlou3208');
+   /*  this.cookieValue = this.cookieServices.get('rtsdt3298dwlou3208'); */
   }
 
    cargar(): void {
     this.headService.mostrarSpinner();
     setTimeout(() => {
       this.stopLoading();
-    }, 1500); // tiempo en milisegundos
+    }, 1500); 
   }
 
   stopLoading(): void {
@@ -59,20 +59,28 @@ export class FlightsListComponent implements OnInit {
   setFlights(){
     this.request = this.cookieValue.request;
     if(this.cookieValue.result.status === 200){
-      if(this.cookieValue.result.llowCostAirlines.length > 0){
+      if(this.cookieValue.result.llowCostAirlines != null){
+        if(this.cookieValue.result.llowCostAirlines.length > 0){
         
-        this.llowCostAirlines = this.cookieValue.result.llowCostAirlines;
+          this.llowCostAirlines = this.cookieValue.result.llowCostAirlines;
+        
+        }
+      }
       
-      }
-      if(this.cookieValue.result.lcalendars.length > 0){
+      if(this.cookieValue.result.lcalendars != null){
+        if(this.cookieValue.result.lcalendars.length > 0){
         
-        this.lstCalendar = this.cookieValue.result.lcalendars;
-        this.validCalendar = true;
+          this.lstCalendar = this.cookieValue.result.lcalendars;
+          this.validCalendar = true;
+        }
       }
-      if(this.cookieValue.result.lrecommendations.length > 0){
-        this.lstFlights = this.cookieValue.result.lrecommendations;
-        this.validFlights = true;
+      if(this.cookieValue.result.lrecommendations != null){
+        if(this.cookieValue.result.lrecommendations.length > 0){
+          this.lstFlights = this.cookieValue.result.lrecommendations;
+          this.validFlights = true;
+        }
       }
+      
     }
   }
 

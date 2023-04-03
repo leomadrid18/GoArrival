@@ -106,7 +106,7 @@
                                 [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-red',  selectFromOtherMonth: true }">
                         </label>
                     </div>
-                    <div class="col-lg-6 col-6  m-0 p-0">
+                    <div *ngIf="tipoVuelo!=='OW'" class="col-lg-6 col-6  m-0 p-0">
                         <label id="txtFechaDestino" for="" class="d-inline-flex box-shadow dates">
                             <input type="image" src="assets/Images/seeker/calendario.svg"
                                 (click)="datepickerRetorno.toggle()"

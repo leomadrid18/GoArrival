@@ -6,8 +6,8 @@
                 [recommendationIndex]="i + 1" [tipoVuelo]="tipoVuelo" (outSegmentCheck)="setearRadioId($event)" [section]="section"
                  *ngFor="let section of lsections; let i = index"></app-section>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-12 col-12 mt-3 p-0">
-                <app-final-price [gds]="gds" [index]="index" [lpolicies]="lpolicies" [recomen]="recomen" [lsections]="lsections" [currency]="currency" [totalFareAmount]="totalFareAmount"
+            <div *ngIf="validSegment" class="col-lg-3 col-md-3 col-sm-12 col-12 mt-3 p-0">
+                <app-final-price [gds]="gds" [index]="index" [lstRadioCheck]="lstRadioCheck" [lpolicies]="lpolicies" [recomen]="recomen" [lsections]="lsections" [currency]="currency" [totalFareAmount]="totalFareAmount"
                  [finalAmount]="recomen.oprice?.lpriceByPayments?.[0]?.finalAmount  ?? defaultValue"
                 [fareTaxAmountByPassenger]="fareTaxAmountByPassenger" [chargesAmount]="recomen.oprice?.lpriceByPayments?.[0]?.chargesAmount ?? defaultValue" [internationalPrice]="internationalPrice">
             </app-final-price>

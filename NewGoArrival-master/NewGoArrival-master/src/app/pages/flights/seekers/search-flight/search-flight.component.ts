@@ -55,11 +55,50 @@ export class SearchFlightComponent implements OnInit {
   objetoDesencriptado: any;
   validarPasajeros = false;
   passengerList: any;
-  constructor(private service: FlightService,private router: Router,private cookie: CookieService,private headerService: HeaderService) {
+
+  origenAuto1: any;
+  origenAuto2: any;
+  origenAuto3: any;
+  origenAuto4: any;
+  origenAuto5: any;
+  origenAuto6: any;
+  origentTexto1: any;
+  origentTexto2: any;
+  origentTexto3: any;
+  origentTexto4: any;
+  origentTexto5: any;
+  origentTexto6: any;
+  destinoAuto1: any;
+  destinoAuto2: any;
+  destinoAuto3: any;
+  destinoAuto4: any;
+  destinoAuto5: any;
+  destinoAuto6: any;
+  destinoTexto1: any;
+  destinoTexto2: any;
+  destinoTexto3: any;
+  destinoTexto4: any;
+  destinoTexto5: any;
+  destinoTexto6: any;
+
+  fechaSalida1: any;
+  fechaSalida2: any;
+  fechaSalida3: any;
+  fechaSalida4: any;
+  fechaSalida5: any;
+  fechaSalida6: any;
+
+  fechaSalidaShow1: any;
+  fechaSalidaShow2: any;
+  fechaSalidaShow3: any;
+  fechaSalidaShow4: any;
+  fechaSalidaShow5: any;
+  fechaSalidaShow6: any;
+  constructor(private service: FlightService, private router: Router, private cookie: CookieService, private headerService: HeaderService) {
 
     this.datae = [];
-   
-    this.tipoVuelo = "";
+
+    this.tipoVuelo = "RT";
     this.indexTramo = 2;
     this.pasajeros = 1;
     this.origenAuto = "";
@@ -88,7 +127,7 @@ export class SearchFlightComponent implements OnInit {
   ngOnInit(): void {
     this.objetoDesencriptado = this.cookie.get('dwerrgfqw24423');
     this.objetoDesencriptado = this.headerService.desencriptar(this.objetoDesencriptado);
-    this.cookie.delete("rtsdt3298dwlou3208");
+   /*  this.cookie.delete("rtsdt3298dwlou3208"); */
   }
 
 
@@ -102,9 +141,106 @@ export class SearchFlightComponent implements OnInit {
     });
   }
 
+  llenarMulti() {
+    let origen: any[] = [];
+    let destino: any[] = [];
+    let fechas: any[] = [];
+    const indexTramo = this.indexTramo;
+    switch (indexTramo) {
+      case 2:
+        origen.push(this.origenAuto1);
+        origen.push(this.origenAuto2);
+
+        destino.push(this.destinoAuto1);
+        destino.push(this.destinoAuto2);
+
+        fechas.push(this.fechaSalida1);
+        fechas.push(this.fechaSalida2);
+        break;
+      case 3:
+        origen.push(this.origenAuto1);
+        origen.push(this.origenAuto2);
+        origen.push(this.origenAuto3);
+
+        destino.push(this.destinoAuto1);
+        destino.push(this.destinoAuto2);
+        destino.push(this.destinoAuto3);
+
+        fechas.push(this.fechaSalida1);
+        fechas.push(this.fechaSalida2);
+        fechas.push(this.fechaSalida3);
+        break;
+      case 4:
+        origen.push(this.origenAuto1);
+        origen.push(this.origenAuto2);
+        origen.push(this.origenAuto3);
+        origen.push(this.origenAuto4);
+
+        destino.push(this.destinoAuto1);
+        destino.push(this.destinoAuto2);
+        destino.push(this.destinoAuto3);
+        destino.push(this.destinoAuto4);
+
+        fechas.push(this.fechaSalida1);
+        fechas.push(this.fechaSalida2);
+        fechas.push(this.fechaSalida3);
+        fechas.push(this.fechaSalida4);
+        break;
+      case 5:
+        origen.push(this.origenAuto1);
+        origen.push(this.origenAuto2);
+        origen.push(this.origenAuto3);
+        origen.push(this.origenAuto4);
+        origen.push(this.origenAuto5);
+
+        destino.push(this.destinoAuto1);
+        destino.push(this.destinoAuto2);
+        destino.push(this.destinoAuto3);
+        destino.push(this.destinoAuto4);
+        destino.push(this.destinoAuto5);
+
+        fechas.push(this.fechaSalida1);
+        fechas.push(this.fechaSalida2);
+        fechas.push(this.fechaSalida3);
+        fechas.push(this.fechaSalida4);
+        fechas.push(this.fechaSalida5);
+        break;
+      case 6:
+        origen.push(this.origenAuto1);
+        origen.push(this.origenAuto2);
+        origen.push(this.origenAuto3);
+        origen.push(this.origenAuto4);
+        origen.push(this.origenAuto5);
+        origen.push(this.origenAuto6);
+
+        destino.push(this.destinoAuto1);
+        destino.push(this.destinoAuto2);
+        destino.push(this.destinoAuto3);
+        destino.push(this.destinoAuto4);
+        destino.push(this.destinoAuto5);
+        destino.push(this.destinoAuto6);
+
+        fechas.push(this.fechaSalida1);
+        fechas.push(this.fechaSalida2);
+        fechas.push(this.fechaSalida3);
+        fechas.push(this.fechaSalida4);
+        fechas.push(this.fechaSalida5);
+        fechas.push(this.fechaSalida6);
+        break;
+    }
+
+    let obj = {
+      orig: origen,
+      dest: destino,
+      fec: fechas
+    }
+
+    return obj;
+  }
 
 
-  searchFlight(){
+
+  searchFlight() {
     this.headerService.mostrarSpinner();
     let origen: any[] = [];
     let destino: any[] = [];
@@ -114,14 +250,32 @@ export class SearchFlightComponent implements OnInit {
     let lUsers_: any[] = [];
     let lPassengers: any[] = [];
 
-    origen.push(this.origenAuto);
-    origen.push(this.destinoAuto);
+    switch (this.tipoVuelo) {
+      case "RT":
+        origen.push(this.origenAuto);
+        origen.push(this.destinoAuto);
 
-    destino.push(this.destinoAuto);
-    destino.push(this.origenAuto);
+        destino.push(this.destinoAuto);
+        destino.push(this.origenAuto);
 
-    fechas.push(this.fechaSalida);
-    fechas.push(this.fechaRetorno);
+        fechas.push(this.fechaSalida);
+        fechas.push(this.fechaRetorno);
+        break;
+
+      case "OW":
+        origen.push(this.origenAuto);
+        destino.push(this.destinoAuto);
+        fechas.push(this.fechaSalida);
+        break;
+      case "MC":
+        let valor = this.llenarMulti();
+        origen = valor.orig;
+        destino = valor.dest;
+        fechas = valor.fec
+        break;
+    }
+
+
 
     fechas.forEach(function (fe) {
       horasFrom.push("");
@@ -153,10 +307,11 @@ export class SearchFlightComponent implements OnInit {
       DepartureArrivalTimeFrom: horasFrom,
       DepartureArrivalTimeTo: horasTo,
       Ocompany: this.objetoDesencriptado.ocompany,
-      Oagency: this.objetoDesencriptado.oagency
+      Oagency: this.objetoDesencriptado.oagency,
+      Type: this.tipoVuelo
     };
     this.service.searchFlight(data).subscribe(
-      x =>{
+      x => {
         this.headerService.ocultarSpinner();
         const obj = {
           result: x,
@@ -173,12 +328,12 @@ export class SearchFlightComponent implements OnInit {
     this.passengerList = passengers;
   }
 
-  seleccionarCabina(valor:any, texto:string) {
+  seleccionarCabina(valor: any, texto: string) {
     this.cabina = valor;
     this.textoCabina = texto;
   }
 
-  seleccionarEscala(valor:any, texto: any) {
+  seleccionarEscala(valor: any, texto: any) {
     this.escala = valor;
     this.textoEscala = texto;
   }
@@ -339,7 +494,7 @@ export class SearchFlightComponent implements OnInit {
     if (value != null) {
       this.valfechadestino = false;
       this.calendarSalidaValue = value;
-      
+
       this.dateCustomClasses = [
         { date: null, classes: ["bg-danger", "text-warning"] },
       ];

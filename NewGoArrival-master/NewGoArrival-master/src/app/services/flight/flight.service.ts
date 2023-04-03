@@ -16,7 +16,8 @@ export class FlightService {
 
   private _url5: string = environment.url_5 + "User/";
   private _url3: string = environment.url_2 + "Search/";
-  
+  private _url4: string = environment.url_2 + "Search/";
+
   constructor(private http: HttpClient) {
     this.key = environment.key;
    }
@@ -29,12 +30,21 @@ export class FlightService {
     return this.http.post<any[]>(this._url5 + "GetUserByFreeText", data, httpOptions);
   }
 
+  getFareFamily(dataPost:any): Observable<any> {
+    httpOptions.headers = new HttpHeaders({
+      'Content-Type': "application/json",
+      'Ocp-Apim-Subscription-Key': this.key
+    });
+
+    return this.http.post<any>(this._url3 + 'GetFamilyDescription', dataPost, httpOptions);
+  }
+
   searchFlight(data: any): Observable<any> {
     httpOptions.headers = new HttpHeaders({
        'Content-Type': "application/json",
        'Ocp-Apim-Subscription-Key': this.key
      });
-     return this.http.post<any>(this._url3 + "SearchFlight", data, httpOptions);
+     return this.http.post<any>(this._url4 + "SearchFlight", data, httpOptions);
    }
 
  

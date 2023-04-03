@@ -16,7 +16,7 @@ export class RecommendationComponent implements OnInit {
   outSegmentCheck: any;
   lstRadioCheck: any[] = [];
 
-
+  validSegment = false;
   @Input() index: any;
   @Input() recomen: any;
   @Input() currency: any;
@@ -52,13 +52,11 @@ export class RecommendationComponent implements OnInit {
 
   setearRadioId($event: any) {
     this.outSegmentCheck = $event;
-
     const recommendationId = this.recommendationId;
     const indexSegment = this.outSegmentCheck.indexSegment_;
     const radioId = this.outSegmentCheck.radioId_;
     const segment = this.outSegmentCheck.segment_;
     const section = this.outSegmentCheck.section_;
-
     const dataRadioSel = {
       recommendationId_: recommendationId,
       sectionId_: section.sectionId,
@@ -84,6 +82,7 @@ export class RecommendationComponent implements OnInit {
       this.lstRadioCheck.push(dataRadioSel);
       this.lstRadioCheck = this.lstRadioCheck.filter((x) => x.flag === 1);
     }
+    this.validSegment = true;
   }
 
 }

@@ -114,7 +114,7 @@ export class HeaderComponent implements OnInit {
       case 1:
         this.numero = 1;
         this.ocultar(id, text, img, rojo);
-        this.router.navigate(["flights"]);
+        this.router.navigate(["/flights"]);
         break;
       case 2:
         this.numero = 2;

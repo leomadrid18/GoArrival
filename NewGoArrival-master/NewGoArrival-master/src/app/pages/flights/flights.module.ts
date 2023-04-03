@@ -24,6 +24,7 @@ import { FormattimeairportPipe } from 'src/app/pipes/formattimeairport.pipe';
 
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { FamilyRateComponent } from './family-rate/family-rate.component';
 
 
 const routes: Routes = [
@@ -49,7 +50,8 @@ const routes: Routes = [
     SectionComponent,
     SegmentComponent,
     SegmentGroupComponent,
-    FinalPriceComponent
+    FinalPriceComponent,
+    FamilyRateComponent
   ],
   imports: [
     CommonModule,
