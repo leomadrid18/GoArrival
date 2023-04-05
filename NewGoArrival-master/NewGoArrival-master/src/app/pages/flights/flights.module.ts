@@ -25,7 +25,11 @@ import { FormattimeairportPipe } from 'src/app/pipes/formattimeairport.pipe';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { FamilyRateComponent } from './family-rate/family-rate.component';
-
+import { FilterTimeComponent } from './filters/filter-time/filter-time.component';
+import { FilterHourComponent } from './filters/filter-hour/filter-hour.component';
+import { FilterAirlineComponent } from './filters/filter-airline/filter-airline.component';
+import { OrderPriceComponent } from './filters/order-price/order-price.component';
+import { AlertModule } from "ngx-bootstrap/alert";
 
 const routes: Routes = [
   {
@@ -51,11 +55,16 @@ const routes: Routes = [
     SegmentComponent,
     SegmentGroupComponent,
     FinalPriceComponent,
-    FamilyRateComponent
+    FamilyRateComponent,
+    FilterTimeComponent,
+    FilterHourComponent,
+    FilterAirlineComponent,
+    OrderPriceComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    AlertModule.forRoot(),
     ModalModule.forRoot(),
     TooltipModule.forRoot(),
     BsDropdownModule.forRoot(),

@@ -29,13 +29,16 @@ export class HeaderComponent implements OnInit {
 
     this.cookieValue = this.cookieServices.get('dwerrgfqw24423');
     this.cookieValue = this.headService.desencriptar(this.cookieValue);
-    if (this.cookieValue.ocompany != null) {
-      this.empresa = this.cookieValue.ocompany.companyName;
-    } else {
-      if (this.cookieValue.oagency) {
-        this.empresa = this.cookieValue.oagency.agencyName;
+    if(this.cookieValue != null){
+      if (this.cookieValue.ocompany != null) {
+        this.empresa = this.cookieValue.ocompany.companyName;
+      } else {
+        if (this.cookieValue.oagency) {
+          this.empresa = this.cookieValue.oagency.agencyName;
+        }
       }
     }
+    
   }
 
   changeProfile() {

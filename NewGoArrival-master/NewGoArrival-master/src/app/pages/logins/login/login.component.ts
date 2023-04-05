@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.cookieServices.deleteAll();
     this.lstAirports = sessionStorage.getItem("ls_airportlist")
     if(this.lstAirports === null){

@@ -17,7 +17,7 @@ export class HeaderService {
     this.createDatabase();
   }
 
-  private createDatabase(): void {
+  public createDatabase(): void {
     this.db = new Dexie('myDB');
 
     this.db.version(1).stores({
@@ -33,6 +33,10 @@ export class HeaderService {
     return this.db.delete();
   }
 
+  public deleteValue(): Promise<void> {
+    return this.db.table('myTable').delete(1);
+  }
+
   public addObject(id: number, myString: string): Promise<any> {
     return this.db.table('myTable').put({id, myObject: {myString}});
   }
@@ -40,6 +44,8 @@ export class HeaderService {
   public getObject(id: number): Promise<{id: number, myObject: {myString: string}}> {
     return this.db.table('myTable').get(id);
   }
+
+ 
 
   setData(key: string, value: any): void {
     const expirationDate = new Date();
@@ -79,8 +85,12 @@ export class HeaderService {
   }
 
   desencriptar(objetoEncriptado: string): any {
-    const bytes = AES.decrypt(objetoEncriptado, this.passwordCrypto);
-    const objetoDesencriptado = JSON.parse(bytes.toString(enc.Utf8));
+    let objetoDesencriptado = null;
+    if (objetoEncriptado != ''){
+      const bytes = AES.decrypt(objetoEncriptado, this.passwordCrypto);
+      objetoDesencriptado = JSON.parse(bytes.toString(enc.Utf8));
+    }
+    
     return objetoDesencriptado;
   }
 }

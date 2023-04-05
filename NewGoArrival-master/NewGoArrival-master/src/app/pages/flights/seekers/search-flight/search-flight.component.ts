@@ -133,13 +133,7 @@ export class SearchFlightComponent implements OnInit {
 
 
 
-  public saveObject(valor: any): void {
-    this.headerService.addObject(1, valor).then(() => {
-      console.log('Objeto guardado en la base de datos');
-    }).catch(error => {
-      console.error('Error al guardar objeto en la base de datos', error);
-    });
-  }
+  
 
   llenarMulti() {
     let origen: any[] = [];
@@ -236,6 +230,14 @@ export class SearchFlightComponent implements OnInit {
     }
 
     return obj;
+  }
+
+  public saveObject(valor: any): void {
+    this.headerService.addObject(1, valor).then(() => {
+      console.log('Objeto guardado en la base de datos');
+    }).catch(error => {
+      console.error('Error al guardar objeto en la base de datos', error);
+    });
   }
 
 

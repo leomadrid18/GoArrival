@@ -1,0 +1,26 @@
+<div class="row m-0 p-0 mt-5">
+    <div *ngIf="flagVD" class="col-lg-4 col-md-4 col-sm-4 m-0 p-0 text-center">
+        <button style="width: 160px" (click)="selDirectos(1)" class="btn" [ngClass]="{
+          'fs-btn-activo': flagVDactivo===true,
+          'fs-btn-inactivo': flagVDactivo===false
+        }">
+            Vuelos Directos
+        </button>
+    </div>
+    <div *ngIf="flagSM" class="col-lg-4 col-md-4 col-sm-4 m-0 p-0 text-center">
+        <button style="width: 160px" (click)="selSalidaManiana(1)" class="btn" [ngClass]="{
+          'fs-btn-activo': flagSMactivo===true,
+          'fs-btn-inactivo': flagSMactivo===false
+        }">
+            Salida en la mañana
+        </button>
+    </div>
+    <div *ngIf="flagSN" class="col-lg-4 col-md-4 col-sm-4 m-0 p-0 text-center">
+        <button style="width: 160px" (click)="selSalidaNoche(1)" class="btn" [ngClass]="{
+          'fs-btn-activo': flagSNactivo===true,
+          'fs-btn-inactivo': flagSNactivo===false
+        }">
+            Salida en la noche
+        </button>
+    </div>
+</div>

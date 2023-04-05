@@ -2,7 +2,15 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-12 m-0 p-0">
         <div class="row m-0 p-0">
             <div class="col-lg-3 col-md-12 col-sm-12 col-12 m-0">
-                <app-search-flight-lower (result)="validShowFlights($event)"></app-search-flight-lower>
+                <div class="row m-0 p-0">
+                    <app-search-flight-lower  (result)="validShowFlights($event)"></app-search-flight-lower>
+                </div>
+                <div class="row m-0 p-0">
+                    <app-order-price [searchFlight]="lstFlights" (searchFlightFilter)="busquedaFiltros($event)"></app-order-price>
+                </div>
+                <div class="row m-0 p-0 mt-3">
+                    <app-filter-hour (searchFilter)="busquedaFiltros($event)" [tipoVuelo]="tipoVuelo"  [indexTramo]="indexTramo"></app-filter-hour>
+                </div>
             </div>
             <div class="col-lg-9 col-md-12 col-sm-12 col-12 m-0">
                 <div id="calendar" class="row m-0 p-0">
@@ -12,8 +20,25 @@
                     </div>
                 </div>
                 <div *ngIf="validFlights" class="row m-0 p-0">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 m-0 p-0">
-                        <app-recommendation *ngFor="let recomendacion of lstFlights; let i = index"
+                    <div *ngIf="lstFlights.length > 0" class="col-lg-12 col-md-12 col-sm-12 col-12 m-0 p-0">
+                        <app-filter-time [searchFlight]="lstFlights" [request]="request" [tipoEscala]="request.Scales"
+                            (refreshdata)="Datafiltrosuperior($event)"
+                            (searchFilter)="busquedaFiltros($event)"></app-filter-time>
+                    </div>
+                    <div *ngIf="flagDinData2" class="col-lg-12 col-md-12 col-sm-12 col-12 m-0 p-0 mt-3">
+
+                        <div class="row m-0 p-0">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12 m-0 p-0 text-center">
+                                <alert type="warning" class="text-center">
+                                    No se encontraron itinerarios para esta búsqueda
+                                </alert>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 m-0 p-0 mt-3">
+                        <app-recommendation *ngFor="let recomendacion of lstFlights; let i = index" [request]="request"
                             [isVisible]="recomendacion.isVisible" [currency]="recomendacion.oprice.currency"
                             [totalFareAmount]="recomendacion.oprice.totalAmount"
                             [totalTaxAmount]="recomendacion.oprice.totalTaxAmount"
@@ -30,9 +55,8 @@
                         </app-recommendation>
                     </div>
                 </div>
-             
+
             </div>
         </div>
     </div>
 </div>
-

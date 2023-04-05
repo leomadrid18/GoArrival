@@ -129,6 +129,85 @@
                     [lSegmentGroupsIndex]="i+1" [sectionGroup]="lSectionGroups[i]"
                     *ngFor="let segmentGroup of lSegmentGroups; let i=index"></app-segment-group>
             </div>
+            
+            <div id="baggageWeb" class="col-lg-12 col-md-12 col-sm-12 m-0 p-0 p-4">
+                <div class="row m-0 p-0 box-shadow p-3">
+                    <div class="col-lg-2 col-md-2 col-sm-2 m-0 p-0 s-texto-4" style="border-right: 1px solid #898989;">
+                        Equipaje
+                    </div>
+                    <div class="col-lg-10 col-md-10 col-sm-10 m-0 p-0">
+                        <div class="row m-0 p-0">
+                          <div class="col-12 col-md-12 col-sm-12 m-0 p-0 pt-3">
+                            <div class="row m-0 p-0">
+                                <div class="col-lg-2 col-md-2 col-sm-2 m-0 p-0 d-flex justify-content-center align-items-center">
+                                  <img  style="width: 33px" src="assets/Images/flight/mochila.svg" >
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-10 m-0 p-0">
+                                    <div class="row m-0 p-0">
+                                        <div  class="col-lg-12 col-md-12 col-sm-12 m-0 p-0 s-texto-5">
+                                            <span class="text-baggages-phone">Incluye una mochila o cartera</span><br />
+                        <span class="sm-text-2">Debe caber bajo el asiento delantero.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 m-0 p-0 pt-3">
+                                <div class="row m-0 p-0">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 m-0 p-0 d-flex justify-content-center align-items-center">
+                                        <img *ngIf="bagAllowed" style="width: 33px;" src="assets/Images/flight/bolsodemano-1.svg" alt="">
+                                        <img *ngIf="!bagAllowed" style="width: 30px;" src="assets/Images/flight/sinmaleta.png">
+                                    </div>
+                                    <div class="col-lg-10 col-md-10 col-sm-10 m-0 p-0">
+                                        <div class="row m-0 p-0">
+                                            <div *ngIf="bagAllowed" class="col-lg-12 col-md-12 col-sm-12 m-0 p-0 text-baggages-phone">
+                                                Incluye maleta en cabina
+                                            </div>
+                                            <div *ngIf="bagAllowed" class="col-lg-12 col-md-12 col-sm-12 m-0 p-0 sm-text-2">
+                                                Debe caber en el compartimiento superior del avión.
+                                            </div>
+                                            <div *ngIf="!bagAllowed" class="col-lg-12 col-md-12 col-sm-12 m-0 p-0 sm-text-2">
+                                              No incluye maleta en cabina
+                                          </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="col-lg-12 col-md-12 col-sm-12 m-0 p-0 pt-3">
+                                <div class="row m-0 p-0">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 m-0 p-0 d-flex justify-content-center align-items-center">
+                                        <img style="width: 33px;" *ngIf="bagAllowed" src="assets/Images/flight/maleta-si.svg" alt="">
+                                        <img style="width: 33px;" *ngIf="!bagAllowed" src="assets/Images/flight/maleta-no.svg" alt="">
+                                    </div>
+                                    <div *ngIf="bagQuantity > 0" class="col-lg-10 col-md-10 col-sm-10 m-0 p-0">
+                                        <div class="row m-0 p-0">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 m-0 p-0  text-baggages-phone">
+                                                Incluye equipaje para documentar
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 m-0 p-0 sm-text-2">
+                                                {{bagQuantity}} maleta(s) por adulto.
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 m-0 p-0 sm-text-2">
+                                                Se documenta en el aeropuerto durante el Check-in.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="bagQuantity == 0" class="col-lg-10 col-md-10 col-sm-10 m-0 p-0">
+                                        <div class="row m-0 p-0">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 m-0 p-0  text-baggages-phone">
+                                                No incluye maleta
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
 
             <div id="baggagePhone" class="col-12">
                 <div class="row m-0 p-0 mt-4">

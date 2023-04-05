@@ -16,7 +16,7 @@
                 <span class="carrito">0</span>
                 <div id="profile" class="user-box">
                     <div class="row m-0 p-0">
-                        <div class="col-lg-12 col-md-12 col-sm-12" style="line-height: 18px;"> 
+                        <div *ngIf="cookieValue != null" class="col-lg-12 col-md-12 col-sm-12" style="line-height: 18px;"> 
                             <span class="name">{{cookieValue.userName}}</span><br/>
                             <span class="job">{{cookieValue.orole.roleDescription}}</span><br/>
                             <span *ngIf="cookieValue.Vip === true" class="job">Pasajero Vip</span><br *ngIf="cookieValue.Vip === true"/>

@@ -30,7 +30,8 @@ export class FinalPriceComponent implements OnInit {
   @Input() fareTaxAmountByPassenger: any;
   @Input() chargesAmount: any;
   @Input() internationalPrice: any;
-  @Input() recomen: any
+  @Input() recomen: any;
+  @Input() request: any;
   @Input() lstRadioCheck: any;
   dataFlight: any;
   public myObject!: {id: number, myObject: {myString: string}};
@@ -43,19 +44,9 @@ export class FinalPriceComponent implements OnInit {
   ngOnInit(): void {
     this.cookieValue = this.cookieServices.get('dwerrgfqw24423');
     this.cookieValue = this.headService.desencriptar(this.cookieValue);
-    this.getObject();
   }
 
-  public getObject(): void {
-    this.headService.getObject(1).then(object => {
-      this.myObject = object;
-      this.dataFlight = this.headService.desencriptar(this.myObject.myObject.myString);
-      
-      console.log('Objeto obtenido de la base de datos', this.myObject);
-    }).catch(error => {
-      console.error('Error al obtener objeto de la base de datos', error);
-    });
-  }
+ 
 
   openModal(
     template: TemplateRef<any>,
@@ -142,7 +133,7 @@ export class FinalPriceComponent implements OnInit {
       Oagency: this.cookieValue.oagency,
       LpseudoRepeats: this.recomen.lpseudoRepeats,
       Lsections: Lsections_,
-      Lpassengers: this.dataFlight.request.Lpassengers,
+      Lpassengers: this.request.Lpassengers,
     };
 
    

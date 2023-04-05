@@ -28,6 +28,7 @@ export class RecommendationComponent implements OnInit {
   @Input() numberPassengers: any;
   @Input() pseudo: any;
   @Input() gds: any;
+  @Input() request: any;
   @Input() lsections: any;
   @Input() lsectionLength: any;
   @Input() lpolicies: any;
@@ -82,7 +83,7 @@ export class RecommendationComponent implements OnInit {
       this.lstRadioCheck.push(dataRadioSel);
       this.lstRadioCheck = this.lstRadioCheck.filter((x) => x.flag === 1);
     }
-    this.validSegment = true;
+    /* this.validSegment = true; */
   }
 
 }
