@@ -3,23 +3,28 @@
         <div class="row m-0 p-0">
             <div class="col-lg-3 col-md-12 col-sm-12 col-12 m-0">
                 <div class="row m-0 p-0">
-                    <app-search-flight-lower  (result)="validShowFlights($event)"></app-search-flight-lower>
+                    <app-search-flight-lower  *ngIf="validFlights"
+                     (ocultar)="ocultarComponentes($event)" [tipoVuelo]="tipoVuelo"  
+                     (result)="validShowFlights($event)"></app-search-flight-lower>
                 </div>
-                <div class="row m-0 p-0">
+                <div *ngIf="validFlights" class="row m-0 p-0">
                     <app-order-price [searchFlight]="lstFlights" (searchFlightFilter)="busquedaFiltros($event)"></app-order-price>
                 </div>
-                <div class="row m-0 p-0 mt-3">
-                    <app-filter-hour (searchFilter)="busquedaFiltros($event)" [tipoVuelo]="tipoVuelo"  [indexTramo]="indexTramo"></app-filter-hour>
+                <div *ngIf="validFlights" class="row m-0 p-0 mt-3">
+                    <app-filter-hour  (searchFilter)="busquedaFiltros($event)" [tipoVuelo]="tipoVuelo" [request]="request"  [indexTramo]="indexTramo"></app-filter-hour>
+                </div>
+                <div *ngIf="validFlights" class="row m-0 p-0 mt-3">
+                    <app-filter-airline [lstAerolineas]="aerolineas" [searchFlight]="lstFlights" ></app-filter-airline>
                 </div>
             </div>
-            <div class="col-lg-9 col-md-12 col-sm-12 col-12 m-0">
+            <div *ngIf="validFlights" class="col-lg-9 col-md-12 col-sm-12 col-12 m-0">
                 <div id="calendar" class="row m-0 p-0">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                         <app-calendar-flights *ngIf="validCalendar" (fechas)="onSelectDate($event)" [buscador]="request"
                             [calendar]="lstCalendar" [salida]="llowCostAirlines"></app-calendar-flights>
                     </div>
                 </div>
-                <div *ngIf="validFlights" class="row m-0 p-0">
+                <div  class="row m-0 p-0">
                     <div *ngIf="lstFlights.length > 0" class="col-lg-12 col-md-12 col-sm-12 col-12 m-0 p-0">
                         <app-filter-time [searchFlight]="lstFlights" [request]="request" [tipoEscala]="request.Scales"
                             (refreshdata)="Datafiltrosuperior($event)"

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 import { DatepickerDateCustomClasses } from 'ngx-bootstrap/datepicker';
 import { CookieService } from 'ngx-cookie-service';
 import { FlightService } from 'src/app/services/flight/flight.service';
@@ -16,8 +16,13 @@ declare var $: any;
 
 export class SearchFlightLowerComponent implements OnInit {
 
+  @Input() tipoVuelo: any;
+
+
+
+
   general = "col-lg-12 col-md-12 col-sm-12 col-12 "
-  tipoVuelo: string;
+ /*  tipoVuelo: string; */
   indexTramo: number;
   lstAutocomplete: any[] = [];
   airportlist: any;
@@ -26,12 +31,8 @@ export class SearchFlightLowerComponent implements OnInit {
   keyword = "name";
   flights: any;
   data: any[] = [];
-  origenAuto: string;
-  origentTexto: string;
   isOpen = false;
   data2: any[] = [];
-  destinoAuto: string;
-  destinoTexto: string;
   valdestino = false;
   bsValue: Date;
   isOpendate = false;
@@ -55,17 +56,22 @@ export class SearchFlightLowerComponent implements OnInit {
   passengerList: any;
   objetoDesencriptado: any;
 
-  @Output() result = new EventEmitter<any>();
 
+  origenValue: any;
+  origenText: any;
+  destinoValue: any;
+  destinoText: any;
+
+
+
+  objRq: any;
+  @Output() result = new EventEmitter<any>();
+  @Output() ocultar = new EventEmitter<any>();
   constructor(private service: FlightService,private head: HeaderService,private cookie : CookieService) {
     this.tipoVuelo = "";
     this.indexTramo = 2;
     this.pasajeros = 1;
-    this.origenAuto = "";
-    this.origentTexto = "";
     this.cabina = "";
-    this.destinoAuto = "";
-    this.destinoTexto = "";
     this.fechaSalida = "";
     this.textoCabina = "Todas";
     this.textoEscala = "Todas";
@@ -87,12 +93,55 @@ export class SearchFlightLowerComponent implements OnInit {
   ngOnInit(): void {
     this.objetoDesencriptado = this.cookie.get('dwerrgfqw24423');
     this.objetoDesencriptado = this.head.desencriptar(this.objetoDesencriptado);
+    this.objRq = this.cookie.get('euimbh235$%/mjmn');
+    this.objRq = this.head.desencriptar(this.objRq);
+
+    $(".x").hide();
+    if (this.tipoVuelo === 'MC') {
+      this.origenValue = this.objRq.origenAuto1;
+      this.origenText = this.objRq.origentTexto1;
+      this.destinoValue = this.objRq.destinoAuto1;
+      this.destinoText = this.objRq.destinoTexto1;
+    } else {
+      this.origenValue = this.objRq.origenAuto;
+      this.origenText = this.objRq.origentTexto;
+      this.destinoValue = this.objRq.destinoAuto;
+      this.destinoText = this.objRq.destinoTexto;
+    }
+
+    this.objRq.origenAuto1 = this.origenValue;
+    this.objRq.origentTexto1 = this.origenText;
+    this.objRq.destinoAuto1 = this.destinoValue;
+    this.objRq.destinoTexto1 = this.destinoText;
+    this.llenarSearch(this.tipoVuelo);
   }
 
+
+  llenarSearch(tipovuelo: any){
+    switch (tipovuelo) {
+      case 'RT':
+        $('#radio_b_tv_1').prop("checked", true);
+        let radio = document.getElementById("radio_b_tv_1")
+        $('#datepickerSalidaLower').val(this.objRq.fechaSalidaShow);
+        let fecha = document.getElementById("datepickerSalidaLower");
+        $('#datepickerRetornoLower').val(this.objRq.fechaRetornoShow);
+        let fecha1 = document.getElementById("datepickerRetornoLower");
+        break;
+      case 'OW':
+        $('#radio_b_tv_2').prop("checked", true);
+        $('#fechasalida').val(this.objRq.fechaSalidaShow);
+        let fechae = document.getElementById("fechasalida");
+        break;
+      case 'MC':
+        $('#radio_b_tv_3').prop("checked", true);
+        break;
+    }
+  }
 
 
   searchFlight() {
     this.head.mostrarSpinner();
+    this.ocultar.emit(false);
     let origen: any[] = [];
     let destino: any[] = [];
     let fechas: any[] = [];
@@ -101,11 +150,11 @@ export class SearchFlightLowerComponent implements OnInit {
     let lUsers_: any[] = [];
     let lPassengers: any[] = [];
 
-    origen.push(this.origenAuto);
-    origen.push(this.destinoAuto);
+    origen.push(this.objRq.origenAuto);
+    origen.push(this.objRq.destinoAuto);
 
-    destino.push(this.destinoAuto);
-    destino.push(this.origenAuto);
+    destino.push(this.objRq.destinoAuto);
+    destino.push(this.objRq.origenAuto);
 
     fechas.push(this.fechaSalida);
     fechas.push(this.fechaRetorno);
@@ -152,7 +201,7 @@ export class SearchFlightLowerComponent implements OnInit {
         this.result.emit(obj);
         let valor = this.head.encriptar(obj);
         this.head.addObject(1,valor);
-        this.head.ocultarSpinner();
+        
       }
     )
   }
@@ -230,8 +279,8 @@ export class SearchFlightLowerComponent implements OnInit {
   onFocused(e: any) { }
 
   selectEventDestino(item: any) {
-    this.destinoAuto = item.iataCode;
-    this.destinoTexto = item.name;
+    this.objRq.destinoAuto = item.iataCode;
+    this.objRq.destinoTexto = item.name;
     this.valdestino = false;
     $("#txtDestino").removeClass("campo-invalido");
     $(".x").hide();
@@ -358,8 +407,8 @@ export class SearchFlightLowerComponent implements OnInit {
 
   selectEvent(item: any) {
     // do something with selected item
-    this.origenAuto = item.iataCode;
-    this.origentTexto = item.name;
+    this.objRq.origenAuto = item.iataCode;
+    this.objRq.origentTexto = item.name;
     this.isOpen = false;
     $("#txtOrigen").removeClass("campo-invalido");
     $(".x").hide();

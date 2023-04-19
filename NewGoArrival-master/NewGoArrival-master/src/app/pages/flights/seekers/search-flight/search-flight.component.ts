@@ -27,12 +27,10 @@ export class SearchFlightComponent implements OnInit {
   model: any = {};
   keyword = "name";
   data: any[] = [];
-  origenAuto: string;
-  origentTexto: string;
+  
   isOpen = false;
   data2: any[] = [];
-  destinoAuto: string;
-  destinoTexto: string;
+ 
   valdestino = false;
   bsValue: Date;
   isOpendate = false;
@@ -42,10 +40,7 @@ export class SearchFlightComponent implements OnInit {
   minDateRetorno: Date;
   dateCustomClasses: DatepickerDateCustomClasses[];
   calendarSalidaValue: any;
-  fechaSalida: string;
-  fechaRetorno: string;
-  fechaSalidaShow: string;
-  fechaRetornoShow: string;
+  
   textoCabina: string;
   cabina: string;
   textoEscala: string;
@@ -56,63 +51,71 @@ export class SearchFlightComponent implements OnInit {
   validarPasajeros = false;
   passengerList: any;
 
-  origenAuto1: any;
-  origenAuto2: any;
-  origenAuto3: any;
-  origenAuto4: any;
-  origenAuto5: any;
-  origenAuto6: any;
-  origentTexto1: any;
-  origentTexto2: any;
-  origentTexto3: any;
-  origentTexto4: any;
-  origentTexto5: any;
-  origentTexto6: any;
-  destinoAuto1: any;
-  destinoAuto2: any;
-  destinoAuto3: any;
-  destinoAuto4: any;
-  destinoAuto5: any;
-  destinoAuto6: any;
-  destinoTexto1: any;
-  destinoTexto2: any;
-  destinoTexto3: any;
-  destinoTexto4: any;
-  destinoTexto5: any;
-  destinoTexto6: any;
 
-  fechaSalida1: any;
-  fechaSalida2: any;
-  fechaSalida3: any;
-  fechaSalida4: any;
-  fechaSalida5: any;
-  fechaSalida6: any;
+  datosEnvira = {
+  origenAuto:  "",
+  origentTexto: "",
+  destinoAuto: "",
+  destinoTexto: "",
+  fechaSalida: "",
+  fechaRetorno: "",
+  fechaSalidaShow: "",
+  fechaRetornoShow: "",
+  origenAuto1: "",
+  origenAuto2: "",
+  origenAuto3: "",
+  origenAuto4: "",
+  origenAuto5: "",
+  origenAuto6: "",
+  origentTexto1: "",
+  origentTexto2: "",
+  origentTexto3: "",
+  origentTexto4: "",
+  origentTexto5: "",
+  origentTexto6: "",
+  destinoAuto1: "",
+  destinoAuto2: "",
+  destinoAuto3: "",
+  destinoAuto4: "",
+  destinoAuto5: "",
+  destinoAuto6: "",
+  destinoTexto1: "",
+  destinoTexto2: "",
+  destinoTexto3: "",
+  destinoTexto4: "",
+  destinoTexto5: "",
+  destinoTexto6: "",
 
-  fechaSalidaShow1: any;
-  fechaSalidaShow2: any;
-  fechaSalidaShow3: any;
-  fechaSalidaShow4: any;
-  fechaSalidaShow5: any;
-  fechaSalidaShow6: any;
-  constructor(private service: FlightService, private router: Router, private cookie: CookieService, private headerService: HeaderService) {
+  fechaSalida1: "",
+  fechaSalida2: "",
+  fechaSalida3: "",
+  fechaSalida4: "",
+  fechaSalida5: "",
+  fechaSalida6: "",
+
+  fechaSalidaShow1: "",
+  fechaSalidaShow2: "",
+  fechaSalidaShow3: "",
+  fechaSalidaShow4: "",
+  fechaSalidaShow5: "",
+  fechaSalidaShow6: "",
+}
+
+  constructor(private service: FlightService, private router: Router, 
+    private cookie: CookieService, private headerService: HeaderService,
+    private cookieServices: CookieService) {
 
     this.datae = [];
 
     this.tipoVuelo = "RT";
     this.indexTramo = 2;
     this.pasajeros = 1;
-    this.origenAuto = "";
-    this.origentTexto = "";
+ 
     this.cabina = "";
-    this.destinoAuto = "";
-    this.destinoTexto = "";
-    this.fechaSalida = "";
+
     this.textoCabina = "Todas";
     this.textoEscala = "Todas";
     this.escala = "";
-    this.fechaRetorno = "";
-    this.fechaSalidaShow = "";
-    this.fechaRetornoShow = "";
     this.minDateSalida = new Date();
     this.minDateSalida.setDate(this.minDateSalida.getDate());
     this.minDateRetorno = new Date();
@@ -142,84 +145,84 @@ export class SearchFlightComponent implements OnInit {
     const indexTramo = this.indexTramo;
     switch (indexTramo) {
       case 2:
-        origen.push(this.origenAuto1);
-        origen.push(this.origenAuto2);
+        origen.push(this.datosEnvira.origenAuto1);
+        origen.push(this.datosEnvira.origenAuto2);
 
-        destino.push(this.destinoAuto1);
-        destino.push(this.destinoAuto2);
+        destino.push(this.datosEnvira.destinoAuto1);
+        destino.push(this.datosEnvira.destinoAuto2);
 
-        fechas.push(this.fechaSalida1);
-        fechas.push(this.fechaSalida2);
+        fechas.push(this.datosEnvira.fechaSalida1);
+        fechas.push(this.datosEnvira.fechaSalida2);
         break;
       case 3:
-        origen.push(this.origenAuto1);
-        origen.push(this.origenAuto2);
-        origen.push(this.origenAuto3);
+        origen.push(this.datosEnvira.origenAuto1);
+        origen.push(this.datosEnvira.origenAuto2);
+        origen.push(this.datosEnvira.origenAuto3);
 
-        destino.push(this.destinoAuto1);
-        destino.push(this.destinoAuto2);
-        destino.push(this.destinoAuto3);
+        destino.push(this.datosEnvira.destinoAuto1);
+        destino.push(this.datosEnvira.destinoAuto2);
+        destino.push(this.datosEnvira.destinoAuto3);
 
-        fechas.push(this.fechaSalida1);
-        fechas.push(this.fechaSalida2);
-        fechas.push(this.fechaSalida3);
+        fechas.push(this.datosEnvira.fechaSalida1);
+        fechas.push(this.datosEnvira.fechaSalida2);
+        fechas.push(this.datosEnvira.fechaSalida3);
         break;
       case 4:
-        origen.push(this.origenAuto1);
-        origen.push(this.origenAuto2);
-        origen.push(this.origenAuto3);
-        origen.push(this.origenAuto4);
+        origen.push(this.datosEnvira.origenAuto1);
+        origen.push(this.datosEnvira.origenAuto2);
+        origen.push(this.datosEnvira.origenAuto3);
+        origen.push(this.datosEnvira.origenAuto4);
 
-        destino.push(this.destinoAuto1);
-        destino.push(this.destinoAuto2);
-        destino.push(this.destinoAuto3);
-        destino.push(this.destinoAuto4);
+        destino.push(this.datosEnvira.destinoAuto1);
+        destino.push(this.datosEnvira.destinoAuto2);
+        destino.push(this.datosEnvira.destinoAuto3);
+        destino.push(this.datosEnvira.destinoAuto4);
 
-        fechas.push(this.fechaSalida1);
-        fechas.push(this.fechaSalida2);
-        fechas.push(this.fechaSalida3);
-        fechas.push(this.fechaSalida4);
+        fechas.push(this.datosEnvira.fechaSalida1);
+        fechas.push(this.datosEnvira.fechaSalida2);
+        fechas.push(this.datosEnvira.fechaSalida3);
+        fechas.push(this.datosEnvira.fechaSalida4);
         break;
       case 5:
-        origen.push(this.origenAuto1);
-        origen.push(this.origenAuto2);
-        origen.push(this.origenAuto3);
-        origen.push(this.origenAuto4);
-        origen.push(this.origenAuto5);
+        origen.push(this.datosEnvira.origenAuto1);
+        origen.push(this.datosEnvira.origenAuto2);
+        origen.push(this.datosEnvira.origenAuto3);
+        origen.push(this.datosEnvira.origenAuto4);
+        origen.push(this.datosEnvira.origenAuto5);
 
-        destino.push(this.destinoAuto1);
-        destino.push(this.destinoAuto2);
-        destino.push(this.destinoAuto3);
-        destino.push(this.destinoAuto4);
-        destino.push(this.destinoAuto5);
+        destino.push(this.datosEnvira.destinoAuto1);
+        destino.push(this.datosEnvira.destinoAuto2);
+        destino.push(this.datosEnvira.destinoAuto3);
+        destino.push(this.datosEnvira.destinoAuto4);
+        destino.push(this.datosEnvira.destinoAuto5);
 
-        fechas.push(this.fechaSalida1);
-        fechas.push(this.fechaSalida2);
-        fechas.push(this.fechaSalida3);
-        fechas.push(this.fechaSalida4);
-        fechas.push(this.fechaSalida5);
+        fechas.push(this.datosEnvira.fechaSalida1);
+        fechas.push(this.datosEnvira.fechaSalida2);
+        fechas.push(this.datosEnvira.fechaSalida3);
+        fechas.push(this.datosEnvira.fechaSalida4);
+        fechas.push(this.datosEnvira.fechaSalida5);
         break;
       case 6:
-        origen.push(this.origenAuto1);
-        origen.push(this.origenAuto2);
-        origen.push(this.origenAuto3);
-        origen.push(this.origenAuto4);
-        origen.push(this.origenAuto5);
-        origen.push(this.origenAuto6);
+        origen.push(this.datosEnvira.origenAuto1);
+        origen.push(this.datosEnvira.origenAuto2);
+        origen.push(this.datosEnvira.origenAuto3);
+        origen.push(this.datosEnvira.origenAuto4);
+        origen.push(this.datosEnvira.origenAuto5);
+        origen.push(this.datosEnvira.origenAuto6);
 
-        destino.push(this.destinoAuto1);
-        destino.push(this.destinoAuto2);
-        destino.push(this.destinoAuto3);
-        destino.push(this.destinoAuto4);
-        destino.push(this.destinoAuto5);
-        destino.push(this.destinoAuto6);
+        destino.push(this.datosEnvira.destinoAuto1);
+        destino.push(this.datosEnvira.destinoAuto2);
+        destino.push(this.datosEnvira.destinoAuto3);
+        destino.push(this.datosEnvira.destinoAuto4);
+        destino.push(this.datosEnvira.destinoAuto5);
+        destino.push(this.datosEnvira.destinoAuto6);
 
-        fechas.push(this.fechaSalida1);
-        fechas.push(this.fechaSalida2);
-        fechas.push(this.fechaSalida3);
-        fechas.push(this.fechaSalida4);
-        fechas.push(this.fechaSalida5);
-        fechas.push(this.fechaSalida6);
+        fechas.push(this.datosEnvira.fechaSalida1);
+        fechas.push(this.datosEnvira.fechaSalida2);
+        fechas.push(this.datosEnvira.fechaSalida3);
+        fechas.push(this.datosEnvira.fechaSalida4);
+        fechas.push(this.datosEnvira.fechaSalida5);
+        fechas.push(this.datosEnvira.fechaSalida6);
         break;
     }
 
@@ -254,20 +257,20 @@ export class SearchFlightComponent implements OnInit {
 
     switch (this.tipoVuelo) {
       case "RT":
-        origen.push(this.origenAuto);
-        origen.push(this.destinoAuto);
+        origen.push(this.datosEnvira.origenAuto);
+        origen.push(this.datosEnvira.destinoAuto);
 
-        destino.push(this.destinoAuto);
-        destino.push(this.origenAuto);
+        destino.push(this.datosEnvira.destinoAuto);
+        destino.push(this.datosEnvira.origenAuto);
 
-        fechas.push(this.fechaSalida);
-        fechas.push(this.fechaRetorno);
+        fechas.push(this.datosEnvira.fechaSalida);
+        fechas.push(this.datosEnvira.fechaRetorno);
         break;
 
       case "OW":
-        origen.push(this.origenAuto);
-        destino.push(this.destinoAuto);
-        fechas.push(this.fechaSalida);
+        origen.push(this.datosEnvira.origenAuto);
+        destino.push(this.datosEnvira.destinoAuto);
+        fechas.push(this.datosEnvira.fechaSalida);
         break;
       case "MC":
         let valor = this.llenarMulti();
@@ -312,6 +315,8 @@ export class SearchFlightComponent implements OnInit {
       Oagency: this.objetoDesencriptado.oagency,
       Type: this.tipoVuelo
     };
+    let valor = this.headerService.encriptar(this.datosEnvira);
+    this.cookieServices.set('euimbh235$%/mjmn', valor);
     this.service.searchFlight(data).subscribe(
       x => {
         this.headerService.ocultarSpinner();
@@ -397,8 +402,8 @@ export class SearchFlightComponent implements OnInit {
   onFocused(e: any) { }
 
   selectEventDestino(item: any) {
-    this.destinoAuto = item.iataCode;
-    this.destinoTexto = item.name;
+    this.datosEnvira.destinoAuto = item.iataCode;
+    this.datosEnvira.destinoTexto = item.name;
     this.valdestino = false;
     $("#txtDestino").removeClass("campo-invalido");
     $(".x").hide();
@@ -485,10 +490,10 @@ export class SearchFlightComponent implements OnInit {
 
       if (value >= this.calendarSalidaValue) {
         $("#fechadestino").val("");
-        this.fechaRetorno = "";
+        this.datosEnvira.fechaRetorno = "";
       }
-      this.fechaSalida = value.getFullYear() + "/" + mes + "/" + dia;
-      this.fechaSalidaShow = dia + "/" + mes + "/" + value.getFullYear();
+      this.datosEnvira.fechaSalida = value.getFullYear() + "/" + mes + "/" + dia;
+      this.datosEnvira.fechaSalidaShow = dia + "/" + mes + "/" + value.getFullYear();
     }
   }
 
@@ -517,16 +522,16 @@ export class SearchFlightComponent implements OnInit {
         dia = "" + value.getDate();
       }
 
-      this.fechaRetorno = value.getFullYear() + "/" + mes + "/" + dia;
-      this.fechaRetornoShow = dia + "/" + mes + "/" + value.getFullYear();
+      this.datosEnvira.fechaRetorno = value.getFullYear() + "/" + mes + "/" + dia;
+      this.datosEnvira.fechaRetornoShow = dia + "/" + mes + "/" + value.getFullYear();
     }
   }
 
 
   selectEvent(item: any) {
     // do something with selected item
-    this.origenAuto = item.iataCode;
-    this.origentTexto = item.name;
+    this.datosEnvira.origenAuto = item.iataCode;
+    this.datosEnvira.origentTexto = item.name;
     this.isOpen = false;
     $("#txtOrigen").removeClass("campo-invalido");
     $(".x").hide();

@@ -45,19 +45,19 @@ export class HeaderService {
     return this.db.table('myTable').get(id);
   }
 
- 
-
   setData(key: string, value: any): void {
     const expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + 7);
     this.cookieService.set(key, JSON.stringify(value), expirationDate, "null", "null", true, 'Strict');
   }
 
+
   getData(key: string): any {
     const value = this.cookieService.get(key);
     return value !== '' ? JSON.parse(value) : null;
   }
 
+  
   removeData(key: string): void {
     this.cookieService.delete(key);
   }

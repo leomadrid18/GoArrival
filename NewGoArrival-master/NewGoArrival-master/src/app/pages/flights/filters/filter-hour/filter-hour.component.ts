@@ -14,6 +14,7 @@ export class FilterHourComponent implements OnInit,AfterViewInit {
   @Input() request: any;
   maleta: any;
   @Output() searchFilter = new EventEmitter<any[]>();
+ 
   horario1 = 1;
   horario2 = 2;
   horario3 = 3;
@@ -89,6 +90,7 @@ export class FilterHourComponent implements OnInit,AfterViewInit {
   setHorarios() {
 
     this.head.mostrarSpinner();
+    
     const leta = document.getElementById('chkmaleta');
     this.maleta = leta;
     let dataRequestFlight = this.request;

@@ -6,20 +6,20 @@
             </div>
             <div class="col-lg-6 col-md-5 col-sm m-0 p-0 col-4">
                 <div class="radio-item">
-                    <input checked (click)="seleccionarTipoVuelo('RT')" type="radio" id="ritema" name="ritem"
+                    <input checked (click)="seleccionarTipoVuelo('RT')" type="radio" id="radio_b_tv_1" name="ritem"
                         value="RT">
                     <label class="textFlight" for="ritema">Ida & Vuelta</label>
                 </div>
             </div>
             <div class="col-lg-6 col-md-5 col-sm col-4 m-0 p-0">
                 <div class="radio-item">
-                    <input (click)="seleccionarTipoVuelo('OW')" type="radio" id="ritemb" name="ritem" value="OW">
+                    <input (click)="seleccionarTipoVuelo('OW')" type="radio" id="radio_b_tv_2" name="ritem" value="OW">
                     <label class="textFlight" for="ritemb">Sólo ida</label>
                 </div>
             </div>
             <div class="col-lg-6 col-md-5 col-sm col-4 m-0 p-0">
                 <div class="radio-item">
-                    <input (click)="seleccionarTipoVuelo('MC')" type="radio" id="ritemc" name="ritem" value="MC">
+                    <input (click)="seleccionarTipoVuelo('MC')" type="radio" id="radio_b_tv_3" name="ritem" value="MC">
                     <label class="textFlight" for="ritemc">Multidestino</label>
                 </div>
             </div>
@@ -27,7 +27,7 @@
         <div class="row m-0 p-0 mt-3">
             <div class="col-lg-12 col-md-12 col-sm-12 top">
                 <span class="titles">Origen</span>
-                <ng-autocomplete [(ngModel)]="model.origentTexto" triggers="" style="color: #898989 !important;"
+                <ng-autocomplete [(ngModel)]="objRq.origentTexto" triggers="" style="color: #898989 !important;"
                     [data]="data" [searchKeyword]="keyword" (selected)='selectEvent($event)'
                     (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)'
                     [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
@@ -60,7 +60,7 @@
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 top">
                 <span class="titles">Destino</span>
-                <ng-autocomplete [(ngModel)]="model.destinoTexto" style="color: #898989 !important;" [data]="data2"
+                <ng-autocomplete [(ngModel)]="objRq.destinoTexto" style="color: #898989 !important;" [data]="data2"
                     [searchKeyword]="keyword" (selected)='selectEventDestino($event)'
                     (inputChanged)='onChangeSearchDestino($event)' (inputFocused)='onFocused2($event)'
                     [itemTemplate]="itemTemplate2" [notFoundTemplate]="notFoundTemplate2">
@@ -97,10 +97,10 @@
                     <div class="col-lg-6 col-md-12 col-sm-12 col-6 m-0 p-0">
                         <label id="txtFechaSalida" for="" class="d-inline-flex box-shadow fechas dates">
                             <input type="image" src="assets/Images/seeker/calendario.svg"
-                                (click)="datepickerSalida.toggle()"
+                                (click)="datepickerSalidaLower.toggle()"
                                 style="outline: none; border: 0; width: 25px !important;">
                             <input type="text" readonly placeholder="Salida" class="p-0 pl-2 fechasInput"
-                                #datepickerSalida="bsDatepicker" (onHidden)="handlerSalida()"
+                                #datepickerSalidaLower="bsDatepicker" (onHidden)="handlerSalida()"
                                 (bsValueChange)="onValueChangeSalida($event)" [minDate]="minDateSalida" bsDatepicker
                                 id="fechasalida" [bsValue]="bsValue" value="" (onHidden)="ValidarCiudad()"
                                 [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-red',  selectFromOtherMonth: true }">
@@ -109,10 +109,10 @@
                     <div class="col-lg-6 col-md-12 col-sm-12 col-6 m-0 p-0">
                         <label id="txtFechaDestino" for="" class="d-inline-flex box-shadow dates">
                             <input type="image" src="assets/Images/seeker/calendario.svg"
-                                (click)="datepickerRetorno.toggle()"
+                                (click)="datepickerRetornoLower.toggle()"
                                 style="outline: none; border: 0; width: 25px !important;">
                             <input type="text" readonly placeholder="Retorno" class="p-0 pl-2 fechasInput"
-                                #datepickerRetorno="bsDatepicker" (bsValueChange)="onValueChangeRetorno($event)"
+                                #datepickerRetornoLower="bsDatepicker" (bsValueChange)="onValueChangeRetorno($event)"
                                 [minDate]="minDateRetorno" [dateCustomClasses]="dateCustomClasses" bsDatepicker
                                 [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-red',  selectFromOtherMonth: true }"
                                 id="fechadestino" (onHidden)="ValidarCiudad()">

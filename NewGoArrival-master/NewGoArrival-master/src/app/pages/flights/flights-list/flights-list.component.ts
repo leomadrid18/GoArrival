@@ -96,6 +96,10 @@ export class FlightsListComponent implements OnInit {
     this.aerolineas = aerolineas;
   }
 
+  ocultarComponentes($event: any){
+    this.validFlights = $event;
+  }
+
   busquedaFiltros($event: any) {
     this.lstFlights = [];
 
@@ -108,8 +112,9 @@ export class FlightsListComponent implements OnInit {
         this.flagDinData2 = true;
       } else {
         this.lstFlights = $event;
-          this.validFlights = true;
         this.flagDinData2 = false;
+        this.validFlights = true;
+        
       }
     } else {
       this.flagDinData2 = true;
@@ -124,55 +129,53 @@ export class FlightsListComponent implements OnInit {
   }
 
 
-
+  enviarAeropuertos(request_: any){
+    console.log(request_);
+  }
 
 
   setFlights() {
     this.request = this.cookieValue.request;
     if (this.cookieValue.result.status === 200) {
-      if (this.cookieValue.result.llowCostAirlines != null) {
-        if (this.cookieValue.result.llowCostAirlines.length > 0) {
-
+        if (this.cookieValue.result.llowCostAirlines?.length > 0) {
           this.llowCostAirlines = this.cookieValue.result.llowCostAirlines;
-
         }
-      }
-
-      if (this.cookieValue.result.lcalendars != null) {
-        if (this.cookieValue.result.lcalendars.length > 0) {
-
+        if (this.cookieValue.result.lcalendars?.length > 0) {
           this.lstCalendar = this.cookieValue.result.lcalendars;
           this.validCalendar = true;
         }
-      }
-      if (this.cookieValue.result.lrecommendations != null) {
-        if (this.cookieValue.result.lrecommendations.length > 0) {
+        if (this.cookieValue.result.lrecommendations?.length > 0) {
           this.lstFlights = this.cookieValue.result.lrecommendations;
+          this.tipoVuelo = this.request.Type;
+          this.setLstAerolineas(this.lstFlights);
+          this.enviarAeropuertos(this.request);
+        
           this.validFlights = true;
         }
-      }
-
     }
+    
   }
 
   validShowFlights(valor: any) {
     this.request = valor.request;
     if (valor.result.status === 200) {
-      if (valor.result.llowCostAirlines.length > 0) {
+      this.flagDinData2 = false;
+      if (valor.result.llowCostAirlines?.length > 0) {
 
         this.llowCostAirlines = valor.result.llowCostAirlines;
 
       }
-      if (valor.result.lcalendars.length > 0) {
+      if (valor.result.lcalendars?.length > 0) {
 
         this.lstCalendar = valor.result.lcalendars;
         this.validCalendar = true;
       }
-      if (valor.result.lrecommendations.length > 0) {
+      if (valor.result.lrecommendations?.length > 0) {
         this.lstFlights = valor.result.lrecommendations;
         this.validFlights = true;
       }
     }
+    this.headService.ocultarSpinner();
   }
 
   onSelectDate(fechas: any) {
