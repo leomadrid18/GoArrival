@@ -145,6 +145,11 @@ export class FinalPriceComponent implements OnInit {
     )
   }
 
+
+  getFlightAvailability(template: TemplateRef<any>, template2: TemplateRef<any>) {
+    
+  }
+
   openModalPoliticas(template: any) {
     this.modalRefPoliticas = this.modalService.show(
       template,

@@ -225,12 +225,12 @@ export class SearchFlightLowerComponent implements OnInit {
 
 
   ValidarCiudad() {
-    if (this.model.origentTexto.length < 10) {
-      this.model.origentTexto = "";
+    if (this.objRq.origentTexto.length < 10) {
+      this.objRq.origentTexto = "";
     }
 
-    if (this.model.destinoTexto.length < 10) {
-      this.model.destinoTexto = "";
+    if (this.objRq.destinoTexto.length < 10) {
+      this.objRq.destinoTexto = "";
     }
   }
 
@@ -284,8 +284,8 @@ export class SearchFlightLowerComponent implements OnInit {
     this.valdestino = false;
     $("#txtDestino").removeClass("campo-invalido");
     $(".x").hide();
-    if (this.model.origentTexto.length < 5) {
-      this.model.origentTexto = "";
+    if (this.objRq.origentTexto.length < 5) {
+      this.objRq.origentTexto = "";
     }
   }
 

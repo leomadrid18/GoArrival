@@ -20,6 +20,7 @@ export class HeaderComponent implements OnInit {
   apagado = "vuelosOff";
   cookieValue: any
   empresa: any;
+  validCompanie = false;
   @ViewChild('userBox') userBox!: ElementRef;
   constructor(private router: Router,private cookieServices: CookieService,private headService: HeaderService) {
     this.numero = 1;
@@ -31,9 +32,10 @@ export class HeaderComponent implements OnInit {
     this.cookieValue = this.headService.desencriptar(this.cookieValue);
     if(this.cookieValue != null){
       if (this.cookieValue.ocompany != null) {
+        this.validCompanie = false;
         this.empresa = this.cookieValue.ocompany.companyName;
       } else {
-        if (this.cookieValue.oagency) {
+        if (this.cookieValue.oagency != null) {
           this.empresa = this.cookieValue.oagency.agencyName;
         }
       }

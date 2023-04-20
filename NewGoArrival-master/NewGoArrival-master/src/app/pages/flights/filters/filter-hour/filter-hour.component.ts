@@ -59,13 +59,13 @@ export class FilterHourComponent implements OnInit,AfterViewInit {
       this.indexTramo = 2;
       this.texto1 = 'Ida';
       this.texto2 = 'Vuelta';
-      this.imgIdaVuelta1 = 'avion_ida_blanco.svg';
-      this.imgIdaVuelta2 = 'avion_vuelta_blanco.svg';
+      this.imgIdaVuelta1 = 'flight/avion_ida_blanco.svg';
+      this.imgIdaVuelta2 = 'flight/avion_vuelta_blanco.svg';
     }
     if (tipoVuelo === 'OW') {
       this.indexTramo = 1;
       this.texto1 = 'Ida';
-      this.imgIdaVuelta1 = 'avion_ida_blanco.svg';
+      this.imgIdaVuelta1 = 'flight/avion_ida_blanco.svg';
     }
     if (tipoVuelo === 'MC') {
       this.texto1 = 'Tramo 1';
@@ -74,12 +74,12 @@ export class FilterHourComponent implements OnInit,AfterViewInit {
       this.texto4 = 'Tramo 4';
       this.texto5 = 'Tramo 5';
       this.texto6 = 'Tramo 6';
-      this.imgIdaVuelta1 = 'avion_ida_blanco.svg';
-      this.imgIdaVuelta2 = 'avion_ida_blanco.svg';
-      this.imgIdaVuelta3 = 'avion_ida_blanco.svg';
-      this.imgIdaVuelta4 = 'avion_ida_blanco.svg';
-      this.imgIdaVuelta5 = 'avion_ida_blanco.svg';
-      this.imgIdaVuelta6 = 'avion_ida_blanco.svg';
+      this.imgIdaVuelta1 = 'flight/avion_ida_blanco.svg';
+      this.imgIdaVuelta2 = 'flight/avion_ida_blanco.svg';
+      this.imgIdaVuelta3 = 'flight/avion_ida_blanco.svg';
+      this.imgIdaVuelta4 = 'flight/avion_ida_blanco.svg';
+      this.imgIdaVuelta5 = 'flight/avion_ida_blanco.svg';
+      this.imgIdaVuelta6 = 'flight/avion_ida_blanco.svg';
     }
   }
 
