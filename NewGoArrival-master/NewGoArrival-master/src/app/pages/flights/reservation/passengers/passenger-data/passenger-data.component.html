@@ -14,7 +14,7 @@
                 </select>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-                <span class="label-pasajero">Nombre</span><br />
+                <span class="label-pasajero">Nombre(s):</span><br />
                 <input *ngIf="loginData.orole.roleId === 1;else inputTemplate" disabled (keypress)="Solotexto($event)"
                     (keydown)="ValidarCampos()" (keyup)="ValidarCampos()" class="input-pasajero" type="text"
                     [(ngModel)]="user.firstName" id="txtnombre_{{index}}" pattern="[A-Za-z0-9_-]{1,15}" maxlength="80">
@@ -23,6 +23,45 @@
                         class="input-pasajero" type="text" [(ngModel)]="user.firstName" id="txtnombre_{{index}}"
                         pattern="[A-Za-z0-9_-]{1,15}" maxlength="80">
                 </ng-template>
+            </div>
+        </div>
+        <div class="row m-0 p-0 mt-3">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                <span class="label-pasajero">Apellidos:</span><br />
+                <input *ngIf="loginData.orole.roleId === 1;else inputTemplate2" disabled (keypress)="Solotexto($event)" (keydown)="ValidarCampos()" (keyup)="ValidarCampos()" class="input-pasajero" type="text" [(ngModel)]="user.lastName" id="txtapellidos_{{index}}" pattern="[A-Za-z0-9_-]{1,15}" maxlength="80">
+                <ng-template #inputTemplate2>
+                  <input (keypress)="Solotexto($event)" (keydown)="ValidarCampos()" (keyup)="ValidarCampos()" class="input-pasajero" type="text" [(ngModel)]="user.lastName" id="txtapellidos_{{index}}" pattern="[A-Za-z0-9_-]{1,15}" maxlength="80">
+                </ng-template>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                <span class="label-pasajero">Tipo de Documento:</span><br />
+                <select class="input-pasajero" type="text" [(ngModel)]="user.lpersonDocuments[0].docTypeId"   #t (change)="setValor($event.target.value);" id="cbo_tipodocumento_{{index}}">
+                    <option *ngFor="let item of this.document" value="{{item.docTypeId}}" >{{item.name}}</option>
+                  </select>
+            </div>
+        </div>
+        <div class="row m-0 p-0 mt-3">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                <span class="label-pasajero">Numero de Documento:</span><br />
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                
+            </div>
+        </div>
+        <div class="row m-0 p-0 mt-3">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                
+            </div>
+        </div>
+        <div class="row m-0 p-0 mt-3">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                
             </div>
         </div>
     </div>

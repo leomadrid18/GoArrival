@@ -18,8 +18,9 @@ export class PassengerDataComponent implements OnInit {
   tratamiento: any;
   loginData: any;
   datosuser: any;
-
-
+  document: any;
+  validNumberDoc: any;
+  
   constructor(private cookieServices: CookieService,private headService: HeaderService) { }
 
   ngOnInit(): void {
@@ -74,6 +75,14 @@ export class PassengerDataComponent implements OnInit {
     if (!regex.test(key)) {
       event.preventDefault();
       return;
+    }
+  }
+
+  setValor(valor: any) {
+    if (valor === 'F3F05B20-412E-4A1A-BA31-B69B1E6D0392') {
+      this.validNumberDoc = true;
+    } else {
+      this.validNumberDoc = false;
     }
   }
 
