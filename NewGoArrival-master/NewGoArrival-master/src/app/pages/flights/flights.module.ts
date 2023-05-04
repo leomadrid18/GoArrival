@@ -30,13 +30,19 @@ import { FilterHourComponent } from './filters/filter-hour/filter-hour.component
 import { FilterAirlineComponent } from './filters/filter-airline/filter-airline.component';
 import { OrderPriceComponent } from './filters/order-price/order-price.component';
 import { AlertModule } from "ngx-bootstrap/alert";
+import { ReservationComponent } from './reservation/reservation.component';
+import { PassengersComponent } from './reservation/passengers/passengers.component';
+import { PassengerDataComponent } from './reservation/passengers/passenger-data/passenger-data.component';
+import { ValidateReservationComponent } from './reservation/validate-reservation/validate-reservation.component';
+import { GenerateReservationComponent } from './reservation/generate-reservation/generate-reservation.component';
 
 const routes: Routes = [
   {
     path: '',
     component: FlightsComponent
   },
-  {path: 'flight-list',component: FlightsListComponent}
+  {path: 'flight-list',component: FlightsListComponent},
+  {path: 'passenger-data',component: PassengersComponent}
 
 ];
 
@@ -59,7 +65,12 @@ const routes: Routes = [
     FilterTimeComponent,
     FilterHourComponent,
     FilterAirlineComponent,
-    OrderPriceComponent
+    OrderPriceComponent,
+    ReservationComponent,
+    PassengersComponent,
+    PassengerDataComponent,
+    ValidateReservationComponent,
+    GenerateReservationComponent
   ],
   imports: [
     CommonModule,

@@ -109,7 +109,6 @@ export class LoginComponent implements OnInit {
         if (rpta.oerror != null) {
           this.messageError = rpta.oerror.message;
           this.validError = true;
-          return;
         } else {
           let valor = this.headerService.encriptar(rpta);
           this.cookieServices.set('dwerrgfqw24423', valor);

@@ -17,7 +17,8 @@ export class FlightService {
   private _url5: string = environment.url_5 + "User/";
   private _url3: string = environment.url_2 + "Search/";
   private _url4: string = environment.url_2 + "Search/";
-
+  private url_bookingTemp: string = environment.url_2 + "Booking/";
+  
   constructor(private http: HttpClient) {
     this.key = environment.key;
    }
@@ -47,5 +48,13 @@ export class FlightService {
      return this.http.post<any>(this._url4 + "SearchFlight", data, httpOptions);
    }
 
+   fligthAvailibility(data: any): Observable<any> {
+    httpOptions.headers = new HttpHeaders({
+      
+      'Content-Type': "application/json",
+      'Ocp-Apim-Subscription-Key': this.key
+    });
+    return this.http.post<any>(this.url_bookingTemp + "GetFlightAvailability", data, httpOptions);
+  }
  
 }

@@ -1,0 +1,33 @@
+.seccion{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.title-form {
+  color: #676767;
+  font-family: Omnes-med;
+  border-radius: 20px 20px;
+  width: 862px;
+}
+
+.banner{
+    background: #FBF6F6 0% 0% no-repeat padding-box;
+    line-height: 70px;
+    border-radius: 15px 15px 0px 0px;
+}
+
+.banner-data{
+    border-radius: 0px 0px 15px 15px;
+    background: #FDFDFD 0% 0% no-repeat padding-box;
+    box-shadow: -1px 2px 6px #00000029
+}
+
+
+.back{
+    font-family: Omnes-med;
+    letter-spacing: 0;
+    color: #ED1C24;
+    opacity: 1;
+    font-size: 14px;
+    cursor: pointer;
+}

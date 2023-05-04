@@ -1,0 +1,29 @@
+<div class="row m-0 p-0">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12 m-0 p-0">
+        <div class="row m-0 p-0 mt-4">
+            <div class="col-lg-3 col-md-5 col-sm-6 col-6 divecolors m-0 p-0 text-center">
+                <span class="">Adulto</span>
+            </div>
+        </div>
+        <div class="row m-0 p-0 mt-3">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                <span class="label-pasajero">Tratamiento</span><br />
+                <select class="input-pasajero" type="text" id="cbotratamiento_{{index}}" [(ngModel)]="tratamiento">
+                    <option value="MR">Sr.</option>
+                    <option value="MRS">Sra.</option>
+                </select>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                <span class="label-pasajero">Nombre</span><br />
+                <input *ngIf="loginData.orole.roleId === 1;else inputTemplate" disabled (keypress)="Solotexto($event)"
+                    (keydown)="ValidarCampos()" (keyup)="ValidarCampos()" class="input-pasajero" type="text"
+                    [(ngModel)]="user.firstName" id="txtnombre_{{index}}" pattern="[A-Za-z0-9_-]{1,15}" maxlength="80">
+                <ng-template #inputTemplate>
+                    <input (keypress)="Solotexto($event)" (keydown)="ValidarCampos()" (keyup)="ValidarCampos()"
+                        class="input-pasajero" type="text" [(ngModel)]="user.firstName" id="txtnombre_{{index}}"
+                        pattern="[A-Za-z0-9_-]{1,15}" maxlength="80">
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>
