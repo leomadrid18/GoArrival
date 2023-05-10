@@ -107,6 +107,7 @@ export class LoginComponent implements OnInit {
     this.service.login(obj).subscribe(
       rpta => {
         if (rpta.oerror != null) {
+          this.headerService.ocultarSpinner();
           this.messageError = rpta.oerror.message;
           this.validError = true;
         } else {
@@ -114,7 +115,7 @@ export class LoginComponent implements OnInit {
           this.cookieServices.set('dwerrgfqw24423', valor);
           this.router.navigate(["flights"]);
         }
-        this.headerService.ocultarSpinner();
+        
       }
     );
   }

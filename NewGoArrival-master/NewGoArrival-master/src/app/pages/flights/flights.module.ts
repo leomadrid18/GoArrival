@@ -35,6 +35,8 @@ import { PassengersComponent } from './reservation/passengers/passengers.compone
 import { PassengerDataComponent } from './reservation/passengers/passenger-data/passenger-data.component';
 import { ValidateReservationComponent } from './reservation/validate-reservation/validate-reservation.component';
 import { GenerateReservationComponent } from './reservation/generate-reservation/generate-reservation.component';
+import { FechaformatPipe } from 'src/app/pipes/fechaformat.pipe';
+import { DetailPriceComponent } from './reservation/detail-price/detail-price.component';
 
 const routes: Routes = [
   {
@@ -62,6 +64,7 @@ const routes: Routes = [
     SegmentGroupComponent,
     FinalPriceComponent,
     FamilyRateComponent,
+    FechaformatPipe,
     FilterTimeComponent,
     FilterHourComponent,
     FilterAirlineComponent,
@@ -70,7 +73,8 @@ const routes: Routes = [
     PassengersComponent,
     PassengerDataComponent,
     ValidateReservationComponent,
-    GenerateReservationComponent
+    GenerateReservationComponent,
+    DetailPriceComponent
   ],
   imports: [
     CommonModule,

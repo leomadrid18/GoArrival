@@ -1,4 +1,5 @@
 import { Component, OnInit, TemplateRef, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { CookieService } from 'ngx-cookie-service';
@@ -23,6 +24,7 @@ export class FinalPriceComponent implements OnInit {
   @Input() lpolicies: any;
   @Input() lsections: any;
   @Input() index: any;
+  @Input() recomendacion: any;
   @Input() gds: any;
   @Input() currency: any;
   @Input() totalFareAmount: any;
@@ -37,7 +39,7 @@ export class FinalPriceComponent implements OnInit {
   type: any;
   public myObject!: {id: number, myObject: {myString: string}};
   constructor(private modalService: BsModalService,private headService: HeaderService,
-    private cookieServices: CookieService,private service: FlightService) {
+    private cookieServices: CookieService,private service: FlightService,private router: Router) {
 
     this.flagResultFamilias = 0;
    }
@@ -243,12 +245,21 @@ export class FinalPriceComponent implements OnInit {
     };
     this.service.fligthAvailibility(dataFamilias).subscribe(
       x=> {
-        if(x.status === 200){
-
+        if(x.ostatus.status === 200){
+          this.dataShared();
+          this.router.navigate(["flights/passenger-data"])
         }
         console.log(x);
       }
     )
+  }
+
+  dataShared(){
+    let obj = {
+      gds: this.gds
+    }
+    let valor = this.headService.encriptar(obj);
+    this.cookieServices.set("DC12$&%",valor);
   }
 
   openModalPoliticas(template: any) {

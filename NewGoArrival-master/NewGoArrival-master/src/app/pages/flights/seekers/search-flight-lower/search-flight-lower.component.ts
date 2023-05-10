@@ -65,7 +65,7 @@ export class SearchFlightLowerComponent implements OnInit {
 
 
   objRq: any;
-  @Output() result = new EventEmitter<any>();
+  @Output() enviarData = new EventEmitter<any>();
   @Output() ocultar = new EventEmitter<any>();
   constructor(private service: FlightService,private head: HeaderService,private cookie : CookieService) {
     this.tipoVuelo = "";
@@ -198,10 +198,9 @@ export class SearchFlightLowerComponent implements OnInit {
           result: x,
           request: data
         }
-        this.result.emit(obj);
         let valor = this.head.encriptar(obj);
         this.head.addObject(1,valor);
-        
+        this.enviarData.emit(obj);
       }
     )
   }
