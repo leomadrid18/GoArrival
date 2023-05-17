@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { FlightService } from 'src/app/services/flight/flight.service';
 import { HeaderService } from 'src/app/services/head.service';
@@ -13,14 +14,34 @@ export class PassengersComponent implements OnInit {
   lstpaises: any[] = [];
   lstDocument: any[] = [];
   gds: any;
-  constructor(private headService: HeaderService,private cookie: CookieService,private flightService: FlightService) { }
+  validPassenger = false;
+  flight: any;
+  typevuelo: any;
+  reasonFlight!: string;
+  extraReason!: string;
+  public myObject!: { id: number, myObject: { myString: string } };
+  constructor(private router: Router,private headService: HeaderService,private cookie: CookieService,private flightService: FlightService) { }
 
   ngOnInit(): void {
     this.datosuser = this.cookie.get("PSG987");
     this.datosuser = this.headService.desencriptar(this.datosuser);
-    this.gds = this.cookie.get("DC12$&%");
-    this.gds = this.headService.desencriptar(this.gds).gds;
+    this.traerData();
     this.getPaises();
+  }
+
+  traerData(){
+    this.headService.getObject(2).then(object => {
+      this.myObject = object;
+      this.gds = this.headService.desencriptar(this.myObject.myObject.myString);
+      this.typevuelo = this.gds.typeFlight;
+      this.flight = this.gds.rpta;
+      this.gds = this.gds.gds;
+      this.validPassenger = true;
+    })
+  }
+
+  volver(){
+    this.router.navigate(["flights/flight-list"]);
   }
 
   getPaises(){
@@ -30,6 +51,14 @@ export class PassengersComponent implements OnInit {
         this.getDocument();
       }
     )
+  }
+
+  updateReasonFlight($event: any) {
+    this.reasonFlight = $event
+  }
+
+  updateExtraReason($event: any) {
+    this.extraReason = $event
   }
 
   getDocument() {

@@ -26,6 +26,7 @@ export class FinalPriceComponent implements OnInit {
   @Input() index: any;
   @Input() recomendacion: any;
   @Input() gds: any;
+  @Input() tipoVuelo: any;
   @Input() currency: any;
   @Input() totalFareAmount: any;
   @Input() finalAmount: any;
@@ -246,20 +247,27 @@ export class FinalPriceComponent implements OnInit {
     this.service.fligthAvailibility(dataFamilias).subscribe(
       x=> {
         if(x.ostatus.status === 200){
-          this.dataShared();
-          this.router.navigate(["flights/passenger-data"])
+          this.dataShared(x);
+          
         }
         console.log(x);
       }
     )
   }
 
-  dataShared(){
+  dataShared(availa: any){
     let obj = {
-      gds: this.gds
+      rpta: availa,
+      gds: this.gds,
+      typeFlight: this.tipoVuelo
     }
     let valor = this.headService.encriptar(obj);
-    this.cookieServices.set("DC12$&%",valor);
+    this.headService.addObject(2, valor).then(() => {
+      this.router.navigate(["flights/passenger-data"])
+    }).catch(error => {
+      
+    });
+
   }
 
   openModalPoliticas(template: any) {
