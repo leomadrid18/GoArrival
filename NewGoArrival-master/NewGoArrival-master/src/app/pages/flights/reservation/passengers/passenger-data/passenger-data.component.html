@@ -35,7 +35,7 @@
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                 <span class="label-pasajero">Tipo de Documento:</span><br />
-                <select class="input-pasajero" type="text" [(ngModel)]="user.lpersonDocuments[0].docTypeId"   #t (change)="setValor($event.target.value);" id="cbo_tipodocumento_{{index}}">
+                <select class="input-pasajero" type="text" [(ngModel)]="user.lpersonDocuments[0].docTypeId"   #t (change)="setValor($event);" id="cbo_tipodocumento_{{index}}">
                     <option *ngFor="let item of this.document" value="{{item.docTypeId}}" >{{item.name}}</option>
                   </select>
             </div>
