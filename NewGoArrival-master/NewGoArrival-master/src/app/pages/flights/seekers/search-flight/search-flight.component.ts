@@ -319,7 +319,7 @@ export class SearchFlightComponent implements OnInit {
     this.cookieServices.set('euimbh235$%/mjmn', valor);
     this.service.searchFlight(data).subscribe(
       x => {
-        this.headerService.ocultarSpinner();
+        
         const obj = {
           result: x,
           request: data

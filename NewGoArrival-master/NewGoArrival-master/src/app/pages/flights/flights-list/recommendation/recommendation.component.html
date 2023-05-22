@@ -3,14 +3,18 @@
         <div class="row m-0 p-0">
             <div class="col-lg-9 col-md-9 col-sm-12 col-12 m-0 p-0 box-shadow-important">
                 <app-section [sectionLength]="lsectionLength" [posicion]="i + 1" [recommendationId]="recommendationId"
-                [recommendationIndex]="i + 1" [tipoVuelo]="tipoVuelo" (outSegmentCheck)="setearRadioId($event)" [section]="section"
-                 *ngFor="let section of lsections; let i = index"></app-section>
+                    [recommendationIndex]="i + 1" [tipoVuelo]="tipoVuelo" (outSegmentCheck)="setearRadioId($event)"
+                    [section]="section" *ngFor="let section of lsections; let i = index"></app-section>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-12 col-12 mt-3 p-0">
-                <app-final-price [request]="request" [gds]="gds" [index]="index" [lstRadioCheck]="lstRadioCheck" [lpolicies]="lpolicies" [recomen]="recomen" [lsections]="lsections" [currency]="currency" [totalFareAmount]="totalFareAmount"
-                 [finalAmount]="recomen.oprice?.lpriceByPayments?.[0]?.finalAmount  ?? defaultValue"
-                [fareTaxAmountByPassenger]="fareTaxAmountByPassenger" [chargesAmount]="recomen.oprice?.lpriceByPayments?.[0]?.chargesAmount ?? defaultValue" [internationalPrice]="internationalPrice">
-            </app-final-price>
+                <app-final-price [request]="request" [recomendacion]="recomen" [gds]="gds" [index]="index"
+                    [lstRadioCheck]="lstRadioCheck" [lpolicies]="lpolicies" [recomen]="recomen" [lsections]="lsections"
+                    [currency]="currency" [tipoVuelo]="tipoVuelo" [totalFareAmount]="totalFareAmount"
+                    [finalAmount]="recomen.oprice?.lpriceByPayments?.[0]?.finalAmount  ?? defaultValue"
+                    [fareTaxAmountByPassenger]="fareTaxAmountByPassenger"
+                    [chargesAmount]="recomen.oprice?.lpriceByPayments?.[0]?.chargesAmount ?? defaultValue"
+                    [internationalPrice]="internationalPrice">
+                </app-final-price>
             </div>
         </div>
     </div>

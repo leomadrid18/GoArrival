@@ -29,7 +29,7 @@ export class FlightsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cargar();
+   /*  this.cargar(); */
     this.getObject();
     /*  this.cookieValue = this.cookieServices.get('rtsdt3298dwlou3208'); */
   }
@@ -153,7 +153,7 @@ export class FlightsListComponent implements OnInit {
           this.validFlights = true;
         }
     }
-    
+    this.headService.ocultarSpinner();
   }
 
   validShowFlights(valor: any) {

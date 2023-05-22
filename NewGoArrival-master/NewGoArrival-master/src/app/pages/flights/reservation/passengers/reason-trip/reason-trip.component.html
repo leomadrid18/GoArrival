@@ -1,0 +1,19 @@
+<div id="borderspace" class="row m-0 p-0">
+    <div class="col-12 m-0 p-0 contenedor-form">
+        <div class="row m-0 p-0">
+            <div class="col-12 m-0 p-0">
+                <div class="row m-0 p-0">
+                    <div class="col-12 div-info text-left pt-3 pb-3">
+                        <select id="cbomotivo" class="input-pasajero" (change)="reasonSelected($event)">
+                           <option value="{{item.id}}" *ngFor="let item of lsReasonflight" >{{item.description}}</option>
+                       </select>
+                    </div>
+                    <div *ngIf="valor" class="col-12">
+                      <textarea class="input-pasajero" name="valor" placeholder="Ingrese el motivo" id="reason" (change)="onInputChange($event)"></textarea>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

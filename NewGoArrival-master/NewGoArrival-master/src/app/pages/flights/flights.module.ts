@@ -35,6 +35,17 @@ import { PassengersComponent } from './reservation/passengers/passengers.compone
 import { PassengerDataComponent } from './reservation/passengers/passenger-data/passenger-data.component';
 import { ValidateReservationComponent } from './reservation/validate-reservation/validate-reservation.component';
 import { GenerateReservationComponent } from './reservation/generate-reservation/generate-reservation.component';
+import { FechaformatPipe } from 'src/app/pipes/fechaformat.pipe';
+import { DetailPriceComponent } from './reservation/detail-price/detail-price.component';
+import { DetailFlightComponent } from './reservation/detail-flight/detail-flight.component';
+import { DetailSectionComponent } from './reservation/detail-flight/detail-section/detail-section.component';
+import { DetailSegmentComponent } from './reservation/detail-flight/detail-segment/detail-segment.component';
+import { ModalDetailFlightComponent } from './reservation/detail-flight/modal-detail-flight/modal-detail-flight.component';
+import { ModalSectionComponent } from './reservation/detail-flight/modal-section/modal-section.component';
+import { ModalSegmentComponent } from './reservation/detail-flight/modal-segment/modal-segment.component';
+import { ModalSegmentGroupComponent } from './reservation/detail-flight/modal-segment-group/modal-segment-group.component';
+import { PassengerContactComponent } from './reservation/passengers/passenger-contact/passenger-contact.component';
+import { ReasonTripComponent } from './reservation/passengers/reason-trip/reason-trip.component';
 
 const routes: Routes = [
   {
@@ -62,6 +73,7 @@ const routes: Routes = [
     SegmentGroupComponent,
     FinalPriceComponent,
     FamilyRateComponent,
+    FechaformatPipe,
     FilterTimeComponent,
     FilterHourComponent,
     FilterAirlineComponent,
@@ -70,7 +82,17 @@ const routes: Routes = [
     PassengersComponent,
     PassengerDataComponent,
     ValidateReservationComponent,
-    GenerateReservationComponent
+    GenerateReservationComponent,
+    DetailPriceComponent,
+    DetailFlightComponent,
+    DetailSectionComponent,
+    DetailSegmentComponent,
+    ModalDetailFlightComponent,
+    ModalSectionComponent,
+    ModalSegmentComponent,
+    ModalSegmentGroupComponent,
+    PassengerContactComponent,
+    ReasonTripComponent
   ],
   imports: [
     CommonModule,

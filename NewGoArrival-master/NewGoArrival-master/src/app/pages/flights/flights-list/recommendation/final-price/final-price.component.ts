@@ -1,4 +1,5 @@
 import { Component, OnInit, TemplateRef, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { CookieService } from 'ngx-cookie-service';
@@ -23,7 +24,9 @@ export class FinalPriceComponent implements OnInit {
   @Input() lpolicies: any;
   @Input() lsections: any;
   @Input() index: any;
+  @Input() recomendacion: any;
   @Input() gds: any;
+  @Input() tipoVuelo: any;
   @Input() currency: any;
   @Input() totalFareAmount: any;
   @Input() finalAmount: any;
@@ -37,7 +40,7 @@ export class FinalPriceComponent implements OnInit {
   type: any;
   public myObject!: {id: number, myObject: {myString: string}};
   constructor(private modalService: BsModalService,private headService: HeaderService,
-    private cookieServices: CookieService,private service: FlightService) {
+    private cookieServices: CookieService,private service: FlightService,private router: Router) {
 
     this.flagResultFamilias = 0;
    }
@@ -152,7 +155,7 @@ export class FinalPriceComponent implements OnInit {
 
 
   getFlightAvailability(template: TemplateRef<any>, template2: TemplateRef<any>) {
-
+    this.headService.mostrarSpinner();
     let Lsections_: any[] = [];
     const lstRadioCheck = this.lstRadioCheck;
     lstRadioCheck.sort((a:any, b:any) => a.sectionId_ - b.sectionId_);
@@ -243,12 +246,28 @@ export class FinalPriceComponent implements OnInit {
     };
     this.service.fligthAvailibility(dataFamilias).subscribe(
       x=> {
-        if(x.status === 200){
-
+        if(x.ostatus.status === 200){
+          this.dataShared(x);
+          
         }
-        console.log(x);
+        
       }
     )
+  }
+
+  dataShared(availa: any){
+    let obj = {
+      rpta: availa,
+      gds: this.gds,
+      typeFlight: this.tipoVuelo
+    }
+    let valor = this.headService.encriptar(obj);
+    this.headService.addObject(2, valor).then(() => {
+      this.router.navigate(["flights/passenger-data"])
+    }).catch(error => {
+      
+    });
+
   }
 
   openModalPoliticas(template: any) {

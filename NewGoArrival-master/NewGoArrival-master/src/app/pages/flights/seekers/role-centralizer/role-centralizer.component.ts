@@ -77,6 +77,8 @@ export class RoleCentralizerComponent implements OnInit {
         Object.assign({}, { class: 'gray modal-lg m-infraccion' })
       );
     } else {
+      let passengers = this.head.encriptar(this.lstPasajeros);
+      this.cookie.set("PSG987", passengers);
       /* this.sessionStorageService.store('ss_lstPasajeros', this.lstPasajeros); */
       this.flagCentralizado.emit(false);
     }

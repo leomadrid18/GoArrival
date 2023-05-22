@@ -30,6 +30,7 @@ export class FlightsComponent implements OnInit {
     this.cookieValue = this.cookieServices.get('dwerrgfqw24423');
     this.objetoDesencriptado = this.headerService.desencriptar(this.cookieValue);
     this.validCentralizer();
+    this.headerService.ocultarSpinner();
   }
 
   validCentralizer() {
