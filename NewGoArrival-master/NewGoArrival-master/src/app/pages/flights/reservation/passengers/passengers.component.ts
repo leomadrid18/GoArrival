@@ -20,16 +20,20 @@ export class PassengersComponent implements OnInit {
   reasonFlight!: string;
   extraReason!: string;
   public myObject!: { id: number, myObject: { myString: string } };
-  constructor(private router: Router,private headService: HeaderService,private cookie: CookieService,private flightService: FlightService) { }
+  public usuarios!: { id: number, myObject: { myString: string } };
+  constructor(private router: Router, private headService: HeaderService, private cookie: CookieService, private flightService: FlightService) { }
 
   ngOnInit(): void {
-    this.datosuser = this.cookie.get("PSG987");
-    this.datosuser = this.headService.desencriptar(this.datosuser);
-    this.traerData();
-    this.getPaises();
+    /*  this.datosuser = this.cookie.get("PSG987"); */
+    this.datosuser = this.headService.getObject(20).then(user => {
+      this.usuarios = user;
+      this.datosuser = this.headService.desencriptar(this.usuarios.myObject.myString);
+      this.traerData();
+      this.getPaises();
+    });
   }
 
-  traerData(){
+  traerData() {
     this.headService.getObject(2).then(object => {
       this.myObject = object;
       this.gds = this.headService.desencriptar(this.myObject.myObject.myString);
@@ -40,11 +44,11 @@ export class PassengersComponent implements OnInit {
     })
   }
 
-  volver(){
+  volver() {
     this.router.navigate(["flights/flight-list"]);
   }
 
-  getPaises(){
+  getPaises() {
     this.flightService.getCountries().subscribe(
       x => {
         this.lstpaises = x;

@@ -27,7 +27,6 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.cookieValue = this.cookieServices.get('dwerrgfqw24423');
     this.cookieValue = this.headService.desencriptar(this.cookieValue);
     if(this.cookieValue != null){
@@ -49,6 +48,9 @@ export class HeaderComponent implements OnInit {
   }
 
   cerrarSesion() {
+    this.headService.clearAllCookies();
+    this.cookieServices.deleteAll();
+    this.cookieServices.delete("dwerrgfqw24423");
     this.router.navigate([""]);
   }
  
