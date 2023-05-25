@@ -16,6 +16,7 @@ export class ModalSegmentGroupComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.segmentGroup);
     if (this.lSegmentGroupsLength === this.lSegmentGroupsIndex) {
       this.textFlightTimeShow = "Duración total: " + this.totalFlightTimeShow;
     } else {

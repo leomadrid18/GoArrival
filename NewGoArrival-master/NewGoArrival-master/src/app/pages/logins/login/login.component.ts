@@ -59,8 +59,8 @@ export class LoginComponent implements OnInit {
   airportListPriority() {
     this.service.getAirportList(true).subscribe(
       (result: any) => {
-        sessionStorage.setItem('ls_airportlist', JSON.stringify(result.lairports));
-        sessionStorage.setItem('ls_citylist', JSON.stringify(result.lcities));
+        localStorage.setItem('ls_airportlist', JSON.stringify(result.lairports));
+        localStorage.setItem('ls_citylist', JSON.stringify(result.lcities));
         this.airportList();
       },
 
@@ -79,8 +79,8 @@ export class LoginComponent implements OnInit {
   airportList() {
     this.service.getAirportList(false).subscribe(
       (result: any) => {
-        sessionStorage.setItem('ls_airportlist', JSON.stringify(result.lairports));
-        sessionStorage.setItem('ls_citylist', JSON.stringify(result.lcities));
+        localStorage.setItem('ls_airportlist', JSON.stringify(result.lairports));
+        localStorage.setItem('ls_citylist', JSON.stringify(result.lcities));
       },
 
       (err) => {
@@ -108,7 +108,7 @@ export class LoginComponent implements OnInit {
 
       pasajero = {
         age:0,
-        birthDate: "",
+        birthDate: rpta.birthDate,
         countryIataCode: rpta.ocompany.countryCode,
         createdDatePerson : "",
         createdDateUser : "",
@@ -118,7 +118,7 @@ export class LoginComponent implements OnInit {
         gender : rpta.gender,
         isVIP : rpta.vip,
         lastName : rpta.userLastName,
-        lcostCenter : [],
+        lcostCenter : rpta.lcostCenter,
         loginUser : rpta.loginUser,
         lpersonDocuments : documents,
         message : null,

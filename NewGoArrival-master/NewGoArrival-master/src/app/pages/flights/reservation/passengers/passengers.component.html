@@ -4,7 +4,7 @@
             <span (click)="volver()" class="back">Volver</span>
         </div>
     </div>
-    <div class="row m-0 p-0 mt-5">
+    <div class="row m-0 p-0 mt-4">
         <div class="col-lg-12 col-md-12 col-sm-12 col-12 m-0 p-0">
             <div class="row m-0 p-0">
                 <div class="col-lg-8 col-md-7 col-sm-7 col-12 m-0 p-0">
@@ -16,7 +16,7 @@
                     <div *ngIf="validPassenger" class="row m-0 p-0">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-12 m-0 p-0 mb-4 banner-data">
                             <app-passenger-data *ngFor="let user of datosuser; let i = index;" [user]="user" [gds]="gds" [index]="i + 1"
-                            [lstpaises]="lstpaises" [lstDocument]="lstDocument"></app-passenger-data>
+                            [lstpaises]="lstpaises" [lcompanyUids]="uids" [lstCostCenter]="lstCostCenter" [lstDocument]="lstDocument"></app-passenger-data>
                         </div>
                     </div>
                     <div class="row m-0 p-0 mt-3">
@@ -29,14 +29,24 @@
                             <app-passenger-contact  [document]="lstDocument"></app-passenger-contact>
                         </div>
                     </div>
-                    <div class="row m-0 p-0 mt-3">
+                    <div *ngIf="flight?.lreasonFlights?.length > 0" class="row m-0 p-0 mt-3">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-12 banner">
                             <span class="title-form">MOTIVO DE VIAJE</span>
                         </div>
                     </div>
                     <div *ngIf="validPassenger" class="row m-0 p-0">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-12 m-0 p-0 mb-4 banner-data">
-                            <app-reason-trip *ngIf="this.flight.lreasonFlights?.length > 0" [lsReasonflight]="this.flight.lreasonFlights" (reasonFlightEvent)="updateReasonFlight($event)" (extraReasonEvent)="updateExtraReason($event)"></app-reason-trip>
+                            <app-reason-trip *ngIf="flight.lreasonFlights?.length > 0" [lsReasonflight]="flight.lreasonFlights" (reasonFlightEvent)="updateReasonFlight($event)" (extraReasonEvent)="updateExtraReason($event)"></app-reason-trip>
+                        </div>
+                    </div>
+                    <div *ngIf="lextraProfiles?.length > 0" class="row m-0 p-0 mt-3">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12 banner">
+                            <span class="title-form">SELECCIONAR TARJETA PRECARGADA</span>
+                        </div>
+                    </div>
+                    <div *ngIf="validPassenger" class="row m-0 p-0">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12 m-0 p-0 mb-4 banner-data">
+                            <app-extra-profile *ngIf="lextraProfiles?.length > 0" [lextraProfiles]="lextraProfiles" (profileSelected)="updateProfileFlight($event)"></app-extra-profile>
                         </div>
                     </div>
                 </div>
@@ -54,6 +64,11 @@
                             <app-detail-flight [lstBag]="null" [tipovuelo]="typevuelo" [LSection]="flight.lsections"></app-detail-flight>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="row m-0 p-0">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12 m-0 p-0 mt-3 mb-3 text-center">
+                    <span (click)="obtenerValoresInputHijos()"  class="next">Continuar</span>
                 </div>
             </div>
         </div>

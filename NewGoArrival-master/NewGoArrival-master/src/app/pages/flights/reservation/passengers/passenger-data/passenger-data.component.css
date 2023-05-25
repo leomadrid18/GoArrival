@@ -9,7 +9,21 @@
 
 .input-pasajero{
   outline: none;
-  width: 95%;
+  width: 100%;
+  padding: 5px;
+  border: 2px solid #DFD9D8;
+  border-radius: 5px;
+  font-family: Omnes-med;
+  color: #676767;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+
+
+.input-pasajero-phone{
+  outline: none;
+  width: 79%;
   padding: 5px;
   border: 2px solid #DFD9D8;
   border-radius: 5px;

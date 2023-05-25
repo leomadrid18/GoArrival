@@ -42,7 +42,7 @@
                 <span class="label-pasajero">Tipo de Documento:</span><br />
                 <select class="input-pasajero" type="text" [(ngModel)]="user.lpersonDocuments[0].docTypeId" #t
                     (change)="setValor($event);" id="cbo_tipodocumento_{{index}}">
-                    <option *ngFor="let item of lstDocument" value="{{item.docTypeId}}">{{item.name}}</option>
+                    <option *ngFor="let item of this.lstDocument" value="{{item.docTypeId}}">{{item.name}}</option>
                 </select>
             </div>
         </div>
@@ -309,9 +309,45 @@
                         <option data-countryCode="ZW" value="263">Zimbabwe (+263)</option>
                     </optgroup>
                 </select>
-                <input class="input-pasajero" [(ngModel)]="user.phone" (keypress)="ValidarCampos()" 
-                (keydown)="ValidarSoloNumero($event)" (keyup)="ValidarCampos()" type="text" name="" id="txttelefono_{{index}}" maxlength="9">
+                <input class="input-pasajero-phone" [(ngModel)]="user.phone" (keypress)="ValidarCampos()"
+                    (keydown)="ValidarSoloNumero($event)" (keyup)="ValidarCampos()" type="text" name=""
+                    id="txttelefono_{{index}}" maxlength="9">
                 <input type="hidden" id="hdnTel_{{index}}" name="custId" value="51">
+            </div>
+        </div>
+        <div class="row m-0 p-0 mt-3">
+            <div *ngFor="let item of lstSelects;" class="col-lg-6 col-md-6 col-sm-6 col-12 mt-2 mb-2">
+                <span class="label-pasajero">{{item.title}}:</span><br />
+                <div id="select_{{item.codeUid}}_{{index}}">
+                    <select *ngIf="item.codeUid === 'U5'" [(ngModel)]="costCenterCode" [ngClass]="{'input-pasajero-select': isPhone === true}"  
+                        (change)="setSelectUID(item,index,$event)" class="input-pasajero" name="">
+                        <option value="">Selecciona</option>
+                        <option *ngFor="let uid of item.lcompanyUidLists" value="{{uid.code}}">{{uid.description}}
+                        </option>
+                    </select>
+
+                    <select *ngIf="item.codeUid === 'U9'" [(ngModel)]="travelCode" [ngClass]="{'input-pasajero-select': isPhone === true}"  
+                        (change)="setSelectUID(item,index,$event)" class="input-pasajero" name="">
+                        <option value="">Selecciona</option>
+                        <option *ngFor="let uid of item.lcompanyUidLists" value="{{uid.code}}">{{uid.description}}
+                        </option>
+                    </select>
+
+                    <select *ngIf="item.codeUid != 'U5' && item.codeUid != 'U9'" [ngClass]="{'input-pasajero-select': isPhone === true}"  
+                        (change)="setSelectUID(item,index,$event)" class="input-pasajero" name="">
+                        <option value="">Selecciona</option>
+                        <option *ngFor="let uid of item.lcompanyUidLists" value="{{uid.code}}">{{uid.description}}
+                        </option>
+                    </select>
+                    <input *ngIf="item.showInput" (focusout)="onInputChange(item.codeUid,index,$event)" class="input-pasajero" type="text"
+                        id="otros_{{item.codeUid}}_{{index}}" maxlength="50">
+                </div>
+
+            </div>
+            <div *ngFor="let inputUi of lstInputs;" class="col-lg-6 col-md-6 col-sm-6 col-12 mt-2 mb-2">
+                <span class="label-pasajero">{{inputUi.title}}:</span><br />
+                <input (focusout)="onInputChange(inputUi.codeUid,index,$event)" class="input-pasajero" type="text"
+                    id="input_{{inputUi.codeUid}}_{{index}}" maxlength="50">
             </div>
         </div>
     </div>

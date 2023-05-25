@@ -358,9 +358,9 @@ export class SearchFlightComponent implements OnInit {
   }
 
   onChangeSearch(val: string) {
-    this.airportlist = sessionStorage.getItem("ls_airportlist");
+    this.airportlist = localStorage.getItem("ls_airportlist");
     this.airportlist = JSON.parse(this.airportlist);
-    this.citylist = sessionStorage.getItem("ls_citylist");
+    this.citylist = localStorage.getItem("ls_citylist");
     this.citylist = JSON.parse(this.citylist);
     this.lstAutocomplete = [];
     const lstAutocomplete = this.lstAutocomplete;
@@ -420,9 +420,9 @@ export class SearchFlightComponent implements OnInit {
 
   onChangeSearchDestino(val: string) {
 
-    this.airportlist = sessionStorage.getItem("ls_airportlist");
+    this.airportlist = localStorage.getItem("ls_airportlist");
     this.airportlist = JSON.parse(this.airportlist);
-    this.citylist = sessionStorage.getItem("ls_citylist");
+    this.citylist = localStorage.getItem("ls_citylist");
     this.citylist = JSON.parse(this.citylist);
 
     this.lstAutocomplete = [];

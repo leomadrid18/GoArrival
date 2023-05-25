@@ -1,0 +1,58 @@
+.seccion{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.img-airplane{
+    width: 32px;
+  }
+
+.title-form {
+  color: #676767;
+  font-family: Omnes-med;
+  border-radius: 20px 20px;
+  font-size: 20px;
+}
+
+.banner{
+    background: #FBF6F6 0% 0% no-repeat padding-box;
+    line-height: 60px;
+    border-radius: 15px 15px 0px 0px;
+}
+
+.banner-data{
+    border-radius: 0px 0px 15px 15px;
+    background: #FDFDFD 0% 0% no-repeat padding-box;
+    box-shadow: -1px 2px 4PX #00000029
+}
+
+.next {
+    color: white;
+    background-color: #ED1C24;
+    padding: 10px 30px 10px 30px;
+    border-radius: 5px;
+    font-size: 17px;
+    font-family: Omnes-med;
+    cursor: pointer;
+}
+
+.btnEmit {
+    color: #ED1C24;
+    background-color: white;
+    padding: 10px 30px 10px 30px;
+    border-radius: 5px;
+    border: 1px solid #ED1C24;
+    font-size: 17px;
+    font-family: Omnes-med;
+    cursor: pointer;
+}
+
+
+.back{
+    font-family: Omnes-med;
+    letter-spacing: 0;
+    color: #ED1C24;
+    opacity: 1;
+    font-size: 14px;
+    cursor: pointer;
+}

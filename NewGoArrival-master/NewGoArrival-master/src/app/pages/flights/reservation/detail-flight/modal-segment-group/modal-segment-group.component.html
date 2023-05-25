@@ -40,6 +40,10 @@
                     <div class="col-12 m-0 p-0">
                         Tipo de avión - {{segmentGroup.equipmentType}}
                     </div>
+                    <div class="col-12 m-0 p-0">
+                        <img class="img-airlane"
+                        src="/assets/Images/airlines/{{marketingCarrier}}">
+                    </div>
                 </div>
             </div>
         </div>
@@ -66,7 +70,7 @@
                 <div class="row m-0 p-0">
                     <!--    <div class="col-3 m-0 p-0"></div> -->
                     <div class="col-lg-3 col-md-3 col-1 m-0 p-0">
-                        <hr style="background: transparent linear-gradient(99deg, #ED1C24 0%, #D51A2C 34%, #3C4749 100%) 0% 0% no-repeat padding-box"
+                        <hr style="opacity: inherit;background: transparent linear-gradient(99deg, #ED1C24 0%, #D51A2C 34%, #3C4749 100%) 0% 0% no-repeat padding-box"
                             class="div-separator1">
                     </div>
                     <div class="col-lg-6 col-md-6 col-10 m-0 p-0">
@@ -82,7 +86,7 @@
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-3 col-1 m-0 p-0">
-                        <hr style="background: transparent linear-gradient(99deg, #ED1C24 0%, #D51A2C 34%, #3C4749 100%) 0% 0% no-repeat padding-box"
+                        <hr style="opacity: inherit;background: transparent linear-gradient(99deg, #ED1C24 0%, #D51A2C 34%, #3C4749 100%) 0% 0% no-repeat padding-box"
                             class="div-separator2">
                     </div>
                     <!--  <div class="col-3 m-0 p-0"></div> -->
@@ -96,6 +100,13 @@
                     </div>
                 </div>
             </div>
+            <div *ngIf="segmentGroup.obaggage != null" class="col-lg-12 col-md-12 col-12 m-0 p-0 text-center mt-2">
+                <span tooltip="Permite mochila" class="pr-3"><img  style="width: 30px;margin-top: 7px;margin-bottom: 7px;" src="assets/Images/flight/mochila.svg" alt=""></span>
+                  <span *ngIf="segmentGroup.obaggage.carryOnAllowed" tooltip="Incluye maleta en cabina." class="pr-3"><img style="width: 30px;" src="/assets/Images/flight/bolsodemano-1.svg" alt=""></span>
+                  <span *ngIf="!segmentGroup.obaggage.carryOnAllowed" tooltip="No incluye maleta en cabina." class="pr-3"><img  style="width: 30px;" src="/assets/Images/flight/sinmaleta.png" alt=""></span>
+                  <span> <img style="width: 30px;" tooltip="Incluye equipaje para documentar. {{segmentGroup.obaggage.bagquantity}} maleta(s) por adulto." *ngIf="segmentGroup.obaggage.bagAllowed" src="/assets/Images/flight/maleta-si.svg" alt="">
+                      <img style="width: 30px;" tooltip="No incluye maleta." *ngIf="!segmentGroup.obaggage.bagAllowed" src="/assets/Images/flight/maleta-no.svg" alt=""></span>
+              </div>
         </div>
     </div>
     <div class="col-4 m-0 p-0">
@@ -117,6 +128,7 @@
             'texto5-1': tipo == 2}">{{segmentGroup.odestination.airportName}}</div>
         </div>
     </div>
+    
 </div>
 <div class="row m-0 p-0">
     <div class="col-12 m-0 p-0 pt-3 text-center g-text-5">
@@ -126,7 +138,7 @@
 
             <div class="col-lg-4 col-md-4 col-2 m-0 p-0">
                 <hr
-                    style="height: 7px; border-radius: 20px 0 0 20px; background: transparent linear-gradient(99deg, #ED1C24 0%, #D51A2C 34%, #3C4749 100%) 0% 0% no-repeat padding-box">
+                    style="opacity: inherit;height: 7px; border-radius: 20px 0 0 20px; background: transparent linear-gradient(99deg, #ED1C24 0%, #D51A2C 34%, #3C4749 100%) 0% 0% no-repeat padding-box">
             </div>
             <div class="col-lg-4 col-md-4 col-8 m-0 p-0 g-text-5 d-flex justify-content-center align-items-center"
                 style="border-radius: 20px 20px 20px 20px; background: transparent linear-gradient(99deg, #ED1C24 0%, #D51A2C 34%, #3C4749 100%) 0% 0% no-repeat padding-box; height: 32px">
@@ -134,9 +146,9 @@
             </div>
             <div class="col-lg-4 col-md-4 col-2 m-0 p-0">
                 <hr
-                    style="height: 7px; border-radius: 0 20px 20px 0;background: transparent linear-gradient(99deg, #ED1C24 0%, #D51A2C 34%, #3C4749 100%) 0% 0% no-repeat padding-box">
+                    style="opacity: inherit;height: 7px; border-radius: 0 20px 20px 0;background: transparent linear-gradient(99deg, #ED1C24 0%, #D51A2C 34%, #3C4749 100%) 0% 0% no-repeat padding-box">
             </div>
         </div>
     </div>
-
+    
 </div>

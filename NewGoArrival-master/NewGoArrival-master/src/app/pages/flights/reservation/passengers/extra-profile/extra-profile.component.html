@@ -1,0 +1,15 @@
+<div id="borderspace" class="row m-0 p-0">
+    <div class="col-12 m-0 p-0 contenedor-form">
+        <div class="row m-0 p-0">
+            <div class="col-12 m-0 p-0">
+                <div class="row m-0 p-0">
+                    <div class="col-12 div-info text-left pt-3 pb-3">
+                        <select id="cbomotivo" class="input-pasajero" (change)="profileSelected($event)">
+                           <option value="{{item.id}}" *ngFor="let item of lextraProfiles" >{{item.description}}</option>
+                       </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

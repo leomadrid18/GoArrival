@@ -33,7 +33,6 @@ import { AlertModule } from "ngx-bootstrap/alert";
 import { ReservationComponent } from './reservation/reservation.component';
 import { PassengersComponent } from './reservation/passengers/passengers.component';
 import { PassengerDataComponent } from './reservation/passengers/passenger-data/passenger-data.component';
-import { ValidateReservationComponent } from './reservation/validate-reservation/validate-reservation.component';
 import { GenerateReservationComponent } from './reservation/generate-reservation/generate-reservation.component';
 import { FechaformatPipe } from 'src/app/pipes/fechaformat.pipe';
 import { DetailPriceComponent } from './reservation/detail-price/detail-price.component';
@@ -46,6 +45,9 @@ import { ModalSegmentComponent } from './reservation/detail-flight/modal-segment
 import { ModalSegmentGroupComponent } from './reservation/detail-flight/modal-segment-group/modal-segment-group.component';
 import { PassengerContactComponent } from './reservation/passengers/passenger-contact/passenger-contact.component';
 import { ReasonTripComponent } from './reservation/passengers/reason-trip/reason-trip.component';
+import { ExtraProfileComponent } from './reservation/passengers/extra-profile/extra-profile.component';
+import { DetailPassengersComponent } from './reservation/generate-reservation/detail-passengers/detail-passengers.component';
+import { ApproversPoliciesComponent } from './reservation/generate-reservation/approvers-policies/approvers-policies.component';
 
 const routes: Routes = [
   {
@@ -53,8 +55,8 @@ const routes: Routes = [
     component: FlightsComponent
   },
   {path: 'flight-list',component: FlightsListComponent},
-  {path: 'passenger-data',component: PassengersComponent}
-
+  {path: 'passenger-data',component: PassengersComponent},
+  {path: 'generate-reservation',component: GenerateReservationComponent}
 ];
 
 @NgModule({
@@ -81,7 +83,6 @@ const routes: Routes = [
     ReservationComponent,
     PassengersComponent,
     PassengerDataComponent,
-    ValidateReservationComponent,
     GenerateReservationComponent,
     DetailPriceComponent,
     DetailFlightComponent,
@@ -92,7 +93,10 @@ const routes: Routes = [
     ModalSegmentComponent,
     ModalSegmentGroupComponent,
     PassengerContactComponent,
-    ReasonTripComponent
+    ReasonTripComponent,
+    ExtraProfileComponent,
+    DetailPassengersComponent,
+    ApproversPoliciesComponent
   ],
   imports: [
     CommonModule,

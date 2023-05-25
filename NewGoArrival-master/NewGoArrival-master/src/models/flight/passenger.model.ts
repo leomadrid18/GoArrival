@@ -1,6 +1,6 @@
 export interface Passenger {
     age:any;
-    birthDate:string;
+    birthDate:any;
     countryIataCode:string;
     createdDatePerson:string;
     createdDateUser:string;

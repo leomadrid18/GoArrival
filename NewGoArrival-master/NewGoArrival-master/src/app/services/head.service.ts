@@ -65,10 +65,31 @@ export class HeaderService {
 
   getData(key: string): any {
     const value = this.cookieService.get(key);
-    return value !== '' ? JSON.parse(value) : null;
+    return value;
   }
 
-  
+  getDataLogin(){
+    let valor = this.getData("dwerrgfqw24423");
+    valor = this.desencriptar(valor);
+    return valor;
+  }
+
+  getTypeSearch(){
+    let type;
+    let login = this.getDataLogin();
+    if(login.ocompany != null){
+      type = "C"
+    } else {
+      type = "N"
+    }
+    return type;
+  }
+
+  getCompany(){
+    let login = this.getDataLogin();
+    return login.ocompany;
+  }
+
   removeData(key: string): void {
     this.cookieService.delete(key);
   }

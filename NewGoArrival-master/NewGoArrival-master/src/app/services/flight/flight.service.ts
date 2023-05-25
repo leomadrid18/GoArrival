@@ -19,12 +19,11 @@ export class FlightService {
   private url_bookingTemp: string = environment.url_2 + "Booking/";
   private url_countries: string = environment.url_2 + "Country/";
   private url_document: string = environment.url_5 + 'DocumentType/';
-
-
+  private urlApproverCompany: string = environment.url_customer + 'Approver/GetApproversByCompany';
 
   constructor(private http: HttpClient) {
     this.key = environment.key;
-   }
+  }
 
   getUserByCompany(data: any): Observable<any> {
     httpOptions.headers = new HttpHeaders({
@@ -32,6 +31,14 @@ export class FlightService {
       'Ocp-Apim-Subscription-Key': this.key
     });
     return this.http.post<any[]>(this._url5 + "GetUserByFreeText", data, httpOptions);
+  }
+
+  getListApproverCompany(data: any): Observable<any> {
+    httpOptions.headers = new HttpHeaders({
+      'Content-Type': "application/json",
+      'Ocp-Apim-Subscription-Key': environment.key
+    });
+    return this.http.post<any>(`${this.urlApproverCompany}`, data, httpOptions);
   }
 
   getCountries(): Observable<any> {
@@ -43,9 +50,18 @@ export class FlightService {
     return this.http.get<any>(this.url_countries + 'GetCountry', httpOptions);
   }
 
+  duplicatePnr(data: any): Observable<any> {
+    httpOptions.headers = new HttpHeaders({
+
+      'Content-Type': "application/json",
+      'Ocp-Apim-Subscription-Key': this.key
+    });
+    return this.http.post<any>(this.url_bookingTemp + "ValidatePnrDuplicate", data, httpOptions);
+  }
+
   getDocument(data: boolean): Observable<any> {
     httpOptions.headers = new HttpHeaders({
-      
+
       'Content-Type': "application/json",
       'Ocp-Apim-Subscription-Key': this.key
     });
@@ -53,9 +69,9 @@ export class FlightService {
     return this.http.get<any>(url, httpOptions);
   }
 
- 
 
-  getFareFamily(dataPost:any): Observable<any> {
+
+  getFareFamily(dataPost: any): Observable<any> {
     httpOptions.headers = new HttpHeaders({
       'Content-Type': "application/json",
       'Ocp-Apim-Subscription-Key': this.key
@@ -66,19 +82,19 @@ export class FlightService {
 
   searchFlight(data: any): Observable<any> {
     httpOptions.headers = new HttpHeaders({
-       'Content-Type': "application/json",
-       'Ocp-Apim-Subscription-Key': this.key
-     });
-     return this.http.post<any>(this._url3 + "SearchFlight", data, httpOptions);
-   }
+      'Content-Type': "application/json",
+      'Ocp-Apim-Subscription-Key': this.key
+    });
+    return this.http.post<any>(this._url3 + "SearchFlight", data, httpOptions);
+  }
 
-   fligthAvailibility(data: any): Observable<any> {
+  fligthAvailibility(data: any): Observable<any> {
     httpOptions.headers = new HttpHeaders({
-      
+
       'Content-Type': "application/json",
       'Ocp-Apim-Subscription-Key': this.key
     });
     return this.http.post<any>(this.url_bookingTemp + "GetFlightAvailability", data, httpOptions);
   }
- 
+
 }

@@ -24,6 +24,7 @@ export class DetailSectionComponent implements OnInit {
   textType: any;
   imgIdaVuelta: any;
   marketingcarrier: any;
+  validAirline = false;
   constructor(private modalService: BsModalService) { }
 
   ngOnInit(): void {
@@ -50,6 +51,7 @@ export class DetailSectionComponent implements OnInit {
 
   ObtenerAirline($event: any) {
     this.marketingcarrier = $event;
+    this.validAirline = true;
  }
 
  openModal(template: TemplateRef<any>) {

@@ -155,7 +155,7 @@ export class FinalPriceComponent implements OnInit {
 
 
   getFlightAvailability(template: TemplateRef<any>, template2: TemplateRef<any>) {
-
+    this.headService.mostrarSpinner();
     let Lsections_: any[] = [];
     const lstRadioCheck = this.lstRadioCheck;
     lstRadioCheck.sort((a:any, b:any) => a.sectionId_ - b.sectionId_);
@@ -250,7 +250,7 @@ export class FinalPriceComponent implements OnInit {
           this.dataShared(x);
           
         }
-        console.log(x);
+        
       }
     )
   }
@@ -259,7 +259,8 @@ export class FinalPriceComponent implements OnInit {
     let obj = {
       rpta: availa,
       gds: this.gds,
-      typeFlight: this.tipoVuelo
+      typeFlight: this.tipoVuelo,
+      Pseudo: this.recomen.pseudo
     }
     let valor = this.headService.encriptar(obj);
     this.headService.addObject(2, valor).then(() => {

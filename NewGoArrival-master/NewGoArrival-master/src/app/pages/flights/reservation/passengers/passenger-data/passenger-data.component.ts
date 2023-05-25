@@ -14,22 +14,31 @@ export class PassengerDataComponent implements OnInit {
   @Input() index: any;
   @Input() user: any;
   @Input() gds: any;
+  @Input() lcompanyUids: any[] = [];
   @Input() lstpaises: any[] = [];
   @Input() lstDocument: any[] = [];
-
+  @Input() lstCostCenter: any[] = [];
   tratamiento: any;
   loginData: any;
   datosuser: any;
   document: any;
+  travelCode: string;
+  costCenterCode: string;
   validNumberDoc: any;
   minDate: Date;
   maxDate: Date;
   bsValue: Date;
   isPhone = false;
   lstPaises: any;
+  valorrow!: any;
 
+  lstSelects: any[] = [];
+  lstInputs: any[] = [];
+  lstUidsRq: any[] = [];
   constructor(private cookieServices: CookieService, private headService: HeaderService) {
     this.bsValue = new Date();
+    this.costCenterCode = "";
+    this.travelCode = "";
     if (this.user?.type === 'Niño') {
       this.minDate = new Date(2011, 0, 1);
       this.maxDate = new Date(2020, 0, 1);
@@ -43,22 +52,152 @@ export class PassengerDataComponent implements OnInit {
       this.maxDate.setDate(this.maxDate.getMonth() - 216);
     }
     let fecha;
-    if(this.datosuser != null && this.datosuser?.length > 0){
+    if (this.datosuser != null && this.datosuser?.length > 0) {
       this.datosuser.forEach((element: any) => {
         fecha = new Date(element.birthDate);
         this.bsValue = fecha;
       });
     }
-    
-   }
+
+  }
+
+  setSelectPreUID(item: any, index: any, event: any) {
+    let valor = event;
+    let obj = {
+      CodeUid: item.codeUid,
+      PassengerId: index.toString(),
+      ValueUid: valor
+    }
+    if (this.lstUidsRq.length === 0) {
+      this.lstUidsRq.push(obj);
+      this.createInput(valor, item, index)
+    } else {
+      const indexe = this.lstUidsRq.findIndex(x => x.CodeUid === obj.CodeUid);
+      if (indexe !== -1) {
+        this.lstUidsRq[indexe] = obj;
+        this.createInput(valor, item, index)
+      } else {
+        this.createInput(valor, item, index)
+        this.lstUidsRq.push(obj);
+      }
+    }
+  }
+
+  setSelectUID(item: any, index: any, event: any) {
+    let valor = event.target.value;
+    let obj = {
+      CodeUid: item.codeUid,
+      PassengerId: index.toString(),
+      ValueUid: valor
+    }
+    if (this.lstUidsRq.length === 0) {
+      this.lstUidsRq.push(obj);
+      this.createInput(valor, item, index)
+    } else {
+      const indexe = this.lstUidsRq.findIndex(x => x.CodeUid === obj.CodeUid);
+      if (indexe !== -1) {
+        this.lstUidsRq[indexe] = obj;
+        this.createInput(valor, item, index)
+      } else {
+        this.createInput(valor, item, index)
+        this.lstUidsRq.push(obj);
+      }
+    }
+  }
+
+  createInput(valor: any, item: any, indexPax: any) {
+    if (valor != "OTROS") {
+      item.showInput = false;
+      return;
+    }
+    if (valor === "OTROS") {
+      item.showInput = true;
+      /*  this.valorrow = document.getElementById("select_" + codeUid + "_" + indexPax)
+       const inputElement = document.createElement("input");
+       inputElement.setAttribute("type", "text");
+       let id = "myInput_" + codeUid + "_" + indexPax;
+       inputElement.setAttribute("id", id);
+       inputElement.classList.add("form-control");
+       this.valorrow.appendChild(inputElement); */
+    } else {
+      item.showInput = false;
+      /*  const divElement = document.getElementById("select_" + codeUid + "_" + indexPax);
+       let qwe = "myInput_" + codeUid + "_" + indexPax;
+       const inputElement = document.getElementById(qwe);
+       if (divElement && inputElement) {
+         divElement.removeChild(inputElement);
+       } */
+    }
+  }
+
+  onInputChange(codeUid: any, index: any, event: any) {
+    let valorInput = event.target.value;
+    let obj = {
+      CodeUid: codeUid,
+      PassengerId: index.toString(),
+      ValueUid: valorInput
+    }
+    if (this.lstUidsRq.length === 0) {
+      this.lstUidsRq.push(obj);
+    } else {
+      const indexe = this.lstUidsRq.findIndex(x => x.CodeUid === obj.CodeUid);
+      if (indexe !== -1) {
+        this.lstUidsRq[indexe] = obj;
+      } else {
+        this.lstUidsRq.push(obj);
+      }
+    }
+  }
 
   ngOnInit(): void {
+    this.validUIDS(this.lcompanyUids);
+    this.precargarUids();
+    console.log(this.lcompanyUids);
+    this.headService.ocultarSpinner();
     this.loginData = this.cookieServices.get('dwerrgfqw24423');
     this.loginData = this.headService.desencriptar(this.loginData);
     this.validPassengers();
   }
 
+  precargarUids() {
+    this.lstSelects.forEach(element => {
+      if (element.codeUid === 'U5' && this.user.lcostCenter?.length > 0) {
+        this.costCenterCode = this.user.lcostCenter[0].code;
+        this.setSelectPreUID(element, this.index, this.user.lcostCenter[0].code)
+      }
+      if (element.codeUid === 'U9' && this.user.travelerCode != '') {
+        this.travelCode = this.user.travelerCode;
+        const idExiste = element.lcompanyUidLists.some((objeto: any) => objeto.code === this.travelCode);
+        if (idExiste) {
+          this.setSelectPreUID(element, this.index, this.user.travelerCode)
+        } else {
+          this.travelCode = "";
+        }
+
+      }
+    });
+  }
+
+  validUIDS(lst: any) {
+    lst.forEach((element: any) => {
+      if (element.isList || element.codeUid === "U5") {
+        if (element.codeUid === "U5") {
+          element.lcompanyUidLists = this.lstCostCenter;
+        }
+        this.lstSelects.push(element);
+      } else {
+        this.lstInputs.push(element);
+      }
+    });
+    this.lstSelects.forEach(element => {
+      element.showInput = false;
+    });
+  }
+
   validPassengers() {
+    let fecha = new Date(this.user.birthDate);
+    this.costCenterCode
+    this.bsValue = fecha;
     if (this.user.gender === 'M') {
       this.tratamiento = 'MR';
     } else {
@@ -74,7 +213,7 @@ export class PassengerDataComponent implements OnInit {
   }
 
   ValidarCampos() {
-    this.datosuser.forEach(function (item: any, index: any) {
+    this.datosuser?.forEach(function (item: any, index: any) {
       if ($('#txtnombre_' + (index + 1)).val().length <= 0) {
         $('#txtnombre_' + (index + 1)).addClass('campo-invalido');
       } else {

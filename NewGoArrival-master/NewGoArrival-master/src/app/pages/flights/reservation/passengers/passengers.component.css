@@ -7,7 +7,7 @@
   color: #676767;
   font-family: Omnes-med;
   border-radius: 20px 20px;
-  width: 862px;
+  font-size: 16px;
 }
 
 .banner{
@@ -20,6 +20,16 @@
     border-radius: 0px 0px 15px 15px;
     background: #FDFDFD 0% 0% no-repeat padding-box;
     box-shadow: -1px 2px 4PX #00000029
+}
+
+.next {
+    color: white;
+    background-color: #ED1C24;
+    padding: 10px 30px 10px 30px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-family: Omnes-med;
+    cursor: pointer;
 }
 
 
