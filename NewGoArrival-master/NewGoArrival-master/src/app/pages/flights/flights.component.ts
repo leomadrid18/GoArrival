@@ -28,6 +28,8 @@ export class FlightsComponent implements OnInit {
 
   ngOnInit(): void {
     this.cookieValue = this.cookieServices.get('dwerrgfqw24423');
+    this.cookieServices.delete("euimbh235$%/mjmn",'/');
+    this.cookieServices.delete("euimbh235$%/mjmn",'/flights');
     this.objetoDesencriptado = this.headerService.desencriptar(this.cookieValue);
     this.validCentralizer();
     this.headerService.ocultarSpinner();

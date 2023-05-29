@@ -48,6 +48,8 @@ import { ReasonTripComponent } from './reservation/passengers/reason-trip/reason
 import { ExtraProfileComponent } from './reservation/passengers/extra-profile/extra-profile.component';
 import { DetailPassengersComponent } from './reservation/generate-reservation/detail-passengers/detail-passengers.component';
 import { ApproversPoliciesComponent } from './reservation/generate-reservation/approvers-policies/approvers-policies.component';
+import { PseudosComponent } from './flights-list/pseudos/pseudos.component';
+import { SuccessfulReservationComponent } from './reservation/successful-reservation/successful-reservation.component';
 
 const routes: Routes = [
   {
@@ -96,7 +98,9 @@ const routes: Routes = [
     ReasonTripComponent,
     ExtraProfileComponent,
     DetailPassengersComponent,
-    ApproversPoliciesComponent
+    ApproversPoliciesComponent,
+    PseudosComponent,
+    SuccessfulReservationComponent
   ],
   imports: [
     CommonModule,

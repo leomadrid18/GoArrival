@@ -19,7 +19,7 @@ export class FlightsListComponent implements OnInit {
   tipoVuelo = "RT";
   indexTramo = 2;
   cookieValue: any;
-
+  pseudos: any;
   datae: any;
   aerolineas: any[] = [];
   flagDinData2: boolean = false;
@@ -134,6 +134,8 @@ export class FlightsListComponent implements OnInit {
     console.log(request_);
   }
 
+ 
+
 
   setFlights() {
     this.request = this.cookieValue.request;
@@ -148,13 +150,14 @@ export class FlightsListComponent implements OnInit {
         if (this.cookieValue.result.lrecommendations?.length > 0) {
           this.lstFlights = this.cookieValue.result.lrecommendations;
           this.tipoVuelo = this.request.Type;
+          this.pseudos = this.cookieValue.result.lpseudoPrices;
           this.setLstAerolineas(this.lstFlights);
           this.enviarAeropuertos(this.request);
           
           this.validFlights = true;
         }
     }
-    this.headService.ocultarSpinner();
+   /*  this.headService.ocultarSpinner(); */
   }
 
   validShowFlights(valor: any) {

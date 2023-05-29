@@ -31,7 +31,7 @@ export class PassengerDataComponent implements OnInit {
   isPhone = false;
   lstPaises: any;
   valorrow!: any;
-
+  id: any;
   lstSelects: any[] = [];
   lstInputs: any[] = [];
   lstUidsRq: any[] = [];
@@ -83,7 +83,14 @@ export class PassengerDataComponent implements OnInit {
     }
   }
 
+  setBorder(id: any) {
+    this.id = document.getElementById(id);
+    this.id.style.border = "2px solid #DFD9D8";
+    this.id.style.borderRadius = "7px";
+  }
+
   setSelectUID(item: any, index: any, event: any) {
+    let id = "select_value_" + item.codeUid + "_" + index;
     let valor = event.target.value;
     let obj = {
       CodeUid: item.codeUid,
@@ -92,14 +99,17 @@ export class PassengerDataComponent implements OnInit {
     }
     if (this.lstUidsRq.length === 0) {
       this.lstUidsRq.push(obj);
+      this.setBorder(id);
       this.createInput(valor, item, index)
     } else {
       const indexe = this.lstUidsRq.findIndex(x => x.CodeUid === obj.CodeUid);
       if (indexe !== -1) {
         this.lstUidsRq[indexe] = obj;
+        this.setBorder(id);
         this.createInput(valor, item, index)
       } else {
         this.createInput(valor, item, index)
+        this.setBorder(id);
         this.lstUidsRq.push(obj);
       }
     }
@@ -131,6 +141,7 @@ export class PassengerDataComponent implements OnInit {
   }
 
   onInputChange(codeUid: any, index: any, event: any) {
+    let id = "input_" + codeUid + "_" + index;
     let valorInput = event.target.value;
     let obj = {
       CodeUid: codeUid,
@@ -138,12 +149,15 @@ export class PassengerDataComponent implements OnInit {
       ValueUid: valorInput
     }
     if (this.lstUidsRq.length === 0) {
+      this.setBorder(id);
       this.lstUidsRq.push(obj);
     } else {
       const indexe = this.lstUidsRq.findIndex(x => x.CodeUid === obj.CodeUid);
       if (indexe !== -1) {
+        this.setBorder(id);
         this.lstUidsRq[indexe] = obj;
       } else {
+        this.setBorder(id);
         this.lstUidsRq.push(obj);
       }
     }

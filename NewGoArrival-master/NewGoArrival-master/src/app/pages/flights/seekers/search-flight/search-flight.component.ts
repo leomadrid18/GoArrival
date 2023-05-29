@@ -32,7 +32,7 @@ export class SearchFlightComponent implements OnInit {
   data2: any[] = [];
 
   valdestino = false;
-  bsValue: Date;
+  bsValue: any;
   isOpendate = false;
   valfechasalida = false;
   valfechadestino = false;
@@ -40,13 +40,14 @@ export class SearchFlightComponent implements OnInit {
   minDateRetorno: Date;
   dateCustomClasses: DatepickerDateCustomClasses[];
   calendarSalidaValue: any;
-
-  textoCabina: string;
-  cabina: string;
-  textoEscala: string;
-  escala: string;
+  valueShow: any;
+  textoCabina!: string;
+  cabina!: string;
+  textoEscala!: string;
+  escala!: string;
   pasajeros: number;
   maleta: boolean = true;
+  bodega: boolean = true;
   objetoDesencriptado: any;
   validarPasajeros = false;
   passengerList: any;
@@ -54,6 +55,10 @@ export class SearchFlightComponent implements OnInit {
   id: any;
   datosEnvira = {
     origenAuto: "",
+    escala: this.escala,
+    textoEscala:this.textoEscala,
+    cabina: this.cabina,
+    textoCabina: this.textoCabina,
     origentTexto: "",
     destinoAuto: "",
     destinoTexto: "",
@@ -92,7 +97,8 @@ export class SearchFlightComponent implements OnInit {
     fechaSalida4: "",
     fechaSalida5: "",
     fechaSalida6: "",
-
+    maleta: this.maleta,
+    bodega: this.bodega,
     fechaSalidaShow1: "",
     fechaSalidaShow2: "",
     fechaSalidaShow3: "",
@@ -130,6 +136,7 @@ export class SearchFlightComponent implements OnInit {
   ngOnInit(): void {
     this.objetoDesencriptado = this.cookie.get('dwerrgfqw24423');
     this.objetoDesencriptado = this.headerService.desencriptar(this.objetoDesencriptado);
+    this.onValueChangeSalida(this.bsValue);
     /*  this.cookie.delete("rtsdt3298dwlou3208"); */
   }
 
@@ -254,25 +261,24 @@ export class SearchFlightComponent implements OnInit {
       this.id.style.border = "none";
   }
 
+  setBorderGoodDate(id: any){
+    this.id = document.getElementById(id);
+      this.id.style.border = "2px solid #DFD9D8";
+  }
+
   validCampos() {
     let valor = true;
     if (this.datosEnvira.origenAuto === "") {
       this.setBorder("searchOriginInit");
       valor = false;
-    } else {
-      this.setBorderGood("searchOriginInit");
-    }
+    } 
     if (this.datosEnvira.destinoAuto === "") {
       this.setBorder("searchDestinoInit");
       valor = false;
-    } else {
-      this.setBorderGood("searchDestinoInit");
-    }
+    } 
     if(this.tipoVuelo === 'RT' && this.datosEnvira.fechaRetornoShow === ""){
       this.setBorder("txtFechaDestino");
       valor = false;
-    } else if (this.tipoVuelo != 'OW' && this.tipoVuelo != 'MC') {
-      this.setBorderGood("txtFechaDestino");
     }
     return valor;
   }
@@ -290,6 +296,7 @@ export class SearchFlightComponent implements OnInit {
     if (qwe === false) {
       return;
     }
+    
     this.headerService.mostrarSpinner();
     let origen: any[] = [];
     let destino: any[] = [];
@@ -350,6 +357,7 @@ export class SearchFlightComponent implements OnInit {
       Scales: this.escala,
       TypeSearch: "C",
       IncludesBaggage: this.maleta,
+      IncludeCarryOn: this.bodega,
       Origin: origen,
       Destination: destino,
       DepartureArrivalDate: fechas,
@@ -359,11 +367,17 @@ export class SearchFlightComponent implements OnInit {
       Oagency: this.objetoDesencriptado.oagency,
       Type: this.tipoVuelo
     };
+    this.datosEnvira.bodega = this.bodega;
+    this.datosEnvira.maleta = this.maleta;
+    this.datosEnvira.escala = this.escala;
+    this.datosEnvira.textoEscala = this.textoEscala;
+    this.datosEnvira.cabina = this.cabina;
+    this.datosEnvira.textoCabina = this.textoCabina;
     let valor = this.headerService.encriptar(this.datosEnvira);
+    
     this.cookieServices.set('euimbh235$%/mjmn', valor);
     this.service.searchFlight(data).subscribe(
       x => {
-
         const obj = {
           result: x,
           request: data
@@ -449,7 +463,7 @@ export class SearchFlightComponent implements OnInit {
     this.datosEnvira.destinoAuto = item.iataCode;
     this.datosEnvira.destinoTexto = item.name;
     this.valdestino = false;
-    $("#txtDestino").removeClass("campo-invalido");
+    this.setBorderGood("searchDestinoInit");
     $(".x").hide();
     if (this.model.origentTexto.length < 5) {
       this.model.origentTexto = "";
@@ -538,6 +552,7 @@ export class SearchFlightComponent implements OnInit {
       }
       this.datosEnvira.fechaSalida = value.getFullYear() + "/" + mes + "/" + dia;
       this.datosEnvira.fechaSalidaShow = dia + "/" + mes + "/" + value.getFullYear();
+      this.valueShow = this.datosEnvira.fechaSalidaShow;
     }
   }
 
@@ -568,6 +583,7 @@ export class SearchFlightComponent implements OnInit {
 
       this.datosEnvira.fechaRetorno = value.getFullYear() + "/" + mes + "/" + dia;
       this.datosEnvira.fechaRetornoShow = dia + "/" + mes + "/" + value.getFullYear();
+      this.setBorderGoodDate("txtFechaDestino");
     }
   }
 
@@ -577,7 +593,7 @@ export class SearchFlightComponent implements OnInit {
     this.datosEnvira.origenAuto = item.iataCode;
     this.datosEnvira.origentTexto = item.name;
     this.isOpen = false;
-    $("#txtOrigen").removeClass("campo-invalido");
+    this.setBorderGood("searchOriginInit");
     $(".x").hide();
   }
 

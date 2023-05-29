@@ -13,6 +13,8 @@ export class SectionComponent implements OnInit {
   @Input() recommendationId: any;
   @Input() recommendationIndex: any;
   @Input() tipoVuelo: any;
+  @Input() pseudoRepeat: any;
+  @Input() index: any;
 
   @Output() segmentRadioCheckId = new EventEmitter<string>();
   @Output() outSection = new EventEmitter<any>();

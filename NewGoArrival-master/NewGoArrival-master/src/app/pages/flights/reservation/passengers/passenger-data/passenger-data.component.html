@@ -319,21 +319,21 @@
             <div *ngFor="let item of lstSelects;" class="col-lg-6 col-md-6 col-sm-6 col-12 mt-2 mb-2">
                 <span class="label-pasajero">{{item.title}}:</span><br />
                 <div id="select_{{item.codeUid}}_{{index}}">
-                    <select *ngIf="item.codeUid === 'U5'" [(ngModel)]="costCenterCode" [ngClass]="{'input-pasajero-select': isPhone === true}"  
+                    <select *ngIf="item.codeUid === 'U5'" id="select_value_{{item.codeUid}}_{{index}}" [(ngModel)]="costCenterCode" [ngClass]="{'input-pasajero-select': isPhone === true}"  
                         (change)="setSelectUID(item,index,$event)" class="input-pasajero" name="">
                         <option value="">Selecciona</option>
                         <option *ngFor="let uid of item.lcompanyUidLists" value="{{uid.code}}">{{uid.description}}
                         </option>
                     </select>
 
-                    <select *ngIf="item.codeUid === 'U9'" [(ngModel)]="travelCode" [ngClass]="{'input-pasajero-select': isPhone === true}"  
+                    <select *ngIf="item.codeUid === 'U9'" id="select_value_{{item.codeUid}}_{{index}}" [(ngModel)]="travelCode" [ngClass]="{'input-pasajero-select': isPhone === true}"  
                         (change)="setSelectUID(item,index,$event)" class="input-pasajero" name="">
                         <option value="">Selecciona</option>
                         <option *ngFor="let uid of item.lcompanyUidLists" value="{{uid.code}}">{{uid.description}}
                         </option>
                     </select>
 
-                    <select *ngIf="item.codeUid != 'U5' && item.codeUid != 'U9'" [ngClass]="{'input-pasajero-select': isPhone === true}"  
+                    <select *ngIf="item.codeUid != 'U5' && item.codeUid != 'U9'" id="select_value_{{item.codeUid}}_{{index}}" [ngClass]="{'input-pasajero-select': isPhone === true}"  
                         (change)="setSelectUID(item,index,$event)" class="input-pasajero" name="">
                         <option value="">Selecciona</option>
                         <option *ngFor="let uid of item.lcompanyUidLists" value="{{uid.code}}">{{uid.description}}

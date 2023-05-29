@@ -5,6 +5,8 @@ import { FlightService } from 'src/app/services/flight/flight.service';
 import { HeaderService } from 'src/app/services/head.service';
 import { PassengerDataComponent } from './passenger-data/passenger-data.component';
 
+declare var $: any;
+
 @Component({
   selector: 'app-passengers',
   templateUrl: './passengers.component.html',
@@ -22,6 +24,7 @@ export class PassengersComponent implements OnInit {
   reasonFlight!: string;
   profileFlight!: string;
   lapprovers: any;
+  id: any;
   uids: any;
   pseudo: any;
   extraReason!: string;
@@ -63,9 +66,54 @@ export class PassengersComponent implements OnInit {
     this.hijos.forEach((hijo: PassengerDataComponent) => {
       this.concatList(hijo.lstUidsRq);
       const valorInputHijo = hijo.user;
-      console.log(valorInputHijo);
+      this.validarCampos(valorInputHijo,hijo.index);
+      this.validarUids(hijo.lstSelects,hijo.index);
+      this.validarUidsInputs(hijo.lstInputs,hijo.index);
     });
-    this.valiDuplicatePNR();
+   /*  this.valiDuplicatePNR(); */
+  }
+
+  validarUidsInputs(lst: any, index: any){
+    lst.forEach((element: any) => {
+      if(element.isMandatory){
+        let idset = "#input_" + element.codeUid + "_" + index;
+        let id = "input_" + element.codeUid + "_" + index;
+        let valor = $(idset).val();
+        if(valor === ''){
+          this.setBorder(id);
+        }
+      }
+      
+    });
+  }
+
+  validarUids(lst: any, index: any){
+    lst.forEach((element: any) => {
+      if(element.isMandatory){
+        let idset = "#select_value_" + element.codeUid + "_" + index;
+        let id = "select_value_" + element.codeUid + "_" + index;
+        let otro = "otros_"  + element.codeUid + "_" + index;
+        let valor = $(idset).val();
+        if(valor === ''){
+          this.setBorder(id);
+        } else if (valor === 'OTROS') {
+          this.setBorder(otro);
+        }
+      }
+      
+    });
+  }
+
+  setBorder(id: any) {
+    this.id = document.getElementById(id);
+    this.id.style.border = "2px solid #ED1C24";
+    this.id.style.borderRadius = "7px";
+  }
+
+  validarCampos(user: any, index: any) {
+    if (user.phone === '') {
+      this.setBorder("txttelefono_"+index);
+    }
   }
 
   concatList(lst: any) {
@@ -106,8 +154,8 @@ export class PassengersComponent implements OnInit {
       "Pseudo": this.pseudo
     };
     this.flightService.duplicatePnr(data).subscribe(
-      x=>{
-        if(x?.length === 0){
+      x => {
+        if (x?.length === 0) {
           this.router.navigate(["flights/generate-reservation"]);
         }
       }

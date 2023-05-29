@@ -22,7 +22,7 @@ export class SearchFlightLowerComponent implements OnInit {
 
 
   general = "col-lg-12 col-md-12 col-sm-12 col-12 "
- /*  tipoVuelo: string; */
+  /*  tipoVuelo: string; */
   indexTramo: number;
   lstAutocomplete: any[] = [];
   airportlist: any;
@@ -56,7 +56,7 @@ export class SearchFlightLowerComponent implements OnInit {
   validarPasajeros = false;
   passengerList: any;
   objetoDesencriptado: any;
-
+  bodega: boolean = true;
 
   origenValue: any;
   origenText: any;
@@ -64,11 +64,12 @@ export class SearchFlightLowerComponent implements OnInit {
   destinoText: any;
 
   formattedDate: any;
-
+  vueltaValue: any;
+  idaValue: any;
   objRq: any;
   @Output() enviarData = new EventEmitter<any>();
   @Output() ocultar = new EventEmitter<any>();
-  constructor(private service: FlightService,private head: HeaderService,private cookie : CookieService) {
+  constructor(private service: FlightService, private head: HeaderService, private cookie: CookieService) {
     this.tipoVuelo = "";
     this.indexTramo = 2;
     this.pasajeros = 1;
@@ -111,18 +112,24 @@ export class SearchFlightLowerComponent implements OnInit {
       this.destinoText = this.objRq.destinoTexto;
       this.bsValue = this.objRq.fechaSalidaShow;
       this.bsValueVuelta = this.objRq.fechaRetornoShow;
-     
+      this.vueltaValue = new Date(this.objRq.fechaRetorno);
+      this.idaValue = new Date(this.objRq.fechaSalida);
     }
-
+    this.bodega = this.objRq.bodega;
+    this.maleta = this.objRq.maleta;
     this.objRq.origenAuto1 = this.origenValue;
     this.objRq.origentTexto1 = this.origenText;
     this.objRq.destinoAuto1 = this.destinoValue;
     this.objRq.destinoTexto1 = this.destinoText;
+    this.escala = this.objRq.escala;
+    this.textoEscala = this.objRq.textoEscala;
+    this.cabina = this.objRq.cabina;
+    this.textoCabina = this.objRq.textoCabina;
     this.llenarSearch(this.tipoVuelo);
   }
 
 
-  llenarSearch(tipovuelo: any){
+  llenarSearch(tipovuelo: any) {
     switch (tipovuelo) {
       case 'RT':
         $('#radio_b_tv_1').prop("checked", true);
@@ -161,8 +168,8 @@ export class SearchFlightLowerComponent implements OnInit {
     destino.push(this.objRq.destinoAuto);
     destino.push(this.objRq.origenAuto);
 
-    fechas.push(this.fechaSalida);
-    fechas.push(this.fechaRetorno);
+    fechas.push(this.objRq.fechaSalida);
+    fechas.push(this.objRq.fechaRetorno);
 
     fechas.forEach(function (fe) {
       horasFrom.push("");
@@ -188,6 +195,7 @@ export class SearchFlightLowerComponent implements OnInit {
       Scales: this.escala,
       TypeSearch: "C",
       IncludesBaggage: this.maleta,
+      IncludeCarryOn: this.bodega,
       Origin: origen,
       Destination: destino,
       DepartureArrivalDate: fechas,
@@ -196,7 +204,13 @@ export class SearchFlightLowerComponent implements OnInit {
       Ocompany: this.objetoDesencriptado.ocompany,
       Oagency: this.objetoDesencriptado.oagency
     };
-
+    this.objRq.bodega = this.bodega;
+    this.objRq.maleta = this.maleta;
+    this.objRq.escala = this.escala;
+    this.objRq.textoEscala = this.textoEscala;
+    this.objRq.cabina = this.cabina;
+    this.objRq.textoCabina = this.textoCabina;
+    this.cookie.set('euimbh235$%/mjmn', this.objRq);
     this.service.searchFlight(data).subscribe(
       x => {
         const obj = {
@@ -204,13 +218,13 @@ export class SearchFlightLowerComponent implements OnInit {
           request: data
         }
         let valor = this.head.encriptar(obj);
-        this.head.addObject(1,valor);
+        this.head.addObject(1, valor);
         this.enviarData.emit(obj);
       }
     )
   }
 
- 
+
 
   selection(passengers: any[]) {
     this.passengerList = passengers;
@@ -375,6 +389,8 @@ export class SearchFlightLowerComponent implements OnInit {
       }
       this.fechaSalida = value.getFullYear() + "/" + mes + "/" + dia;
       this.fechaSalidaShow = dia + "/" + mes + "/" + value.getFullYear();
+      this.objRq.fechaSalida = this.fechaSalida;
+      this.objRq.fechaSalidaShow = this.fechaSalidaShow;
     }
   }
 
@@ -405,6 +421,8 @@ export class SearchFlightLowerComponent implements OnInit {
 
       this.fechaRetorno = value.getFullYear() + "/" + mes + "/" + dia;
       this.fechaRetornoShow = dia + "/" + mes + "/" + value.getFullYear();
+      this.objRq.fechaRetorno = this.fechaRetorno;
+      this.objRq.fechaRetornoShow = this.fechaRetornoShow;
     }
   }
 

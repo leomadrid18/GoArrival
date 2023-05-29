@@ -102,7 +102,7 @@
                             <input type="text" readonly placeholder="Salida" class="p-0 pl-2 fechasInput"
                                 #datepickerSalidaLower="bsDatepicker" (onHidden)="handlerSalida()"
                                 (bsValueChange)="onValueChangeSalida($event)" [minDate]="minDateSalida" bsDatepicker
-                                id="fechasalida" [value]="bsValue"  (onHidden)="ValidarCiudad()"
+                                id="fechasalida" [bsValue]="idaValue" [value]="bsValue"  (onHidden)="ValidarCiudad()"
                                 [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-red',  selectFromOtherMonth: true }">
                         </label>
                     </div>
@@ -113,7 +113,7 @@
                                 style="outline: none; border: 0; width: 25px !important;">
                             <input type="text" readonly placeholder="Retorno" class="p-0 pl-2 fechasInput"
                                 #datepickerRetornoLower="bsDatepicker" (bsValueChange)="onValueChangeRetorno($event)"
-                                [minDate]="minDateRetorno"  [value]="bsValueVuelta" [dateCustomClasses]="dateCustomClasses" bsDatepicker
+                                [minDate]="minDateRetorno" [bsValue]="vueltaValue"  [value]="bsValueVuelta" [dateCustomClasses]="dateCustomClasses" bsDatepicker
                                 [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-red',  selectFromOtherMonth: true }"
                                 id="fechadestino" (onHidden)="ValidarCiudad()">
                         </label>
@@ -181,7 +181,7 @@
             </div>
             <div class="col-lg-12 top">
                 <span class="titles mr-2">Incluye maleta en bodega</span>
-                <input id="chkmaleta" type="checkbox" [(ngModel)]="maleta">
+                <input id="chkbodega" type="checkbox" [(ngModel)]="bodega">
             </div>
             <div class="col-lg-12 mt-3 p-0 eew">
                 <div class="buscar" (click)="searchFlight()"><img class="mr-2" src="assets/Images/seeker/buscador-musical.svg" alt="" width="15">Buscar</div>

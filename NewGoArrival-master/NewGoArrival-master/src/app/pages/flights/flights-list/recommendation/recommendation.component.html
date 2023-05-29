@@ -3,8 +3,8 @@
         <div class="row m-0 p-0">
             <div class="col-lg-9 col-md-9 col-sm-12 col-12 m-0 p-0 box-shadow-important">
                 <app-section [sectionLength]="lsectionLength" [posicion]="i + 1" [recommendationId]="recommendationId"
-                    [recommendationIndex]="i + 1" [tipoVuelo]="tipoVuelo" (outSegmentCheck)="setearRadioId($event)"
-                    [section]="section" *ngFor="let section of lsections; let i = index"></app-section>
+                    [recommendationIndex]="i + 1" [pseudoRepeat]="pseudoRepeat" [tipoVuelo]="tipoVuelo" (outSegmentCheck)="setearRadioId($event)"
+                    [section]="section" *ngFor="let section of lsections; let i = index" [index]="i"></app-section>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-12 col-12 mt-3 p-0">
                 <app-final-price [request]="request" [recomendacion]="recomen" [gds]="gds" [index]="index"

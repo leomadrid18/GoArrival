@@ -1,5 +1,11 @@
 <div *ngIf="section.isVisible" class="row m-0 p-0 scet">
     <div class="col-lg-12 col-md-12 col-sm-12 col-12 m-0 p-0 border-b">
+        <div *ngIf="pseudoRepeat?.length > 0 && index === 0" class="row m-0 p-0 mt-3">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <img src="https://domiruthgeneral.z13.web.core.windows.net/images/Country/{{pseudoRepeat[0].countryCode}}.png" alt=""
+            style="width: 40px;">
+            </div>
+        </div>
         <div class="row m-0 p-0">
             <div class="col-lg-3 col-md-3 col-sm-12 col-12 text-center">
                 <div class="row m-0 p-0">

@@ -108,7 +108,7 @@
                             <input type="text" readonly placeholder="Salida" class="p-0 pl-2 fechasInput"
                                 #datepickerSalida="bsDatepicker" (onHidden)="handlerSalida()"
                                 (bsValueChange)="onValueChangeSalida($event)" [minDate]="minDateSalida" bsDatepicker
-                                id="fechasalida" [bsValue]="bsValue" value="" (onHidden)="ValidarCiudad()"
+                                id="fechasalida" [bsValue]="bsValue" [value]="valueShow"  
                                 [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-red',  selectFromOtherMonth: true }">
                         </label>
                     </div>
@@ -118,10 +118,10 @@
                                 (click)="datepickerRetorno.toggle()"
                                 style="outline: none; border: 0; width: 25px !important;">
                             <input type="text" readonly placeholder="Retorno" class="p-0 pl-2 fechasInput"
-                                #datepickerRetorno="bsDatepicker" (bsValueChange)="onValueChangeRetorno($event)"
-                                [minDate]="minDateRetorno" [dateCustomClasses]="dateCustomClasses" bsDatepicker
+                                #datepickerRetorno="bsDatepicker" (bsValueChange)="onValueChangeRetorno($event)" bsDatepicker
+                                [minDate]="minDateRetorno" [dateCustomClasses]="dateCustomClasses" 
                                 [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-red',  selectFromOtherMonth: true }"
-                                id="fechadestino" (onHidden)="ValidarCiudad()">
+                                id="fechadestino" >
                         </label>
                     </div>
                 </div>
@@ -190,7 +190,7 @@
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-12 mt-2">
                         <span class="titles mr-2">Bodega</span>
-                        <input id="chkmaleta" type="checkbox" [(ngModel)]="maleta">
+                        <input id="chkbodega" type="checkbox" [(ngModel)]="bodega">
                     </div>
                 </div>
 
