@@ -102,18 +102,18 @@
                             <input type="text" readonly placeholder="Salida" class="p-0 pl-2 fechasInput"
                                 #datepickerSalidaLower="bsDatepicker" (onHidden)="handlerSalida()"
                                 (bsValueChange)="onValueChangeSalida($event)" [minDate]="minDateSalida" bsDatepicker
-                                id="fechasalida" [bsValue]="bsValue" value="" (onHidden)="ValidarCiudad()"
+                                id="fechasalida" [value]="bsValue"  (onHidden)="ValidarCiudad()"
                                 [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-red',  selectFromOtherMonth: true }">
                         </label>
                     </div>
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-6 m-0 p-0">
+                    <div *ngIf="tipoVuelo!=='OW'" class="col-lg-6 col-md-12 col-sm-12 col-6 m-0 p-0">
                         <label id="txtFechaDestino" for="" class="d-inline-flex box-shadow dates">
                             <input type="image" src="assets/Images/seeker/calendario.svg"
                                 (click)="datepickerRetornoLower.toggle()"
                                 style="outline: none; border: 0; width: 25px !important;">
                             <input type="text" readonly placeholder="Retorno" class="p-0 pl-2 fechasInput"
                                 #datepickerRetornoLower="bsDatepicker" (bsValueChange)="onValueChangeRetorno($event)"
-                                [minDate]="minDateRetorno" [dateCustomClasses]="dateCustomClasses" bsDatepicker
+                                [minDate]="minDateRetorno"  [value]="bsValueVuelta" [dateCustomClasses]="dateCustomClasses" bsDatepicker
                                 [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-red',  selectFromOtherMonth: true }"
                                 id="fechadestino" (onHidden)="ValidarCiudad()">
                         </label>
@@ -176,11 +176,15 @@
                       ></app-passenger-counter>
             </div>
             <div class="col-lg-12 top">
+                <span class="titles mr-2">Incluye maleta en cabina</span>
+                <input id="chkmaleta" type="checkbox" [(ngModel)]="maleta">
+            </div>
+            <div class="col-lg-12 top">
                 <span class="titles mr-2">Incluye maleta en bodega</span>
                 <input id="chkmaleta" type="checkbox" [(ngModel)]="maleta">
             </div>
-            <div class="col-lg-12 eew">
-                <div class="buscar" (click)="searchFlight()"><img src="assets/Images/seeker/buscador-musical.svg" alt="" style="width: 15px">Buscar</div>
+            <div class="col-lg-12 mt-3 p-0 eew">
+                <div class="buscar" (click)="searchFlight()"><img class="mr-2" src="assets/Images/seeker/buscador-musical.svg" alt="" width="15">Buscar</div>
               
             </div>
         </div>

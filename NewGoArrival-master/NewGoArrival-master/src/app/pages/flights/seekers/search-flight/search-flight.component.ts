@@ -27,10 +27,10 @@ export class SearchFlightComponent implements OnInit {
   model: any = {};
   keyword = "name";
   data: any[] = [];
-  
+
   isOpen = false;
   data2: any[] = [];
- 
+
   valdestino = false;
   bsValue: Date;
   isOpendate = false;
@@ -40,7 +40,7 @@ export class SearchFlightComponent implements OnInit {
   minDateRetorno: Date;
   dateCustomClasses: DatepickerDateCustomClasses[];
   calendarSalidaValue: any;
-  
+
   textoCabina: string;
   cabina: string;
   textoEscala: string;
@@ -51,57 +51,57 @@ export class SearchFlightComponent implements OnInit {
   validarPasajeros = false;
   passengerList: any;
 
-
+  id: any;
   datosEnvira = {
-  origenAuto:  "",
-  origentTexto: "",
-  destinoAuto: "",
-  destinoTexto: "",
-  fechaSalida: "",
-  fechaRetorno: "",
-  fechaSalidaShow: "",
-  fechaRetornoShow: "",
-  origenAuto1: "",
-  origenAuto2: "",
-  origenAuto3: "",
-  origenAuto4: "",
-  origenAuto5: "",
-  origenAuto6: "",
-  origentTexto1: "",
-  origentTexto2: "",
-  origentTexto3: "",
-  origentTexto4: "",
-  origentTexto5: "",
-  origentTexto6: "",
-  destinoAuto1: "",
-  destinoAuto2: "",
-  destinoAuto3: "",
-  destinoAuto4: "",
-  destinoAuto5: "",
-  destinoAuto6: "",
-  destinoTexto1: "",
-  destinoTexto2: "",
-  destinoTexto3: "",
-  destinoTexto4: "",
-  destinoTexto5: "",
-  destinoTexto6: "",
+    origenAuto: "",
+    origentTexto: "",
+    destinoAuto: "",
+    destinoTexto: "",
+    fechaSalida: "",
+    fechaRetorno: "",
+    fechaSalidaShow: "",
+    fechaRetornoShow: "",
+    origenAuto1: "",
+    origenAuto2: "",
+    origenAuto3: "",
+    origenAuto4: "",
+    origenAuto5: "",
+    origenAuto6: "",
+    origentTexto1: "",
+    origentTexto2: "",
+    origentTexto3: "",
+    origentTexto4: "",
+    origentTexto5: "",
+    origentTexto6: "",
+    destinoAuto1: "",
+    destinoAuto2: "",
+    destinoAuto3: "",
+    destinoAuto4: "",
+    destinoAuto5: "",
+    destinoAuto6: "",
+    destinoTexto1: "",
+    destinoTexto2: "",
+    destinoTexto3: "",
+    destinoTexto4: "",
+    destinoTexto5: "",
+    destinoTexto6: "",
 
-  fechaSalida1: "",
-  fechaSalida2: "",
-  fechaSalida3: "",
-  fechaSalida4: "",
-  fechaSalida5: "",
-  fechaSalida6: "",
+    fechaSalida1: "",
+    fechaSalida2: "",
+    fechaSalida3: "",
+    fechaSalida4: "",
+    fechaSalida5: "",
+    fechaSalida6: "",
 
-  fechaSalidaShow1: "",
-  fechaSalidaShow2: "",
-  fechaSalidaShow3: "",
-  fechaSalidaShow4: "",
-  fechaSalidaShow5: "",
-  fechaSalidaShow6: "",
-}
+    fechaSalidaShow1: "",
+    fechaSalidaShow2: "",
+    fechaSalidaShow3: "",
+    fechaSalidaShow4: "",
+    fechaSalidaShow5: "",
+    fechaSalidaShow6: "",
+  }
 
-  constructor(private service: FlightService, private router: Router, 
+  constructor(private service: FlightService, private router: Router,
     private cookie: CookieService, private headerService: HeaderService,
     private cookieServices: CookieService) {
 
@@ -110,7 +110,7 @@ export class SearchFlightComponent implements OnInit {
     this.tipoVuelo = "RT";
     this.indexTramo = 2;
     this.pasajeros = 1;
- 
+
     this.cabina = "";
 
     this.textoCabina = "Todas";
@@ -130,13 +130,13 @@ export class SearchFlightComponent implements OnInit {
   ngOnInit(): void {
     this.objetoDesencriptado = this.cookie.get('dwerrgfqw24423');
     this.objetoDesencriptado = this.headerService.desencriptar(this.objetoDesencriptado);
-   /*  this.cookie.delete("rtsdt3298dwlou3208"); */
+    /*  this.cookie.delete("rtsdt3298dwlou3208"); */
   }
 
 
 
 
-  
+
 
   llenarMulti() {
     let origen: any[] = [];
@@ -243,9 +243,53 @@ export class SearchFlightComponent implements OnInit {
     });
   }
 
+  setBorder(id: any){
+    this.id = document.getElementById(id);
+      this.id.style.border = "2px solid #ED1C24";
+      this.id.style.borderRadius = "7px";
+  }
+
+  setBorderGood(id: any){
+    this.id = document.getElementById(id);
+      this.id.style.border = "none";
+  }
+
+  validCampos() {
+    let valor = true;
+    if (this.datosEnvira.origenAuto === "") {
+      this.setBorder("searchOriginInit");
+      valor = false;
+    } else {
+      this.setBorderGood("searchOriginInit");
+    }
+    if (this.datosEnvira.destinoAuto === "") {
+      this.setBorder("searchDestinoInit");
+      valor = false;
+    } else {
+      this.setBorderGood("searchDestinoInit");
+    }
+    if(this.tipoVuelo === 'RT' && this.datosEnvira.fechaRetornoShow === ""){
+      this.setBorder("txtFechaDestino");
+      valor = false;
+    } else if (this.tipoVuelo != 'OW' && this.tipoVuelo != 'MC') {
+      this.setBorderGood("txtFechaDestino");
+    }
+    return valor;
+  }
+
+  getAutocompleteStyles(): any {
+    /* return {
+      'border': '1px solid red',
+    }; */
+  }
+
 
 
   searchFlight() {
+    let qwe = this.validCampos();
+    if (qwe === false) {
+      return;
+    }
     this.headerService.mostrarSpinner();
     let origen: any[] = [];
     let destino: any[] = [];
@@ -319,7 +363,7 @@ export class SearchFlightComponent implements OnInit {
     this.cookieServices.set('euimbh235$%/mjmn', valor);
     this.service.searchFlight(data).subscribe(
       x => {
-        
+
         const obj = {
           result: x,
           request: data

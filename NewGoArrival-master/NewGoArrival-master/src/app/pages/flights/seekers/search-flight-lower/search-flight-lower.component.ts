@@ -35,6 +35,7 @@ export class SearchFlightLowerComponent implements OnInit {
   data2: any[] = [];
   valdestino = false;
   bsValue: Date;
+  bsValueVuelta: Date;
   isOpendate = false;
   valfechasalida = false;
   valfechadestino = false;
@@ -62,7 +63,7 @@ export class SearchFlightLowerComponent implements OnInit {
   destinoValue: any;
   destinoText: any;
 
-
+  formattedDate: any;
 
   objRq: any;
   @Output() enviarData = new EventEmitter<any>();
@@ -85,6 +86,7 @@ export class SearchFlightLowerComponent implements OnInit {
     this.minDateRetorno.setDate(this.minDateRetorno.getDate() + 1);
     const now = new Date();
     this.bsValue = new Date();
+    this.bsValueVuelta = new Date();
     this.dateCustomClasses = [
       { date: now, classes: ["bg-danger", "text-warning"] },
     ];
@@ -107,6 +109,9 @@ export class SearchFlightLowerComponent implements OnInit {
       this.origenText = this.objRq.origentTexto;
       this.destinoValue = this.objRq.destinoAuto;
       this.destinoText = this.objRq.destinoTexto;
+      this.bsValue = this.objRq.fechaSalidaShow;
+      this.bsValueVuelta = this.objRq.fechaRetornoShow;
+     
     }
 
     this.objRq.origenAuto1 = this.origenValue;

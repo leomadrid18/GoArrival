@@ -27,10 +27,11 @@
         <div class="row m-0 p-0 mt-3">
             <div class="col-lg col-md-4 col-sm-4 top">
                 <span class="titles">Origen</span>
-                <ng-autocomplete [(ngModel)]="model.origentTexto" triggers="" style="color: #898989 !important;"
+                <div id="searchOriginInit">
+                    <ng-autocomplete  [(ngModel)]="model.origentTexto" triggers="" style="color: #898989 !important;"
                     [data]="data" [searchKeyword]="keyword" (selected)='selectEvent($event)'
                     (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)'
-                    [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+                    [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate" [ngStyle]="getAutocompleteStyles()">
                 </ng-autocomplete>
 
                 <ng-template #itemTemplate let-item>
@@ -53,6 +54,8 @@
 
                 <ng-template #notFoundTemplate let-notFound>
                 </ng-template>
+                </div>
+                
 
 
 
@@ -60,7 +63,8 @@
             </div>
             <div class="col-lg col-md-4 col-sm-4 top">
                 <span class="titles">Destino</span>
-                <ng-autocomplete [(ngModel)]="model.destinoTexto" style="color: #898989 !important;" [data]="data2"
+                <div id="searchDestinoInit">
+                    <ng-autocomplete [(ngModel)]="model.destinoTexto" style="color: #898989 !important;" [data]="data2"
                     [searchKeyword]="keyword" (selected)='selectEventDestino($event)'
                     (inputChanged)='onChangeSearchDestino($event)' (inputFocused)='onFocused2($event)'
                     [itemTemplate]="itemTemplate2" [notFoundTemplate]="notFoundTemplate2">
@@ -89,6 +93,8 @@
                 <ng-template #notFoundTemplate2 let-notFound>
 
                 </ng-template>
+                </div>
+                
 
             </div>
             <div class="col-lg-5 col-md col-sm col-12 top">
@@ -175,9 +181,19 @@
                         (selection)="selection($event)"
                       ></app-passenger-counter>
             </div>
-            <div class="col-lg top">
-                <span class="titles mr-2">Incluye maleta en bodega</span>
-                <input id="chkmaleta" type="checkbox" [(ngModel)]="maleta">
+            <div class="col-lg-2 top">
+                <div class="row m-0 p-0">
+                    <span class="titles">Maleta</span><br/>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-12 mt-2">
+                        <span class="titles mr-2">Cabina</span>
+                        <input id="chkmaleta" type="checkbox" [(ngModel)]="maleta">
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-12 mt-2">
+                        <span class="titles mr-2">Bodega</span>
+                        <input id="chkmaleta" type="checkbox" [(ngModel)]="maleta">
+                    </div>
+                </div>
+
             </div>
             <div class="col-lg-3 eew">
                 <div class="buscar" (click)="searchFlight()"><img src="assets/Images/seeker/buscador-musical.svg" alt="" style="width: 15px">Buscar</div>

@@ -19,6 +19,29 @@
     font-family: Omnes-med;
 }
 
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .pagination-btn {
+    background-color: white;
+    color: #ED1C24;
+    border-radius: 5px;
+    font-family: Omnes-med;
+    border: 1px solid #ED1C24 !important;
+    padding: 8px 12px;
+    margin: 0 5px;
+    cursor: pointer;
+  }
+  
+  .pagination-btn.active {
+    background-color: #ED1C24;
+    color: white;
+  }
+
 .buscar {
     color: white;
     background-color: #ED1C24;

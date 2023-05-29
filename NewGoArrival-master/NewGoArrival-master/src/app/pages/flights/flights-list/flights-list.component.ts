@@ -19,6 +19,7 @@ export class FlightsListComponent implements OnInit {
   tipoVuelo = "RT";
   indexTramo = 2;
   cookieValue: any;
+
   datae: any;
   aerolineas: any[] = [];
   flagDinData2: boolean = false;
@@ -149,7 +150,7 @@ export class FlightsListComponent implements OnInit {
           this.tipoVuelo = this.request.Type;
           this.setLstAerolineas(this.lstFlights);
           this.enviarAeropuertos(this.request);
-        
+          
           this.validFlights = true;
         }
     }
