@@ -248,7 +248,12 @@ export class FinalPriceComponent implements OnInit {
       x=> {
         if(x.ostatus.status === 200){
           this.dataShared(x);
-          
+        } else {
+          this.modalRef = this.modalService.show(
+            template,
+            Object.assign({}, { class: "gray modal-lg sin-familias" })
+          );
+          this.headService.ocultarSpinner();
         }
         
       }
@@ -259,8 +264,10 @@ export class FinalPriceComponent implements OnInit {
     let obj = {
       rpta: availa,
       gds: this.gds,
+      recomen: this.recomendacion,
       typeFlight: this.tipoVuelo,
-      Pseudo: this.recomen.pseudo
+      Pseudo: this.recomen.pseudo,
+      LoginData: this.loginDataUser
     }
     let valor = this.headService.encriptar(obj);
     this.headService.addObject(2, valor).then(() => {

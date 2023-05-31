@@ -25,7 +25,7 @@ export class PassengerContactComponent implements OnInit {
   validNumberDoc = true;
   validConsolidar: any;
   isPhone = false;
-
+  id: any;
   constructor(private cookieServices: CookieService, private headService: HeaderService) {
 
     this.logindata = this.cookieServices.get('dwerrgfqw24423');
@@ -46,6 +46,16 @@ export class PassengerContactComponent implements OnInit {
 
   ngOnInit(): void {
     this.validPhone();
+  }
+
+  onInputChange(id: any){
+    this.setBorder(id);
+  }
+
+  setBorder(id: any) {
+    this.id = document.getElementById(id);
+    this.id.style.border = "2px solid #DFD9D8";
+    this.id.style.borderRadius = "7px";
   }
 
   validPhone() {

@@ -41,6 +41,15 @@ export class FlightService {
     return this.http.post<any>(`${this.urlApproverCompany}`, data, httpOptions);
   }
 
+  generateReservation(data: any): Observable<any> {
+    httpOptions.headers = new HttpHeaders({
+      
+      'Content-Type': "application/json",
+      'Ocp-Apim-Subscription-Key': this.key
+    });
+    return this.http.post<any>(this.url_bookingTemp + "GeneratePNR", data, httpOptions);
+  }
+
   getCountries(): Observable<any> {
     httpOptions.headers = new HttpHeaders({
       'Content-Type': "application/json",

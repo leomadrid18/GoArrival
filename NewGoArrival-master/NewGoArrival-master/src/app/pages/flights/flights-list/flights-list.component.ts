@@ -30,7 +30,7 @@ export class FlightsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   /*  this.cargar(); */
+    /*  this.cargar(); */
     this.getObject();
     /*  this.cookieValue = this.cookieServices.get('rtsdt3298dwlou3208'); */
   }
@@ -47,7 +47,7 @@ export class FlightsListComponent implements OnInit {
     this.changeDetectorRef.detectChanges();
   }
 
-  
+
 
   public getObject(): void {
     this.headService.getObject(1).then(object => {
@@ -97,7 +97,7 @@ export class FlightsListComponent implements OnInit {
     this.aerolineas = aerolineas;
   }
 
-  ocultarComponentes($event: any){
+  ocultarComponentes($event: any) {
     this.validFlights = $event;
   }
 
@@ -115,7 +115,7 @@ export class FlightsListComponent implements OnInit {
         this.lstFlights = $event;
         this.flagDinData2 = false;
         this.validFlights = true;
-        
+
       }
     } else {
       this.flagDinData2 = true;
@@ -130,34 +130,34 @@ export class FlightsListComponent implements OnInit {
   }
 
 
-  enviarAeropuertos(request_: any){
+  enviarAeropuertos(request_: any) {
     console.log(request_);
   }
 
- 
+
 
 
   setFlights() {
     this.request = this.cookieValue.request;
     if (this.cookieValue.result.status === 200) {
-        if (this.cookieValue.result.llowCostAirlines?.length > 0) {
-          this.llowCostAirlines = this.cookieValue.result.llowCostAirlines;
-        }
-        if (this.cookieValue.result.lcalendars?.length > 0) {
-          this.lstCalendar = this.cookieValue.result.lcalendars;
-          this.validCalendar = true;
-        }
-        if (this.cookieValue.result.lrecommendations?.length > 0) {
-          this.lstFlights = this.cookieValue.result.lrecommendations;
-          this.tipoVuelo = this.request.Type;
-          this.pseudos = this.cookieValue.result.lpseudoPrices;
-          this.setLstAerolineas(this.lstFlights);
-          this.enviarAeropuertos(this.request);
-          
-          this.validFlights = true;
-        }
+      if (this.cookieValue.result.llowCostAirlines?.length > 0) {
+        this.llowCostAirlines = this.cookieValue.result.llowCostAirlines;
+      }
+      if (this.cookieValue.result.lcalendars?.length > 0) {
+        this.lstCalendar = this.cookieValue.result.lcalendars;
+        this.validCalendar = true;
+      }
+      if (this.cookieValue.result.lrecommendations?.length > 0) {
+        this.lstFlights = this.cookieValue.result.lrecommendations;
+        this.tipoVuelo = this.request.Type;
+        this.pseudos = this.cookieValue.result.lpseudoPrices;
+        this.setLstAerolineas(this.lstFlights);
+        this.enviarAeropuertos(this.request);
+
+        this.validFlights = true;
+      }
     }
-   /*  this.headService.ocultarSpinner(); */
+    this.headService.ocultarSpinner();
   }
 
   validShowFlights(valor: any) {
@@ -176,6 +176,10 @@ export class FlightsListComponent implements OnInit {
       }
       if (valor.result.lrecommendations?.length > 0) {
         this.lstFlights = valor.result.lrecommendations;
+        this.tipoVuelo = this.request.Type;
+        this.pseudos = this.cookieValue.result.lpseudoPrices;
+        this.setLstAerolineas(this.lstFlights);
+        this.enviarAeropuertos(this.request);
         this.validFlights = true;
       }
     }

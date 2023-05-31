@@ -36,7 +36,7 @@
                     </div>
                     <div *ngIf="validPassenger" class="row m-0 p-0">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-12 m-0 p-0 mb-4 banner-data">
-                            <app-reason-trip *ngIf="flight.lreasonFlights?.length > 0" [lsReasonflight]="flight.lreasonFlights" (reasonFlightEvent)="updateReasonFlight($event)" (extraReasonEvent)="updateExtraReason($event)"></app-reason-trip>
+                            <app-reason-trip *ngIf="flight.lreasonFlights?.length > 0" [ifExtraReason]="ifExtraReason" [lsReasonflight]="flight.lreasonFlights" (reasonFlightEvent)="updateReasonFlight($event)" (extraReasonEvent)="updateExtraReason($event)"></app-reason-trip>
                         </div>
                     </div>
                     <div *ngIf="lextraProfiles?.length > 0" class="row m-0 p-0 mt-3">
@@ -46,7 +46,7 @@
                     </div>
                     <div *ngIf="validPassenger" class="row m-0 p-0">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-12 m-0 p-0 mb-4 banner-data">
-                            <app-extra-profile *ngIf="lextraProfiles?.length > 0" [lextraProfiles]="lextraProfiles" (profileSelected)="updateProfileFlight($event)"></app-extra-profile>
+                            <app-extra-profile *ngIf="lextraProfiles?.length > 0" [lextraProfiles]="lextraProfiles" ></app-extra-profile>
                         </div>
                     </div>
                 </div>
@@ -68,10 +68,25 @@
             </div>
             <div class="row m-0 p-0">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-12 m-0 p-0 mt-3 mb-3 text-center">
-                    <span (click)="obtenerValoresInputHijos()"  class="next">Continuar</span>
+                    <span (click)="obtenerValoresInputHijos(modalDuplicate)"  class="next">Continuar</span>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+
+<ng-template #modalDuplicate let-c="close" let-d="dismiss">
+    <div class="modal-header m-0 pb-0" style="border: none;">
+        <button type="button" class="close pull-right" aria-label="Close">
+            <span (click)="modalRef.hide()" aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body m-0 p-0">
+        <div *ngFor="let item of mensajeDuplicate"
+            class="col-12 m-0 p-4 r-text-sinfam-2">
+            {{item}}
+        </div>
+    </div>
+
+</ng-template>

@@ -13,35 +13,55 @@
 }
 
 .circulo-politica {
-    padding: 0px 20px 0px 0px;
+    padding: 0px 17px 0px 0px;
     background: transparent linear-gradient(56deg, #ED1C24 0%, #D51A2C 31%, #3C4749 100%) 0% 0% no-repeat padding-box;
     border-radius: 50px;
     cursor: pointer
 }
 
-.btnFares{
+.btnFares {
     color: white;
-     background-color: #ED1C24;
-      font-family: Omnes-med;
-       font-size: 16px;
-}
-
-.text-pol{
+    background-color: #ED1C24;
     font-family: Omnes-med;
-     font-size: 16px;
-      text-align: justify
+    font-size: 16px;
 }
 
-.btn-alert-pol{
+
+.r-btn-sinfam-1 {
+    font-family: Omnes-med;
+    font-size: 16px;
+    color: white;
+    background-color: #ED1C24;
+}
+
+.r-text-sinfam-1 {
+    font-family: Omnes-med;
+    font-size: 35px;
+    color: #6B253C;
+}
+
+.r-text-sinfam-2 {
+    font-family: Omnes-med;
+    font-size: 19px;
+    color: #898989;
+}
+
+.text-pol {
+    font-family: Omnes-med;
+    font-size: 16px;
+    text-align: justify
+}
+
+.btn-alert-pol {
     float: left;
     color: white;
-     background-color: #ED1C24;
-      font-family: Omnes-med;
-       font-size: 16px;
+    background-color: #ED1C24;
+    font-family: Omnes-med;
+    font-size: 16px;
 }
 
 .circulo-politica1 {
-    padding: 0px 20px 0px 0px;
+    padding: 0px 17px 0px 0px;
     background: transparent linear-gradient(54deg, #1CED31 0%, #40B23D 32%, #0C5711 100%) 0% 0% no-repeat padding-box;
     border-radius: 50px;
 }
@@ -69,10 +89,10 @@
 }
 
 .num-vuelo {
- border: 2px solid #6B253C;
- border-radius: 155px;
- padding: 7px 13px 7px 14px;
- color: #6B253C;
+    border: 2px solid #6B253C;
+    border-radius: 155px;
+    padding: 7px 13px 7px 14px;
+    color: #6B253C;
 }
 
 .family {
@@ -137,7 +157,7 @@
     margin-right: 10px;
 }
 
-#pricePhone{
+#pricePhone {
     display: none;
 }
 
@@ -164,7 +184,7 @@
         display: none;
     }
 
-    #pricePhone{
+    #pricePhone {
         display: initial;
         line-height: 1;
     }

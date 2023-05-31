@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Input} from '@angular/core';
+import { Router } from '@angular/router';
+import { HeaderService } from 'src/app/services/head.service';
 
 @Component({
   selector: 'app-successful-reservation',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SuccessfulReservationComponent implements OnInit {
 
-  constructor() { }
+  @Input() data: any;
+  @Input() datosuser: any;
+  company: any;
+  updateAproval: any;
+  logindata: any;
+  constructor(private headService: HeaderService,private router: Router) { }
 
   ngOnInit(): void {
+    this.logindata = this.headService.getDataLogin();
+    this.company = this.logindata.ocompany;
+    this.updateAproval = this.logindata.ocompany?.ocompanyConfiguration?.updateApprovals;
+  }
+
+  goInit(){
+    this.router.navigate(['/flights']);
   }
 
 }

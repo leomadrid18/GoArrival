@@ -6,17 +6,15 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./extra-profile.component.css']
 })
 export class ExtraProfileComponent implements OnInit {
-
+  valor: any;
   @Input() lextraProfiles: any[] = [];
   @Output() profileEvent = new EventEmitter<string>();
   constructor() { }
 
   ngOnInit(): void {
+    this.valor = this.lextraProfiles[0].profile;
   }
 
-  profileSelected(id: any) {
-    let reason = this.lextraProfiles.find(x => x.id == id);
-    this.profileEvent.emit(reason.description);
-  }
+  
 
 }

@@ -97,6 +97,7 @@ export class PassengerDataComponent implements OnInit {
       PassengerId: index.toString(),
       ValueUid: valor
     }
+    this.user.ocostCenter = obj;
     if (this.lstUidsRq.length === 0) {
       this.lstUidsRq.push(obj);
       this.setBorder(id);
@@ -122,21 +123,8 @@ export class PassengerDataComponent implements OnInit {
     }
     if (valor === "OTROS") {
       item.showInput = true;
-      /*  this.valorrow = document.getElementById("select_" + codeUid + "_" + indexPax)
-       const inputElement = document.createElement("input");
-       inputElement.setAttribute("type", "text");
-       let id = "myInput_" + codeUid + "_" + indexPax;
-       inputElement.setAttribute("id", id);
-       inputElement.classList.add("form-control");
-       this.valorrow.appendChild(inputElement); */
     } else {
       item.showInput = false;
-      /*  const divElement = document.getElementById("select_" + codeUid + "_" + indexPax);
-       let qwe = "myInput_" + codeUid + "_" + indexPax;
-       const inputElement = document.getElementById(qwe);
-       if (divElement && inputElement) {
-         divElement.removeChild(inputElement);
-       } */
     }
   }
 
@@ -166,7 +154,7 @@ export class PassengerDataComponent implements OnInit {
   ngOnInit(): void {
     this.validUIDS(this.lcompanyUids);
     this.precargarUids();
-    console.log(this.lcompanyUids);
+    console.log(this.user);
     this.headService.ocultarSpinner();
     this.loginData = this.cookieServices.get('dwerrgfqw24423');
     this.loginData = this.headService.desencriptar(this.loginData);
@@ -176,8 +164,16 @@ export class PassengerDataComponent implements OnInit {
   precargarUids() {
     this.lstSelects.forEach(element => {
       if (element.codeUid === 'U5' && this.user.lcostCenter?.length > 0) {
-        this.costCenterCode = this.user.lcostCenter[0].code;
-        this.setSelectPreUID(element, this.index, this.user.lcostCenter[0].code)
+        this.costCenterCode = this.user.lcostCenter[0].id;
+        const indexe = element.lcompanyUidLists.findIndex((x: any) => x.costCenterId === this.costCenterCode);
+        this.costCenterCode = element.lcompanyUidLists[indexe].code;
+        if(indexe != -1){
+          let obj = {
+            ValueUid: element.lcompanyUidLists[indexe].code
+          }
+          this.user.ocostCenter = obj;
+        }
+        this.setSelectPreUID(element, this.index, element.lcompanyUidLists[indexe].code)
       }
       if (element.codeUid === 'U9' && this.user.travelerCode != '') {
         this.travelCode = this.user.travelerCode;
@@ -193,24 +189,26 @@ export class PassengerDataComponent implements OnInit {
   }
 
   validUIDS(lst: any) {
-    lst.forEach((element: any) => {
-      if (element.isList || element.codeUid === "U5") {
-        if (element.codeUid === "U5") {
-          element.lcompanyUidLists = this.lstCostCenter;
+    if(lst?.length > 0){
+      lst.forEach((element: any) => {
+        if (element.isList || element.codeUid === "U5") {
+          if (element.codeUid === "U5") {
+            element.lcompanyUidLists = this.lstCostCenter;
+          }
+          this.lstSelects.push(element);
+        } else {
+          this.lstInputs.push(element);
         }
-        this.lstSelects.push(element);
-      } else {
-        this.lstInputs.push(element);
-      }
-    });
-    this.lstSelects.forEach(element => {
-      element.showInput = false;
-    });
+      });
+      this.lstSelects.forEach(element => {
+        element.showInput = false;
+      });
+    }
+    
   }
 
   validPassengers() {
     let fecha = new Date(this.user.birthDate);
-    this.costCenterCode
     this.bsValue = fecha;
     if (this.user.gender === 'M') {
       this.tratamiento = 'MR';

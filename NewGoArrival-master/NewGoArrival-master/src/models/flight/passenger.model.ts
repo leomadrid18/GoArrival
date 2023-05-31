@@ -9,6 +9,7 @@ export interface Passenger {
     frequentFlyer:string;
     gender:string;
     isVIP:boolean;
+    ocostCenter: any;
     lastName:string;
     lcostCenter:any;
     loginUser:string;

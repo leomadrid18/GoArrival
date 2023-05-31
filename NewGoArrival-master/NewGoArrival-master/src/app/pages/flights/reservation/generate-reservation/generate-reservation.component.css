@@ -29,7 +29,7 @@
 .next {
     color: white;
     background-color: #ED1C24;
-    padding: 10px 30px 10px 30px;
+    padding: 10px 40px 10px 40px;
     border-radius: 5px;
     font-size: 17px;
     font-family: Omnes-med;
@@ -39,7 +39,7 @@
 .btnEmit {
     color: #ED1C24;
     background-color: white;
-    padding: 10px 30px 10px 30px;
+    padding: 10px 40px 10px 40px;
     border-radius: 5px;
     border: 1px solid #ED1C24;
     font-size: 17px;

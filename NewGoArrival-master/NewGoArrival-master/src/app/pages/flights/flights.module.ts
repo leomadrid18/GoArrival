@@ -58,7 +58,7 @@ const routes: Routes = [
   },
   {path: 'flight-list',component: FlightsListComponent},
   {path: 'passenger-data',component: PassengersComponent},
-  {path: 'generate-reservation',component: GenerateReservationComponent}
+  {path: 'generate-reservation',component: ReservationComponent}
 ];
 
 @NgModule({
@@ -100,7 +100,7 @@ const routes: Routes = [
     DetailPassengersComponent,
     ApproversPoliciesComponent,
     PseudosComponent,
-    SuccessfulReservationComponent
+    SuccessfulReservationComponent,
   ],
   imports: [
     CommonModule,

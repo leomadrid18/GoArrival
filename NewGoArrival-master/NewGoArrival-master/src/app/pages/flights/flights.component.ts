@@ -28,10 +28,14 @@ export class FlightsComponent implements OnInit {
 
   ngOnInit(): void {
     this.cookieValue = this.cookieServices.get('dwerrgfqw24423');
-    this.cookieServices.delete("euimbh235$%/mjmn",'/');
-    this.cookieServices.delete("euimbh235$%/mjmn",'/flights');
+    this.cookieServices.delete("euimbh235$%/mjmn", '/');
+    this.cookieServices.delete("euimbh235$%/mjmn", '/flights');
     this.objetoDesencriptado = this.headerService.desencriptar(this.cookieValue);
     this.validCentralizer();
+    this.headerService.deleteValue(31)
+      .then(() => {
+        console.log('Valor eliminado correctamente');
+      })
     this.headerService.ocultarSpinner();
   }
 
@@ -42,6 +46,8 @@ export class FlightsComponent implements OnInit {
       this.flagCentralizador = false;
     }
   }
+
+
 
 
 

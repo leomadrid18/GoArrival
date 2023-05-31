@@ -125,7 +125,7 @@ input[type="checkbox"].switch_1:checked:after {
     border-radius: 8px 8px 8px 8px;
     background: #FDFDFD 0% 0% no-repeat padding-box;
     box-shadow: 1px 1px 6px 1PX #00000029;
-    padding: 20px 20px 20px 20px;
+    padding: 7px 20px 20px 20px;
     margin-top: 20px;
     height: 90px;
     margin-bottom: 20px;
@@ -136,7 +136,7 @@ input[type="checkbox"].switch_1:checked:after {
     font-family: Omnes-med;
     letter-spacing: 0;
     color: #676767;
-    font-size: 17px;
+    font-size: 15;
 }
 
 .txtAmount {

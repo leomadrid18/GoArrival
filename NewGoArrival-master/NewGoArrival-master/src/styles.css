@@ -28,8 +28,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  /* background-color: white; */
+ /*  background-color: rgba(0, 0, 0, 0.5); */
+  background-color: white;
   z-index: 9999;
   display: flex;
   justify-content: center;
@@ -109,7 +109,7 @@
 
 
 .box-shadow {
-  background: white;
+
   padding: 1em;
   border: 1px solid rgba(219, 223, 227, 0.303017);
   box-shadow: 0px 5px 12px rgba(217, 226, 233, 0.5);

@@ -8,6 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
   providedIn: 'root'
 })
 export class HeaderService {
+
   showHeader = true;
   showOverlay = false;
   passwordCrypto = 'serviceLogin#$';
@@ -16,6 +17,8 @@ export class HeaderService {
   constructor(private cookieService: CookieService) {
     this.createDatabase();
   }
+
+  
 
   public createDatabase(): void {
     this.db = new Dexie('myDB');
@@ -29,12 +32,14 @@ export class HeaderService {
     });
   }
 
+
+
   public deleteDatabase(): Promise<void> {
     return this.db.delete();
   }
 
-  public deleteValue(): Promise<void> {
-    return this.db.table('myTable').delete(1);
+  public deleteValue(id: any): Promise<void> {
+    return this.db.table('myTable').delete(id);
   }
 
   public addObject(id: number, myString: string): Promise<any> {

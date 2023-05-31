@@ -14,19 +14,14 @@ export class ReasonTripComponent implements OnInit {
   @Output() reasonFlightEvent = new EventEmitter<string>();
   @Output() extraReasonEvent = new EventEmitter<string>();
   reason: any;
-  valor!: any;
+  @Input() ifExtraReason: any;
+  valorExtra = "";
   constructor(private cookieServices: CookieService, private headService: HeaderService) { }
 
   ngOnInit(): void {
-    this.reason = this.cookieServices.get('dwerrgfqw24423');
-    this.reason = this.headService.desencriptar(this.reason);
-    if (this.reason.ocompany != null) {
-      this.valor = this.reason.ocompany.ocompanyConfiguration.extraReasonFlight;
-    }
-
     if (this.lsReasonflight && this.lsReasonflight.length > 0){
-      this.reasonFlightEvent.emit(this.lsReasonflight[0].description);
-      this.extraReasonEvent.emit(this.valor);
+      this.reasonFlightEvent.emit(this.lsReasonflight[0]);
+      /* this.extraReasonEvent.emit(this.valor); */
     }
   }
 
@@ -40,11 +35,11 @@ export class ReasonTripComponent implements OnInit {
 
   reasonSelected(id: any) {
     let reason = this.lsReasonflight.find(x => x.id == id);
-    this.reasonFlightEvent.emit(reason.description);
+    this.reasonFlightEvent.emit(reason);
   }
 
   onInputChange(event: any) {
-    this.extraReasonEvent.emit(event)
+    this.extraReasonEvent.emit(this.valorExtra);
   }
 
 }
