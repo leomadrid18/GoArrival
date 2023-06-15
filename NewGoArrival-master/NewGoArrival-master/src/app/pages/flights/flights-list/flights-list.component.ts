@@ -16,6 +16,7 @@ export class FlightsListComponent implements OnInit {
   validCalendar = false;
   validFlights = false;
   lstFlights: any;
+  validTypeFlight = true;
   tipoVuelo = "RT";
   indexTramo = 2;
   cookieValue: any;
@@ -24,6 +25,7 @@ export class FlightsListComponent implements OnInit {
   aerolineas: any[] = [];
   flagDinData2: boolean = false;
   flagDinData;
+  lstMultidestino: any[] = [];
   public myObject!: { id: number, myObject: { myString: string } };
   constructor(private cookieServices: CookieService, private headService: HeaderService, private changeDetectorRef: ChangeDetectorRef) {
     this.flagDinData = false;
@@ -50,6 +52,7 @@ export class FlightsListComponent implements OnInit {
 
 
   public getObject(): void {
+    this.validTypeFlight = false;
     this.headService.getObject(1).then(object => {
       this.myObject = object;
       this.cookieValue = this.headService.desencriptar(this.myObject.myObject.myString);
@@ -139,6 +142,10 @@ export class FlightsListComponent implements OnInit {
 
   setFlights() {
     this.request = this.cookieValue.request;
+    this.lstMultidestino = this.cookieValue.lstMulti;
+    this.lstMultidestino.forEach(element => {
+      element.minDate = new Date(element.minDate);
+    });
     if (this.cookieValue.result.status === 200) {
       if (this.cookieValue.result.llowCostAirlines?.length > 0) {
         this.llowCostAirlines = this.cookieValue.result.llowCostAirlines;
@@ -153,7 +160,7 @@ export class FlightsListComponent implements OnInit {
         this.pseudos = this.cookieValue.result.lpseudoPrices;
         this.setLstAerolineas(this.lstFlights);
         this.enviarAeropuertos(this.request);
-
+        this.validTypeFlight= true;
         this.validFlights = true;
       }
     }
@@ -162,6 +169,10 @@ export class FlightsListComponent implements OnInit {
 
   validShowFlights(valor: any) {
     this.request = valor.request;
+    this.lstMultidestino = valor.lstMulti;
+    this.lstMultidestino.forEach(element => {
+      element.minDate = new Date(element.minDate);
+    });
     if (valor.result.status === 200) {
       this.flagDinData2 = false;
       if (valor.result.llowCostAirlines?.length > 0) {
@@ -180,6 +191,7 @@ export class FlightsListComponent implements OnInit {
         this.pseudos = this.cookieValue.result.lpseudoPrices;
         this.setLstAerolineas(this.lstFlights);
         this.enviarAeropuertos(this.request);
+        this.validTypeFlight = true;
         this.validFlights = true;
       }
     }

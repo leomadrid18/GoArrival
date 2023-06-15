@@ -5,26 +5,27 @@
                 <span class="title">Vuelos</span>
             </div>
             <div class="col-lg-6 col-md-5 col-sm m-0 p-0 col-4">
-                <div class="radio-item">
-                    <input checked (click)="seleccionarTipoVuelo('RT')" type="radio" id="radio_b_tv_1" name="ritem"
-                        value="RT">
-                    <label class="textFlight" for="ritema">Ida & Vuelta</label>
-                </div>
+                <label class="containers" (click)="seleccionarTipoVuelo('RT')">
+                    <input id="radio_b_tv_1" type="radio" name="radio" class="bv-texto-1" checked value="RT">
+                    Ida & Vuelta
+                    <span class="checkmark"></span>
+                </label>
             </div>
             <div class="col-lg-6 col-md-5 col-sm col-4 m-0 p-0">
-                <div class="radio-item">
-                    <input (click)="seleccionarTipoVuelo('OW')" type="radio" id="radio_b_tv_2" name="ritem" value="OW">
-                    <label class="textFlight" for="ritemb">Sólo ida</label>
-                </div>
+                <label class="containers" (click)="seleccionarTipoVuelo('OW')">
+                    <input  id="radio_b_tv_2" type="radio" name="radio" value="OW" class="bv-texto-1"> Sólo ida
+                    <span class="checkmark"></span>
+                </label>
             </div>
             <div class="col-lg-6 col-md-5 col-sm col-4 m-0 p-0">
-                <div class="radio-item">
-                    <input (click)="seleccionarTipoVuelo('MC')" type="radio" id="radio_b_tv_3" name="ritem" value="MC">
-                    <label class="textFlight" for="ritemc">Multidestino</label>
-                </div>
+                <label class="containers" (click)="seleccionarTipoVuelo('MC')">
+                    <input id="radio_b_tv_3" type="radio" name="radio" value="MC" class="bv-texto-1">
+                    Multidestinos
+                    <span class="checkmark"></span>
+                </label>
             </div>
         </div>
-        <div class="row m-0 p-0 mt-3">
+        <div *ngIf="tipoVuelo !=='MC' || validMutli" class="row m-0 p-0 mt-3">
             <div class="col-lg-12 col-md-12 col-sm-12 top">
                 <span class="titles">Origen</span>
                 <ng-autocomplete [(ngModel)]="objRq.origentTexto" triggers="" style="color: #898989 !important;"
@@ -106,7 +107,7 @@
                                 [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-red',  selectFromOtherMonth: true }">
                         </label>
                     </div>
-                    <div *ngIf="tipoVuelo!=='OW'" class="col-lg-6 col-md-12 col-sm-12 col-6 m-0 p-0">
+                    <div *ngIf="tipoVuelo !=='OW'" class="col-lg-6 col-md-12 col-sm-12 col-6 m-0 p-0">
                         <label id="txtFechaDestino" for="" class="d-inline-flex box-shadow dates">
                             <input type="image" src="assets/Images/seeker/calendario.svg"
                                 (click)="datepickerRetornoLower.toggle()"
@@ -124,6 +125,7 @@
 
             </div>
         </div>
+        <app-multi-destination *ngIf="tipoVuelo === 'MC' || validMutli" [validStyle]="true" [lstMulti]="lstMultidestino"></app-multi-destination>
         <div class="row m-0 p-0 mt-3 mb-4">
             <div class="col-lg-6 col-md-12 col-sm-12 top" dropdown>
                 <span class="titles">Cabina</span>

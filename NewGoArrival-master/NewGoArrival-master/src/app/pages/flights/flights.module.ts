@@ -50,6 +50,7 @@ import { DetailPassengersComponent } from './reservation/generate-reservation/de
 import { ApproversPoliciesComponent } from './reservation/generate-reservation/approvers-policies/approvers-policies.component';
 import { PseudosComponent } from './flights-list/pseudos/pseudos.component';
 import { SuccessfulReservationComponent } from './reservation/successful-reservation/successful-reservation.component';
+import { MultiDestinationComponent } from './seekers/multi-destination/multi-destination.component';
 
 const routes: Routes = [
   {
@@ -101,6 +102,7 @@ const routes: Routes = [
     ApproversPoliciesComponent,
     PseudosComponent,
     SuccessfulReservationComponent,
+    MultiDestinationComponent,
   ],
   imports: [
     CommonModule,

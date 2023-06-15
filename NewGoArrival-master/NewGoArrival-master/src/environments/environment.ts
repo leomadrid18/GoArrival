@@ -1,6 +1,6 @@
 export const environment = {
   /* production: true,
-  url: "https://domiruth-prd.azure-api.net/security/",
+  url: "https://domiruth-prd.azure-api.net/security/  ",
   url_2: "https://domiruth-prd.azure-api.net/flight/",
   url_5: 'https://domiruth-prd.azure-api.net/customer/',
   url_6: 'https://domiruth-prd.azure-api.net/notify/',

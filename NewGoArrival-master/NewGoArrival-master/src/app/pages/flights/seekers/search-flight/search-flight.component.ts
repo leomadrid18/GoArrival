@@ -26,8 +26,9 @@ export class SearchFlightComponent implements OnInit {
   citylist: any;
   model: any = {};
   keyword = "name";
+  validMessage = false;
   data: any[] = [];
-
+  msgError: any;
   isOpen = false;
   data2: any[] = [];
 
@@ -51,12 +52,13 @@ export class SearchFlightComponent implements OnInit {
   objetoDesencriptado: any;
   validarPasajeros = false;
   passengerList: any;
-
+  validMutli = false;
+  lstMultidestino: any[] = [];
   id: any;
   datosEnvira = {
     origenAuto: "",
     escala: this.escala,
-    textoEscala:this.textoEscala,
+    textoEscala: this.textoEscala,
     cabina: this.cabina,
     textoCabina: this.textoCabina,
     origentTexto: "",
@@ -134,9 +136,14 @@ export class SearchFlightComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.airportlist = localStorage.getItem("ls_airportlist");
+    this.airportlist = JSON.parse(this.airportlist);
+    this.citylist = localStorage.getItem("ls_citylist");
+    this.citylist = JSON.parse(this.citylist);
     this.objetoDesencriptado = this.cookie.get('dwerrgfqw24423');
     this.objetoDesencriptado = this.headerService.desencriptar(this.objetoDesencriptado);
     this.onValueChangeSalida(this.bsValue);
+    this.llenarMulti();
     /*  this.cookie.delete("rtsdt3298dwlou3208"); */
   }
 
@@ -146,100 +153,42 @@ export class SearchFlightComponent implements OnInit {
 
 
   llenarMulti() {
-    let origen: any[] = [];
-    let destino: any[] = [];
-    let fechas: any[] = [];
-    const indexTramo = this.indexTramo;
-    switch (indexTramo) {
-      case 2:
-        origen.push(this.datosEnvira.origenAuto1);
-        origen.push(this.datosEnvira.origenAuto2);
+    let dateShow = new Date();
+    const year = dateShow.getFullYear();
+    const month = String(dateShow.getMonth() + 1).padStart(2, '0');
+    const day = String(dateShow.getDate()).padStart(2, '0');
 
-        destino.push(this.datosEnvira.destinoAuto1);
-        destino.push(this.datosEnvira.destinoAuto2);
-
-        fechas.push(this.datosEnvira.fechaSalida1);
-        fechas.push(this.datosEnvira.fechaSalida2);
-        break;
-      case 3:
-        origen.push(this.datosEnvira.origenAuto1);
-        origen.push(this.datosEnvira.origenAuto2);
-        origen.push(this.datosEnvira.origenAuto3);
-
-        destino.push(this.datosEnvira.destinoAuto1);
-        destino.push(this.datosEnvira.destinoAuto2);
-        destino.push(this.datosEnvira.destinoAuto3);
-
-        fechas.push(this.datosEnvira.fechaSalida1);
-        fechas.push(this.datosEnvira.fechaSalida2);
-        fechas.push(this.datosEnvira.fechaSalida3);
-        break;
-      case 4:
-        origen.push(this.datosEnvira.origenAuto1);
-        origen.push(this.datosEnvira.origenAuto2);
-        origen.push(this.datosEnvira.origenAuto3);
-        origen.push(this.datosEnvira.origenAuto4);
-
-        destino.push(this.datosEnvira.destinoAuto1);
-        destino.push(this.datosEnvira.destinoAuto2);
-        destino.push(this.datosEnvira.destinoAuto3);
-        destino.push(this.datosEnvira.destinoAuto4);
-
-        fechas.push(this.datosEnvira.fechaSalida1);
-        fechas.push(this.datosEnvira.fechaSalida2);
-        fechas.push(this.datosEnvira.fechaSalida3);
-        fechas.push(this.datosEnvira.fechaSalida4);
-        break;
-      case 5:
-        origen.push(this.datosEnvira.origenAuto1);
-        origen.push(this.datosEnvira.origenAuto2);
-        origen.push(this.datosEnvira.origenAuto3);
-        origen.push(this.datosEnvira.origenAuto4);
-        origen.push(this.datosEnvira.origenAuto5);
-
-        destino.push(this.datosEnvira.destinoAuto1);
-        destino.push(this.datosEnvira.destinoAuto2);
-        destino.push(this.datosEnvira.destinoAuto3);
-        destino.push(this.datosEnvira.destinoAuto4);
-        destino.push(this.datosEnvira.destinoAuto5);
-
-        fechas.push(this.datosEnvira.fechaSalida1);
-        fechas.push(this.datosEnvira.fechaSalida2);
-        fechas.push(this.datosEnvira.fechaSalida3);
-        fechas.push(this.datosEnvira.fechaSalida4);
-        fechas.push(this.datosEnvira.fechaSalida5);
-        break;
-      case 6:
-        origen.push(this.datosEnvira.origenAuto1);
-        origen.push(this.datosEnvira.origenAuto2);
-        origen.push(this.datosEnvira.origenAuto3);
-        origen.push(this.datosEnvira.origenAuto4);
-        origen.push(this.datosEnvira.origenAuto5);
-        origen.push(this.datosEnvira.origenAuto6);
-
-        destino.push(this.datosEnvira.destinoAuto1);
-        destino.push(this.datosEnvira.destinoAuto2);
-        destino.push(this.datosEnvira.destinoAuto3);
-        destino.push(this.datosEnvira.destinoAuto4);
-        destino.push(this.datosEnvira.destinoAuto5);
-        destino.push(this.datosEnvira.destinoAuto6);
-
-        fechas.push(this.datosEnvira.fechaSalida1);
-        fechas.push(this.datosEnvira.fechaSalida2);
-        fechas.push(this.datosEnvira.fechaSalida3);
-        fechas.push(this.datosEnvira.fechaSalida4);
-        fechas.push(this.datosEnvira.fechaSalida5);
-        fechas.push(this.datosEnvira.fechaSalida6);
-        break;
-    }
+    const fechaFormateada = `${day}/${month}/${year}`;
 
     let obj = {
-      orig: origen,
-      dest: destino,
-      fec: fechas
+      origen: null,
+      origenIata: null,
+      destinoIata: null,
+      destino: null,
+      disable: false,
+      minDate: new Date(),
+      salida: new Date(),
+      salidaShow: fechaFormateada,
+      data: [],
+      data1: [],
+      keyword: "name"
     }
+    this.lstMultidestino.push(obj);
 
-    return obj;
+    let qwe = {
+      origen: null,
+      destino: null,
+      origenIata: null,
+      disable: false,
+      destinoIata: null,
+      minDate: new Date(),
+      salida: "",
+      salidaShow: "",
+      data: [],
+      data1: [],
+      keyword: "name"
+    }
+    this.lstMultidestino.push(qwe);
   }
 
   public saveObject(valor: any): void {
@@ -250,35 +199,53 @@ export class SearchFlightComponent implements OnInit {
     });
   }
 
-  setBorder(id: any){
+  setBorder(id: any) {
     this.id = document.getElementById(id);
-      this.id.style.border = "2px solid #ED1C24";
-      this.id.style.borderRadius = "7px";
+    this.id.style.border = "2px solid #ED1C24";
+    this.id.style.borderRadius = "7px";
   }
 
-  setBorderGood(id: any){
+  setBorderGood(id: any) {
     this.id = document.getElementById(id);
-      this.id.style.border = "none";
+    this.id.style.border = "none";
   }
 
-  setBorderGoodDate(id: any){
+  setBorderGoodDate(id: any) {
     this.id = document.getElementById(id);
-      this.id.style.border = "2px solid #DFD9D8";
+    this.id.style.border = "2px solid #DFD9D8";
   }
 
   validCampos() {
     let valor = true;
-    if (this.datosEnvira.origenAuto === "") {
-      this.setBorder("searchOriginInit");
-      valor = false;
-    } 
-    if (this.datosEnvira.destinoAuto === "") {
-      this.setBorder("searchDestinoInit");
-      valor = false;
-    } 
-    if(this.tipoVuelo === 'RT' && this.datosEnvira.fechaRetornoShow === ""){
-      this.setBorder("txtFechaDestino");
-      valor = false;
+    if (this.tipoVuelo === 'MC') {
+      for (let index = 0; index < this.lstMultidestino.length; index++) {
+        const element = this.lstMultidestino[index];
+        if (element.origen === null || element.origen === '') {
+          this.setBorder("searchOriginInit_" + index);
+          valor = false;
+        }
+        if (element.destino === null || element.destino === '') {
+          this.setBorder("searchDestinoInit_" + index);
+          valor = false;
+        }
+        if (element.salidaShow === '') {
+          this.setBorder("txtFechaSalida_" + index);
+          valor = false;
+        }
+      }
+    } else {
+      if (this.datosEnvira.origenAuto === "") {
+        this.setBorder("searchOriginInit");
+        valor = false;
+      }
+      if (this.datosEnvira.destinoAuto === "") {
+        this.setBorder("searchDestinoInit");
+        valor = false;
+      }
+      if (this.tipoVuelo === 'RT' && this.datosEnvira.fechaRetornoShow === "") {
+        this.setBorder("txtFechaDestino");
+        valor = false;
+      }
     }
     return valor;
   }
@@ -289,6 +256,19 @@ export class SearchFlightComponent implements OnInit {
     }; */
   }
 
+  llenarOirgenMulti(lst: any, number: any) {
+    this.lstMultidestino.forEach(element => {
+      if (number === 1) {
+        lst.push(element.origenIata);
+      } else if (number === 2) {
+        lst.push(element.destinoIata);
+      } else {
+        lst.push(element.salida);
+      }
+    });
+    return lst;
+  }
+
 
 
   searchFlight() {
@@ -296,7 +276,7 @@ export class SearchFlightComponent implements OnInit {
     if (qwe === false) {
       return;
     }
-    
+
     this.headerService.mostrarSpinner();
     let origen: any[] = [];
     let destino: any[] = [];
@@ -324,10 +304,10 @@ export class SearchFlightComponent implements OnInit {
         fechas.push(this.datosEnvira.fechaSalida);
         break;
       case "MC":
-        let valor = this.llenarMulti();
-        origen = valor.orig;
-        destino = valor.dest;
-        fechas = valor.fec
+        origen = this.llenarOirgenMulti(origen, 1);
+        destino = this.llenarOirgenMulti(destino, 2);
+        fechas = this.llenarOirgenMulti(fechas, 3);
+        /* this.validMutli = true; */
         break;
     }
 
@@ -374,17 +354,27 @@ export class SearchFlightComponent implements OnInit {
     this.datosEnvira.cabina = this.cabina;
     this.datosEnvira.textoCabina = this.textoCabina;
     let valor = this.headerService.encriptar(this.datosEnvira);
-    
+
     this.cookieServices.set('euimbh235$%/mjmn', valor);
     this.service.searchFlight(data).subscribe(
       x => {
-        const obj = {
-          result: x,
-          request: data
+        if (x.status != 500) {
+          this.validMessage= false;
+          const obj = {
+            result: x,
+            request: data,
+            lstMulti: this.lstMultidestino
+          }
+          let valor = this.headerService.encriptar(obj);
+          this.saveObject(valor)
+          this.router.navigate(["flights/flight-list"])
+        } else {
+          this.msgError = x.message;
+          this.validMessage= true;
+          this.headerService.ocultarSpinner();
+          
         }
-        let valor = this.headerService.encriptar(obj);
-        this.saveObject(valor)
-        this.router.navigate(["flights/flight-list"])
+
       }
     )
   }
@@ -601,13 +591,16 @@ export class SearchFlightComponent implements OnInit {
     this.tipoVuelo = valor;
     if (valor === "RT") {
       this.indexTramo = 2;
+      this.validMutli = false;
     }
     if (valor === "OW") {
       this.indexTramo = 1;
+      this.validMutli = false;
     }
     if (valor === "MC") {
       this.indexTramo = 2;
-      this.lstAutocomplete = [];
+      this.validMutli = true;
+      /* this.lstAutocomplete = [];
       const lstAutocomplete = this.lstAutocomplete;
       this.airportlist.forEach(function (aeropuerto: any) {
         const obj1 = {
@@ -632,7 +625,7 @@ export class SearchFlightComponent implements OnInit {
         lstAutocomplete.push(obj1);
       });
       lstAutocomplete.sort((a, b) => b.priority - a.priority);
-      this.lstAutocomplete = lstAutocomplete;
+      this.lstAutocomplete = lstAutocomplete; */
     }
   }
 

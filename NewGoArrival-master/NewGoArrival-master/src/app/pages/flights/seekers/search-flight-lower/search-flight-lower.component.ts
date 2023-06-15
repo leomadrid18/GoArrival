@@ -15,12 +15,13 @@ declare var $: any;
 })
 
 export class SearchFlightLowerComponent implements OnInit {
-
+  @Input() lstMultidestino: any;
   @Input() tipoVuelo: any;
 
 
 
 
+  validMutli = false;
   general = "col-lg-12 col-md-12 col-sm-12 col-12 "
   /*  tipoVuelo: string; */
   indexTramo: number;
@@ -150,6 +151,19 @@ export class SearchFlightLowerComponent implements OnInit {
     }
   }
 
+  llenarOirgenMulti(lst: any, number: any) {
+    this.lstMultidestino.forEach((element: any) => {
+      if (number === 1) {
+        lst.push(element.origenIata);
+      } else if (number === 2) {
+        lst.push(element.destinoIata);
+      } else {
+        lst.push(element.salida);
+      }
+    });
+    return lst;
+  }
+
 
   searchFlight() {
     this.head.mostrarSpinner();
@@ -162,14 +176,33 @@ export class SearchFlightLowerComponent implements OnInit {
     let lUsers_: any[] = [];
     let lPassengers: any[] = [];
 
-    origen.push(this.objRq.origenAuto);
-    origen.push(this.objRq.destinoAuto);
 
-    destino.push(this.objRq.destinoAuto);
-    destino.push(this.objRq.origenAuto);
+    switch (this.tipoVuelo) {
+      case "RT":
+        origen.push(this.objRq.origenAuto);
+        origen.push(this.objRq.destinoAuto);
 
-    fechas.push(this.objRq.fechaSalida);
-    fechas.push(this.objRq.fechaRetorno);
+        destino.push(this.objRq.destinoAuto);
+        destino.push(this.objRq.origenAuto);
+
+        fechas.push(this.objRq.fechaSalida);
+        fechas.push(this.objRq.fechaRetorno);
+        break;
+
+      case "OW":
+        origen.push(this.objRq.origenAuto);
+        destino.push(this.objRq.destinoAuto);
+        fechas.push(this.objRq.fechaSalida);
+        break;
+      case "MC":
+        origen = this.llenarOirgenMulti(origen, 1);
+        destino = this.llenarOirgenMulti(destino, 2);
+        fechas = this.llenarOirgenMulti(fechas, 3);
+        /* this.validMutli = true; */
+        break;
+    }
+
+
 
     fechas.forEach(function (fe) {
       horasFrom.push("");
@@ -213,9 +246,11 @@ export class SearchFlightLowerComponent implements OnInit {
     this.cookie.set('euimbh235$%/mjmn', this.objRq);
     this.service.searchFlight(data).subscribe(
       x => {
+       
         const obj = {
           result: x,
-          request: data
+          request: data,
+          lstMulti: this.lstMultidestino
         }
         let valor = this.head.encriptar(obj);
         this.head.addObject(1, valor);
@@ -446,32 +481,8 @@ export class SearchFlightLowerComponent implements OnInit {
     }
     if (valor === "MC") {
       this.indexTramo = 2;
-      this.lstAutocomplete = [];
-      const lstAutocomplete = this.lstAutocomplete;
-      this.airportlist.forEach(function (aeropuerto: any) {
-        const obj1 = {
-          iataCode: aeropuerto.iataCode,
-          name: aeropuerto.name,
-          searchName: aeropuerto.searchName,
-          priority: aeropuerto.priority,
-          categoryId: 1,
-          categoryName: "Aeropuerto",
-        };
-        lstAutocomplete.push(obj1);
-      });
-      this.citylist.forEach(function (ciudad: any) {
-        const obj1 = {
-          iataCode: ciudad.iataCode,
-          name: ciudad.name,
-          searchName: ciudad.searchName,
-          priority: ciudad.priority,
-          categoryId: 2,
-          categoryName: "Ciudad",
-        };
-        lstAutocomplete.push(obj1);
-      });
-      lstAutocomplete.sort((a, b) => b.priority - a.priority);
-      this.lstAutocomplete = lstAutocomplete;
+      this.validMutli = true;
+
     }
   }
 
